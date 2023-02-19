@@ -68,6 +68,7 @@ const VerticalLayout = props => {
           setNavVisible={setNavVisible}
           toggleNavVisibility={toggleNavVisibility}
           {...props}
+          style={{background:"linear-gradient(81deg, rgba(0, 255, 222, 0.14) 0%, rgb(18 135 137) 100%)"}}
         />
         <MainContentWrapper className='layout-content-wrapper'>
           <AppBar toggleNavVisibility={toggleNavVisibility} {...props} />

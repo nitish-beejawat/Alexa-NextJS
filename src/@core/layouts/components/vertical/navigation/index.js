@@ -82,7 +82,7 @@ const Navigation = props => {
 
   return (
     <Drawer {...props}>
-      <VerticalNavHeader {...props} />
+      <VerticalNavHeader {...props} style={{background:"linear-gradient(81deg, rgba(0, 255, 222, 0.14) 0%, rgb(18 135 137) 100%)"}}/>
       <StyledBoxForShadow
         ref={shadowRef}
         sx={{

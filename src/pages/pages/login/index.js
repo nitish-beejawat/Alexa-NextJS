@@ -130,24 +130,25 @@ const LoginPage = ({setShowRegister}) => {
 
 
 <div className="flex-container">
-          <div className="flex-item-left" style={{padding:100,height:"auto"}}>
+          <div className="flex-item-left" style={{padding:100,height:"auto",backgroundColor:"black"}}>
 
 
-            <div style={{backgroundColor:"#8D94B0",padding:50,borderRadius:50}}>
+            <div style={{backgroundColor:"rgba(29, 21, 40, 0.09)",padding:50,borderRadius:50,backdropFilter:"blur",borderColor:"#00ABFF",borderWidth:1,borderStyle:"solid"}}>
               <div style={{textAlign:"left"}}>
 
 
+              <div style={{textAlign:"center"}}>
+              <img src='https://www.alexapro.finance/assets/alexapro.9782a62c.png' style={{width:200,height:60}} />
+              </div>
 
-              <img src='https://account.ineuron.ai/static/images/ineuron-logo.png' style={{width:200,height:60}} />
 
 
-
-              <h4 style={{color:"white"}}>Hey There, Welcome!</h4>
-              <p style={{color:"#253472",fontSize:18,marginTop:-30}}>We are iNeuron Technology</p>
+              {/* <h4 style={{color:"white"}}>Rule The World</h4> */}
+              {/* <p style={{color:"#253472",fontSize:18,marginTop:-30}}>We are iNeuron Technology</p> */}
 
 
               <div style={{textAlign:"center"}}>
-              <img src='/images/blockchainlogo.png' style={{width:200,height:200}} />
+              <img src='https://www.alexapro.finance/assets/robot.5e0e26f6.png' style={{width:200,height:200}} />
               </div>
 
 
@@ -173,7 +174,7 @@ const LoginPage = ({setShowRegister}) => {
           <div className="flex-item-right">
 
 
-            <h5 style={{color:"#243D7B",fontSize:50,textAlign:"left",marginLeft:80}}>Login Here</h5>
+            <h5 style={{color:"#00A2FF",fontSize:50,textAlign:"left",marginLeft:80}}>Login Here</h5>
 
 <div style={{textAlign:"start",marginLeft:80,marginRight:50}}>
 
