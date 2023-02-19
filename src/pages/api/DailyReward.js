@@ -6,6 +6,8 @@ import User from '../../helper/Modal/User'
 import LykaFastBonusHis from '../../helper/Modal/History/LykaFastBonusHis'
 import RenewalPurchasePackage from '../../helper/Modal/Renewal/RenewalPurchasePackage'
 import RebuyBonus from '../../helper/Modal/Bonus/RebuyBonus'
+import ShortRecord from 'src/helper/Modal/ShortRecord'
+
 
 initDB()
 
@@ -136,8 +138,49 @@ export default async (req, res) => {
           ReferGetFromId:upperlineUserData._id,
           ReferGetFromUserId:upperlineUserData.UserName,
           PackName:upperlineUserData.PurchasedPackageName,
-          EarnedRewardCoins:refDef
+          EarnedRewardCoins:Number(refDef).toFixed(2)
         }).save()
+
+
+
+
+
+        const findShortRecord = await ShortRecord.findOne({RecordOwner:upperlineUserData._id})
+
+
+        if (findShortRecord) {
+    
+          let sum = (parseFloat(findShortRecord.RebuyBonus) + parseFloat(refDef)).toFixed(2)
+         
+          console.log(sum)
+          console.log(typeof(sum))
+    
+          const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{RebuyBonus:sum})
+    
+        }else{
+    
+          const createShortRecord = await ShortRecord({
+            RecordOwner:uplineUser,
+            RebuyBonus:Number(refDef).toFixed(2)
+          }).save()
+    
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       }
 
     }
@@ -163,6 +206,32 @@ export default async (req, res) => {
 
 
 
+        const findShortRecord = await ShortRecord.findOne({RecordOwner:list[i].id})
+
+
+        if (findShortRecord) {
+
+          let sum = Number(findShortRecord.PowerStaing) + Number(finalCal)
+
+          const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{PowerStaing:sum})
+
+        }else{
+
+          const createShortRecord = await ShortRecord({
+            RecordOwner:list[i].id,
+            PowerStaing:finalCal
+          }).save()
+
+        }
+
+
+
+
+
+
+
+
+
 
       } else {
         const createRecord = await DailyBonus({
@@ -171,6 +240,26 @@ export default async (req, res) => {
           PackagePercantage: per,
           Amount: finalCal
         }).save()
+
+
+
+        const findShortRecord = await ShortRecord.findOne({RecordOwner:list[i].id})
+
+
+        if (findShortRecord) {
+
+          let sum = Number(findShortRecord.DailyStakig) + Number(finalCal)
+
+          const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{DailyStakig:sum})
+
+        }else{
+
+          const createShortRecord = await ShortRecord({
+            RecordOwner:list[i].id,
+            DailyStakig:finalCal
+          }).save()
+
+        }
 
 
         // const GiveReawdToUpperUpper = await RebuyBonus({
@@ -193,6 +282,31 @@ export default async (req, res) => {
           PackagePercantage: per,
           Amount: finalCal
         }).save()
+
+
+        const findShortRecord = await ShortRecord.findOne({RecordOwner:list[i].id})
+
+
+        if (findShortRecord) {
+
+          let sum = Number(findShortRecord.PowerStaing) + Number(finalCal)
+
+          const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{PowerStaing:sum})
+
+        }else{
+
+          const createShortRecord = await ShortRecord({
+            RecordOwner:list[i].id,
+            PowerStaing:finalCal
+          }).save()
+
+        }
+
+
+
+
+
+
       } else {
         const createRecord = await DailyBonus({
           BonusOwner: list[i].id,
@@ -200,6 +314,32 @@ export default async (req, res) => {
           PackagePercantage: per,
           Amount: finalCal
         }).save()
+
+
+        const findShortRecord = await ShortRecord.findOne({RecordOwner:list[i].id})
+
+
+        if (findShortRecord) {
+
+          let sum = Number(findShortRecord.DailyStakig) + Number(finalCal)
+
+          const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{DailyStakig:sum})
+
+        }else{
+
+          const createShortRecord = await ShortRecord({
+            RecordOwner:list[i].id,
+            DailyStakig:finalCal
+          }).save()
+
+        }
+
+
+
+
+
+
+
       }
     }
 

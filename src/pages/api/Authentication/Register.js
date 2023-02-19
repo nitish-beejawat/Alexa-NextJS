@@ -1,6 +1,7 @@
 import User from '../../../helper/Modal/User'
 import initDB from '../../../helper/initDB'
 import bcrypt from 'bcrypt'
+import ShortRecord from 'src/helper/Modal/ShortRecord'
 
 initDB()
 
@@ -79,6 +80,33 @@ export default async (req, res) => {
       SponserCode: generatedUserName,
       UserName: generateUserN + randValue2
     }).save()
+
+    // checkReferalUser
+
+    const findUppers = await User.findOne({SponserCode:UpperlineUser})
+    const findShortRecord = await ShortRecord.findOne({RecordOwner:findUppers._id})
+
+
+    if (findShortRecord) {
+
+      let sum = Number(findShortRecord.DirectTeam) + 1
+     
+      // console.log(sum)
+      // console.log(typeof(sum))
+
+      const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{DirectTeam:sum})
+
+    }else{
+
+      const createShortRecord = await ShortRecord({
+        RecordOwner:findUppers._id,
+        DirectTeam:1
+      }).save()
+
+    }
+
+
+
 
     console.log(CreateUser);
 

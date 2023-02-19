@@ -36,20 +36,63 @@ const navigation = () => {
       path: '/'
     },
     {
-      title: 'Account Settings',
+      sectionTitle: 'Fund Manager'
+    },
+    {
+        title: 'Top Up',
+        icon: AccountCogOutline,
+        path: '/Package'
+      },
+    {
+      title: 'Withdrawals',
       icon: AccountCogOutline,
       path: '/account-settings'
     },
     {
-      title: 'Top Up',
+      sectionTitle: 'Team Details'
+    },
+    {
+      title: 'Direct Referrals',
       icon: AccountCogOutline,
-      path: '/Package'
+      path: '/DirectReferal'
     },
     {
-      sectionTitle: 'Records'
+      title: 'Team',
+      icon: AccountCogOutline,
+      path: '/account-settings'
     },
     {
-      title: 'Referal Commisions',
+      title: 'Genealogy',
+      icon: AccountCogOutline,
+      path: `/Member/Genealogy?id=${myId}`
+    },
+    // {
+    //   title: 'Account Settings',
+    //   icon: AccountCogOutline,
+    //   path: '/account-settings'
+    // },
+    // {
+    //   title: 'Top Up',
+    //   icon: AccountCogOutline,
+    //   path: '/Package'
+    // },
+
+    
+    {
+      sectionTitle: 'Rewards'
+    },
+    {
+      title: 'Daily Staking Reward',
+      icon: AccountCogOutline,
+      path: '/DailyBounus'
+    },
+    {
+      title: 'Power Staking Reward',
+      icon: AccountCogOutline,
+      path: '/FastBonus'
+    },
+    {
+      title: 'Direct Reward',
       icon: AccountCogOutline,
       path: '/ReferalCommisions'
     },
@@ -58,35 +101,21 @@ const navigation = () => {
       icon: AccountCogOutline,
       path: '/MatchingBonus'
     },
-    {
-      title: 'Daily Bounus',
-      icon: AccountCogOutline,
-      path: '/DailyBounus'
-    },
-    {
-      title: 'FastBonus',
-      icon: AccountCogOutline,
-      path: '/FastBonus'
-    },
-    {
-      title: 'Genealogy',
-      icon: AccountCogOutline,
-      path: `/Member/Genealogy?id=${myId}`
-    },
+   
+    // {
+    //   title: 'Genealogy',
+    //   icon: AccountCogOutline,
+    //   path: `/Member/Genealogy?id=${myId}`
+    // },
     {
       title: 'Rank Eligibility',
       icon: AccountCogOutline,
       path: '/RankEligibility'
     },
     {
-      title: 'Global Bonus History',
+      title: 'Global Bonus Bonus',
       icon: AccountCogOutline,
       path: '/GlobalBonusHistory'
-    },
-    {
-      title: 'Direct Referal',
-      icon: AccountCogOutline,
-      path: '/DirectReferal'
     },
     {
       title: 'Rebuy Bonus',

@@ -10,6 +10,7 @@ import RankBonusHistory from '../../../helper/Modal/History/RankBonusHistory'
 import RenewalPurchasePackage from 'src/helper/Modal/Renewal/RenewalPurchasePackage'
 import RankEligibilityClaim from 'src/helper/Modal/History/RankEligibilityClaim'
 import PurchasePackageInvoice from 'src/helper/Modal/Invoice/PurchasePackageInvoice'
+import ShortRecord from 'src/helper/Modal/ShortRecord'
 
 initDB()
 
@@ -89,6 +90,34 @@ export default async (req, res) => {
         PackageName: findPackage.PackageName
       }).save()
 
+
+
+
+      
+      const findShortRecord = await ShortRecord.findOne({RecordOwner:uplineUser})
+
+
+      if (findShortRecord) {
+
+        let sum = Number(findShortRecord.DirectReward) + Number(PackagePercantage)
+
+        const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{DirectReward:sum})
+
+      }else{
+
+        const createShortRecord = await ShortRecord({
+          RecordOwner:uplineUser,
+          DirectReward:PackagePercantage
+        }).save()
+
+      }
+
+
+
+
+
+
+
       const uplinerCreationDate = findUplineUserDetails.createdAt
 
       var date = new Date(uplinerCreationDate)
@@ -149,6 +178,35 @@ export default async (req, res) => {
           BusinessYear: date.getFullYear()
 
         }).save()
+
+
+
+        const findShortRecord = await ShortRecord.findOne({RecordOwner:uplineUser})
+
+        if (findShortRecord) {
+  
+          let sum = Number(findShortRecord.RankEligibility) + Number(findMyPackage.PackagePrice)
+  
+          const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{DirectReward:sum})
+  
+        }else{
+  
+          const createShortRecord = await ShortRecord({
+            RecordOwner:uplineUser,
+            DirectReward:findMyPackage.PackagePrice
+          }).save()
+  
+        }
+
+
+
+
+
+
+
+
+
+
 
         const AddRankEligibilityHistory = await RankBonusHistory({
           UpperLineUserId: uplineUser,
@@ -276,6 +334,30 @@ export default async (req, res) => {
         PackageName: findPackage.PackageName
       }).save()
 
+
+      const findShortRecord = await ShortRecord.findOne({RecordOwner:uplineUser})
+
+
+      if (findShortRecord) {
+
+        let sum = Number(findShortRecord.DirectReward) + Number(calWallete)
+
+        const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{DirectReward:sum})
+
+      }else{
+
+        const createShortRecord = await ShortRecord({
+          RecordOwner:uplineUser,
+          DirectReward:calWallete
+        }).save()
+
+      }
+
+
+
+
+
+
       const uplinerCreationDate = findUplineUserDetails.createdAt
 
       var date = new Date(uplinerCreationDate)
@@ -336,6 +418,26 @@ export default async (req, res) => {
 
         }).save()
 
+        const findShortRecord = await ShortRecord.findOne({RecordOwner:uplineUser})
+
+        if (findShortRecord) {
+  
+          let sum = Number(findShortRecord.RankEligibility) + Number(findMyPackage.PackagePrice)
+  
+          const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{DirectReward:sum})
+  
+        }else{
+  
+          const createShortRecord = await ShortRecord({
+            RecordOwner:uplineUser,
+            DirectReward:findMyPackage.PackagePrice
+          }).save()
+  
+        }
+
+
+
+
         const AddRankEligibilityHistory = await RankBonusHistory({
           UpperLineUserId: uplineUser,
           UpperLineUserSponser: findUplineUserDetails.SponserCode,
@@ -366,6 +468,36 @@ export default async (req, res) => {
       PackageOwner: id,
       Type: "Repurchased"
     }).save()
+
+
+
+
+    const findShortRecord = await ShortRecord.findOne({RecordOwner:id})
+
+
+    if (findShortRecord) {
+
+      let sum = Number(findShortRecord.RebuyBonus) + Number(findMyPackage.PackagePrice)
+
+      const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{RebuyBonus:sum})
+
+    }else{
+
+      const createShortRecord = await ShortRecord({
+        RecordOwner:uplineUser,
+        RebuyBonus:findMyPackage.PackagePrice
+      }).save()
+
+    }
+
+
+
+    
+
+
+
+
+
     
     const createPackageInvoice = await PurchasePackageInvoice({
       PackageName: findMyPackage.PackageName,
