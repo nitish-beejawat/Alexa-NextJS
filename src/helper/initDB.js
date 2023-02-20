@@ -6,7 +6,7 @@ function initDB(){
         return
     }
 
-    mongoose.connect("mongodb+srv://lykastakinguser:suraj@cluster0.zfm1ut3.mongodb.net/?retryWrites=true&w=majority",{
+    mongoose.connect("mongodb+srv://digitalchasing:e12CaqdBtak6W910@cluster0.fbuxla9.mongodb.net/?retryWrites=true&w=majority",{
         useNewUrlParser : true,
         useUnifiedTopology:true
 

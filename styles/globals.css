@@ -74,3 +74,8 @@ code[class*='language-'] {
     flex-direction: column;
   }
 }
+
+
+.css-1pg9d41-MuiModal-root-MuiDrawer-root .MuiDrawer-paper {
+  background: #062929 !important;
+}
