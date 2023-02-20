@@ -56,7 +56,7 @@ const TabAccount = ({datas}) => {
 
   useEffect(() => {
 
-    setLeftCode(`https://lyka-staking.vercel.app/?RferCode=${datas.SponserCode}&Posi=${sides}`)
+    setLeftCode(`https://alexapro.vercel.app/?RferCode=${datas.SponserCode}&Posi=${sides}`)
     
   
    
@@ -177,7 +177,7 @@ const TabAccount = ({datas}) => {
               type='text'
               label='Refer Code'
               placeholder='Refer Code'
-             value={`https://lyka-staking.vercel.app?RferCode=${datas.SponserCode}&Posi=${sides}`}
+             value={`https://alexapro.vercel.app?RferCode=${datas.SponserCode}&Posi=${sides}`}
             />
 
             </FormControl>

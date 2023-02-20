@@ -36,6 +36,11 @@ const navigation = () => {
       path: '/'
     },
     {
+      title: 'Account Setting',
+      icon: AccountCogOutline,
+      path: '/account-settings'
+    },
+    {
       sectionTitle: 'Fund Manager'
     },
     {
@@ -56,11 +61,7 @@ const navigation = () => {
       icon: AccountCogOutline,
       path: '/DirectReferal'
     },
-    {
-      title: 'Team',
-      icon: AccountCogOutline,
-      path: '/account-settings'
-    },
+  
     {
       title: 'Genealogy',
       icon: AccountCogOutline,

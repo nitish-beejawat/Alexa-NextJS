@@ -79,3 +79,7 @@ code[class*='language-'] {
 .css-1pg9d41-MuiModal-root-MuiDrawer-root .MuiDrawer-paper {
   background: #062929 !important;
 }
+
+.MuiList-root MuiList-padding MuiMenu-list css-r8u8y9{
+  background: #062929 !important;
+}
