@@ -3,6 +3,7 @@ import initDB from '../../../helper/initDB'
 import bcrypt from 'bcrypt'
 import ShortRecord from 'src/helper/Modal/ShortRecord'
 import MyTeamMember from "../../../helper/Modal/MyTeamMember"
+
 initDB()
 
 export default async (req, res) => {
