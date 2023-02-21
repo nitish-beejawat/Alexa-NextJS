@@ -141,26 +141,26 @@ const Dashboard = () => {
         dashData ? 
 
         <Grid style={{marginTop:20,marginLeft:10}} container spacing={12}>
-          <Grid item xs={4} md={4}>
+          <Grid item xs={12} md={4}>
             <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20,backgroundImage:"https://png.pngtree.com/element_our/sm/20180520/sm_5b0125134eb72.jpg",backgroundSize:80,backgroundRepeat:"no-repeat"}}>
               <h4>Dalily Staking</h4>
-              <h3 style={{marginTop:-20}}>{dashData.DailyStakig}</h3>
+              <h3 style={{marginTop:-20}}>{Number(dashData.DailyStakig).toFixed(2)}</h3>
 
             </div>
 
           </Grid>
-          <Grid item xs={4} md={4}>
+          <Grid item xs={12} md={4}>
             <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20}}>
               <h4>Power Staking</h4>
-              <h3 style={{marginTop:-20}}>{dashData.PowerStaing}</h3>
+              <h3 style={{marginTop:-20}}>{Number(dashData.PowerStaing).toFixed(2)}</h3>
 
             </div>
 
           </Grid>
-          <Grid item xs={4} md={4}>
+          <Grid item xs={12} md={4}>
             <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20}}>
               <h4>Direct Reward</h4>
-              <h3 style={{marginTop:-20}}>{dashData.DirectReward}</h3>
+              <h3 style={{marginTop:-20}}>{Number(dashData.DirectReward).toFixed(2)}</h3>
 
             </div>
 
@@ -173,26 +173,26 @@ const Dashboard = () => {
 
 
 
-          <Grid style={{marginTop:-20}} item xs={4} md={4}>
+          <Grid style={{marginTop:-20}} item xs={12} md={4}>
             <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20,backgroundImage:"https://png.pngtree.com/element_our/sm/20180520/sm_5b0125134eb72.jpg",backgroundSize:80,backgroundRepeat:"no-repeat"}}>
               <h4>Matching Bonus</h4>
-              <h3 style={{marginTop:-20}}>{dashData.MatcingBonus}</h3>
+              <h3 style={{marginTop:-20}}>{Number(dashData.MatcingBonus).toFixed(2)}</h3>
 
             </div>
 
           </Grid>
-          <Grid style={{marginTop:-20}} item xs={4} md={4}>
+          <Grid style={{marginTop:-20}} item xs={12} md={4}>
             <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20}}>
               <h4>Rank Eligibilty</h4>
-              <h3 style={{marginTop:-20}}>{dashData.RankEligibility}</h3>
+              <h3 style={{marginTop:-20}}>{Number(dashData.RankEligibility).toFixed(2)}</h3>
 
             </div>
 
           </Grid>
-          <Grid style={{marginTop:-20}} item xs={4} md={4}>
+          <Grid style={{marginTop:-20}} item xs={12} md={4}>
             <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20}}>
               <h4>Global Pool Bonus</h4>
-              <h3 style={{marginTop:-20}}>{dashData.GobalPoolBonus}</h3>
+              <h3 style={{marginTop:-20}}>{Number(dashData.GobalPoolBonus).toFixed(2)}</h3>
 
             </div>
 
@@ -201,23 +201,23 @@ const Dashboard = () => {
 
 
 
-          <Grid style={{marginTop:-20}} item xs={4} md={4}>
+          <Grid style={{marginTop:-20}} item xs={12} md={4}>
             <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20,backgroundImage:"https://png.pngtree.com/element_our/sm/20180520/sm_5b0125134eb72.jpg",backgroundSize:80,backgroundRepeat:"no-repeat"}}>
               <h4>Rebuy Bonus</h4>
-              <h3 style={{marginTop:-20}}>{dashData.RebuyBonus}</h3>
+              <h3 style={{marginTop:-20}}>{Number(dashData.RebuyBonus).toFixed(2)}</h3>
 
             </div>
 
           </Grid>
-           <Grid style={{marginTop:-20}} item xs={4} md={4}>
+           <Grid style={{marginTop:-20}} item xs={12} md={4}>
             <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20}}>
               <h4>Direct Team</h4>
-              <h3 style={{marginTop:-20}}>{dashData.DirectTeam}</h3>
+              <h3 style={{marginTop:-20}}>{Number(dashData.DirectTeam).toFixed(2)}</h3>
 
             </div>
 
           </Grid>
-        {/*  <Grid style={{marginTop:-20}} item xs={4} md={4}>
+        {/*  <Grid style={{marginTop:-20}} item xs={12} md={4}>
             <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20}}>
               <h4>Account Status</h4>
               <h3 style={{marginTop:-20}}>In-Active</h3>

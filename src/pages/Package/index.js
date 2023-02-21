@@ -136,7 +136,7 @@ const MUITable = () => {
 
             <Grid item xs={12}>
               <Card>
-                <CardHeader title='Topup With Lyka Coin (BEP-20)' titleTypographyProps={{ variant: 'h6' }} />
+                <CardHeader title='Topup With Alexa Token (BEP-20)' titleTypographyProps={{ variant: 'h6' }} />
 
                 <div style={{ marginLeft: 100, marginRight: 100, marginBottom: 40, marginTop: 20 }}>
                   <FormControl  fullWidth>
@@ -147,6 +147,7 @@ const MUITable = () => {
                       defaultValue=''
                       id='form-layouts-separator-select'
                       labelId='form-layouts-separator-select-label'
+                     
                     >
                       {datas ? (
                         datas.map(acc => {
@@ -159,7 +160,7 @@ const MUITable = () => {
 
 
                           return (
-                            <MenuItem key={acc._id} value={acc._id}>
+                            <MenuItem  style={{backgroundColor:"#062929"}} key={acc._id} value={acc._id}>
                               {acc.PackageName} - ${acc.PackagePrice}
                             </MenuItem>
                           )
@@ -170,8 +171,8 @@ const MUITable = () => {
                     </Select>
                   </FormControl>
 
-                  <p>Lyka Coin (Including 1% admin fee)</p>
-                  <TextField disabled={true} fullWidth label='Total Lyka' placeholder='Carter' />
+                  <p>Alexa Coin (Including 1% admin fee)</p>
+                  <TextField disabled={true} fullWidth label='Total Alexa' placeholder='Carter' />
 
                   <div style={{ textAlign: 'center', marginTop: 30 }}>
                     {

@@ -48,11 +48,7 @@ const navigation = () => {
         icon: AccountCogOutline,
         path: '/Package'
       },
-    {
-      title: 'Withdrawals',
-      icon: AccountCogOutline,
-      path: '/account-settings'
-    },
+   
     {
       sectionTitle: 'Team Details'
     },

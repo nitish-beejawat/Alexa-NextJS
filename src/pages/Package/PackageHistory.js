@@ -38,8 +38,8 @@ const PackageHistory = ({ TopUpHistory,setShowHistoryScreen }) => {
                     <TableCell align='left'>Price</TableCell>
                     <TableCell align='left'>Period</TableCell>
                     <TableCell align='left'>Maximum Limit</TableCell>
-                    <TableCell align='left'>Lyka Tokens</TableCell>
-                    <TableCell align='left'>Reward Wallete</TableCell>
+                    <TableCell align='left'>Alexa Tokens</TableCell>
+                    <TableCell align='left'>Reward Wallet</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

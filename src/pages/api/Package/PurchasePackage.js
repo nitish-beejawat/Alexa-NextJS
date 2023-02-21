@@ -91,9 +91,6 @@ export default async (req, res) => {
       }).save()
 
 
-
-
-      
       const findShortRecord = await ShortRecord.findOne({RecordOwner:uplineUser})
 
 
@@ -181,22 +178,22 @@ export default async (req, res) => {
 
 
 
-        const findShortRecord = await ShortRecord.findOne({RecordOwner:uplineUser})
+        // const findShortRecord = await ShortRecord.findOne({RecordOwner:uplineUser})
 
-        if (findShortRecord) {
+        // if (findShortRecord) {
   
-          let sum = Number(findShortRecord.RankEligibility) + Number(findMyPackage.PackagePrice)
+        //   let sum = Number(findShortRecord.RankEligibility) + Number(findMyPackage.PackagePrice)
   
-          const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{DirectReward:sum})
+        //   const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{RankEligibility:sum})
   
-        }else{
+        // }else{
   
-          const createShortRecord = await ShortRecord({
-            RecordOwner:uplineUser,
-            DirectReward:findMyPackage.PackagePrice
-          }).save()
+        //   const createShortRecord = await ShortRecord({
+        //     RecordOwner:uplineUser,
+        //     DirectReward:findMyPackage.PackagePrice
+        //   }).save()
   
-        }
+        // }
 
 
 
@@ -340,7 +337,7 @@ export default async (req, res) => {
 
       if (findShortRecord) {
 
-        let sum = Number(findShortRecord.DirectReward) + Number(calWallete)
+        let sum = Number(findShortRecord.DirectReward) + Number(PackagePercantage)
 
         const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{DirectReward:sum})
 
@@ -348,7 +345,7 @@ export default async (req, res) => {
 
         const createShortRecord = await ShortRecord({
           RecordOwner:uplineUser,
-          DirectReward:calWallete
+          DirectReward:PackagePercantage
         }).save()
 
       }
@@ -418,22 +415,22 @@ export default async (req, res) => {
 
         }).save()
 
-        const findShortRecord = await ShortRecord.findOne({RecordOwner:uplineUser})
+        // const findShortRecord = await ShortRecord.findOne({RecordOwner:uplineUser})
 
-        if (findShortRecord) {
+        // if (findShortRecord) {
   
-          let sum = Number(findShortRecord.RankEligibility) + Number(findMyPackage.PackagePrice)
+        //   let sum = Number(findShortRecord.RankEligibility) + Number(findMyPackage.PackagePrice)
   
-          const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{DirectReward:sum})
+        //   const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{RankEligibility:sum})
   
-        }else{
+        // }else{
   
-          const createShortRecord = await ShortRecord({
-            RecordOwner:uplineUser,
-            DirectReward:findMyPackage.PackagePrice
-          }).save()
+        //   const createShortRecord = await ShortRecord({
+        //     RecordOwner:uplineUser,
+        //     DirectReward:findMyPackage.PackagePrice
+        //   }).save()
   
-        }
+        // }
 
 
 

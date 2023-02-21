@@ -79,7 +79,7 @@ const UserDropdown = () => {
   }
 
   return (
-    <Fragment>
+    <Fragment >
       <Badge
         overlap='circular'
         onClick={handleDropdownOpen}
@@ -98,9 +98,10 @@ const UserDropdown = () => {
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={() => handleDropdownClose()}
-        sx={{ '& .MuiMenu-paper': { width: 230, marginTop: 4 } }}
+        sx={{ '& .MuiMenu-paper': { width: 230, marginTop: 4, backgroundColor:"#062929" } }}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+       
       >
         <Box sx={{ pt: 2, pb: 3, px: 4 }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
