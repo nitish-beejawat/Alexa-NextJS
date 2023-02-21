@@ -10,7 +10,7 @@ const RightOne4 = ({datas,handleClikedSuperUser}) => {
         datas ? 
 
         <>
-<img src='https://lykacoin.net/images/0img.png' style={{ width: 80 }} alt='' />
+<img src={datas.ThirdLevel.Four.RightLine.userName == "null" ?'/empltyplace.png'  : "/activated.png"} style={{ width: 80 }} alt='' />
 <Typography variant='h6'>{datas.ThirdLevel.Four.RightLine.userName == "null" ? "Vacant" : datas.ThirdLevel.Four.RightLine.userName}</Typography>
 
 {

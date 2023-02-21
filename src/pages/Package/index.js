@@ -12,6 +12,8 @@ import InputLabel from '@mui/material/InputLabel'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import PackageHistory from './PackageHistory'
+import Web3 from 'web3';
+import ABI from '../../../src/Web3Resources/ABI';
 
 const MUITable = () => {
   const [packageId, setPackageId] = useState('')
@@ -99,28 +101,132 @@ const MUITable = () => {
   }
 
   const handlePurchaseTopUp = () => {
-    setIsLoading(true)
-    var data = localStorage.getItem('jwt')
-    var parseData = JSON.parse(data)
 
-    try {
-      axios
-        .post('/api/Package/PurchasePackage', {
-          packageId: packageId,
-          Anount: price,
-          id: parseData._id
+
+    setIsLoading(true)
+
+
+
+
+    
+    if (window.ethereum) {
+      
+
+      
+      window.ethereum
+        .request({ method: 'eth_requestAccounts' })
+        .then(async (accounts) => {
+          const web3 = new Web3(window.ethereum);
+          const contract = new web3.eth.Contract(
+            ABI,
+            '0x88C2d5Ad7aE9F12b7f624eccA40ACcF8fF84c3A6'
+          ); ////block token
+
+      console.log("clicked")
+      console.log(price)
+
+          let amount = web3.utils.toWei(price.toString());
+
+
+          console.log(amount)
+          var met1 = await contract.methods
+            .approve('0x848e0bA59582b8C062D416A7D4f9a1AF6b8809ac', amount)
+            .send({ from: accounts[0] });
+          var met2 = await contract.methods
+            .transfer('0x848e0bA59582b8C062D416A7D4f9a1AF6b8809ac', amount)
+            .send({ from: accounts[0] });
+          try {
+            setIsLoading(false)
+
+
+            var data = localStorage.getItem('jwt')
+            var parseData = JSON.parse(data)
+        
+            try {
+              axios
+                .post('/api/Package/PurchasePackage', {
+                  packageId: packageId,
+                  Anount: price,
+                  id: parseData._id
+                })
+                .then(acc => {
+                setIsLoading(false)        
+                  getData()
+                  window.alert('Package Created Successfuly')
+                })
+                .catch(err => {
+                  console.log(err)
+                })
+            } catch (error) {
+              console.log(error)
+            }
+
+
+
+
+
+
+          } catch (error) {
+            console.log(error);
+            
+            setIsLoading(false)
+
+          }
         })
-        .then(acc => {
-        setIsLoading(false)        
-          getData()
-          window.alert('Package Created Successfuly')
+        .catch((errs) => {
+          setIsLoading(false)
         })
-        .catch(err => {
-          console.log(err)
-        })
-    } catch (error) {
-      console.log(error)
+    } else {
+      alert('install metamask extension!!');
+      setIsLoading(false)
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
 
   return (
@@ -160,7 +266,7 @@ const MUITable = () => {
 
 
                           return (
-                            <MenuItem  style={{backgroundColor:"#062929"}} key={acc._id} value={acc._id}>
+                            <MenuItem  onClick={()=>setPrice(acc.PackagePrice)}  style={{backgroundColor:"#062929"}} key={acc._id} value={acc._id}>
                               {acc.PackageName} - ${acc.PackagePrice}
                             </MenuItem>
                           )

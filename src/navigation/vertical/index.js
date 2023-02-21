@@ -41,6 +41,11 @@ const navigation = () => {
       path: '/account-settings'
     },
     {
+      title: 'My Team',
+      icon: AccountCogOutline,
+      path: '/MyTeam'
+    },
+    {
       sectionTitle: 'Fund Manager'
     },
     {

@@ -2,12 +2,12 @@ import User from '../../../helper/Modal/User'
 import initDB from '../../../helper/initDB'
 import bcrypt from 'bcrypt'
 import ShortRecord from 'src/helper/Modal/ShortRecord'
-
+import MyTeamMember from "../../../helper/Modal/MyTeamMember"
 initDB()
 
 export default async (req, res) => {
   const { FullName, Position, Country, ContactNumber, EmailId, UpperlineUser, Passsword } = req.body
-  console.log(UpperlineUser)
+ 
 
   if (!FullName || !Position || !Country || !ContactNumber || !EmailId || !Passsword) {
     return res.status(404).json({ error: 'You Have Not Provided All The Informations' })
@@ -30,12 +30,12 @@ export default async (req, res) => {
 
       let currentChildId = Position === "Left" ? checkReferalUser.LeftTeamId : checkReferalUser.RightTeamId;
 
-      console.log("iniChilID", currentChildId);
+     
 
       while(currentChildId !== "null") {
         const currentChildNode = await User.findById(currentChildId);
 
-        console.log(currentChildNode);
+       
 
         checkReferalUser = currentChildNode;
         currentChildId = Position === "Left" ? checkReferalUser.LeftTeamId : checkReferalUser.RightTeamId;
@@ -43,7 +43,7 @@ export default async (req, res) => {
     }
   }
 
-  console.log(checkReferalUser);
+ 
 
   const hashedPassowd = await bcrypt.hash(Passsword, 12)
 
@@ -91,8 +91,6 @@ export default async (req, res) => {
 
       let sum = Number(findShortRecord.DirectTeam) + 1
      
-      // console.log(sum)
-      // console.log(typeof(sum))
 
       const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{DirectTeam:sum})
 
@@ -107,8 +105,6 @@ export default async (req, res) => {
 
 
 
-
-    console.log(CreateUser);
 
     if(checkReferalUser && Position === "Left") {
       const updatedCheckReferalUser = {
@@ -143,6 +139,68 @@ export default async (req, res) => {
       UserName: generateUserN + randValue2
     }).save()
   }
+
+
+
+
+
+
+
+
+  // calculating upperlines
+
+
+  if (UpperlineUser) {
+    
+    let upperline = await User.findById(checkReferalUser._id)
+
+    var Level = 1
+
+    while (upperline !== null) {
+
+
+      if (Level > 10) {
+        break;
+      }
+
+      await MyTeamMember({
+
+        RecordOwner:upperline._id,
+        UserId:CreateUser._id,
+        Sponser:CreateUser.SponserCode,
+        Position:CreateUser.Position,
+        Referral:UpperlineUser,
+        Level:Level
+
+      }).save()
+
+      let upperlineOfThis = upperline.UpperlineUser
+
+      Level = Level +1
+      if (upperlineOfThis == "null") {
+       break;
+      }
+
+      upperline = await User.findById(upperlineOfThis)
+
+    }
+    
+    
+    
+    
+    
+    
+    
+  }
+
+
+
+
+
+
+
+
+
 
   res.status(200).json(CreateUser)
 }

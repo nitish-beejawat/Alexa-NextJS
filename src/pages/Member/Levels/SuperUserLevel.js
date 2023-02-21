@@ -13,7 +13,7 @@ const SuperUserLevel = ({datas,updateData,handleClikedSuperUser}) => {
         <>
         
     <div onClick={()=>handleClikedSuperUser(datas.SuperUser.userName)} style={{ textAlign: 'center',cursor:"pointer" }}>
-      <img src='https://lykacoin.net/images/1img.png' style={{ width: 80 }} alt='' />
+      <img src='/activated.png' style={{ width: 80 }} alt='' />
       <Typography variant='h6'>{datas.SuperUser.id}</Typography>
       <Typography variant='h6'>( {datas.SuperUser.userName} )</Typography>
     </div>

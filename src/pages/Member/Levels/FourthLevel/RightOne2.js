@@ -11,7 +11,7 @@ const LevelTwo2 = ({datas,handleClikedSuperUser}) => {
         <>
         
         
-<img src='https://lykacoin.net/images/1img.png' style={{ width: 80 }} alt='' />
+<img src={datas.ThirdLevel.Two.RightLine.userName == "null" ?'/empltyplace.png'  : "/activated.png"} style={{ width: 80 }} alt='' />
 <Typography variant='h6'>{datas.ThirdLevel.Two.RightLine.userName == "null" ? "Vacant" :datas.ThirdLevel.Two.RightLine.userName}</Typography>
 {
   datas.ThirdLevel.Two.RightLine.userName == "null" ? 

@@ -12,7 +12,7 @@ const ThirdLevelLeft2 = ({datas,handleClikedSuperUser}) => {
 
         <>
         
-<img src='https://lykacoin.net/images/1img.png' style={{ width: 80 }} alt='' />
+<img src={datas.SecondLeve.TotalRight.LeftLine.userName == "null" ?'/empltyplace.png'  : "/activated.png"} style={{ width: 80 }} alt='' />
 <Typography variant='h6'>{datas.SecondLeve.TotalRight.LeftLine.userName == "null" ? "Vacant":datas.SecondLeve.TotalRight.LeftLine.userName}</Typography>
 {
   datas.SecondLeve.TotalRight.LeftLine.userName == "null" ? 

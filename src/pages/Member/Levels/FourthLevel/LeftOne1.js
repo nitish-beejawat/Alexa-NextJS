@@ -9,7 +9,7 @@ const LeftOne1 = ({ datas ,handleClikedSuperUser}) => {
 
         <>
         
-<img src='https://lykacoin.net/images/0img.png' style={{ width: 80 }} alt='' />
+<img src={datas.ThirdLevel.One.LeftLine.userName == 'null' ?'/empltyplace.png'  : "/activated.png"} style={{ width: 80 }} alt='' />
 <Typography variant='h6'>
   {datas.ThirdLevel.One.LeftLine.userName == 'null' ? 'Vacant' : datas.ThirdLevel.One.LeftLine.userName}
 </Typography>
