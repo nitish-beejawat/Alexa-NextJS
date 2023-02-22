@@ -2,6 +2,8 @@ import initDB from "../../../helper/initDB"
 import User from "../../../helper/Modal/User"
 import PackageHistory from "../../../helper/Modal/History/PackageHistory"
 import MatchingBonusHistory from "../../../helper/Modal/History/MatchingBonusHistory"
+import ShortRecord from "../../../helper/Modal/ShortRecord"
+
 
 initDB()
 
@@ -155,17 +157,27 @@ export default async (req, res) => {
                 if (leftBusiness >= Number(PackPrice) && rightBusiness >= Number(PackPrice)) {
                     
                     console.log("user purchased pack => "+Number(PackPrice))
-
+                    var combo = 0
 
                     if (leftBusiness < rightBusiness) {
+
+
+                        console.log("came in first blocks")
                         
-                        var combo = Number(leftBusiness) + Number(subLastValue)
+                        combo = Number(leftBusiness) + Number(subLastValue)
                         var subtractForwardValue =  rightBusiness - leftBusiness
                         
                     }else if(rightBusiness < leftBusiness){
+                        console.log("came in second blocks")
                         
-                        var combo = Number(rightBusiness) + Number(subLastValue)
+                        combo = Number(rightBusiness) + Number(subLastValue)
                         var subtractForwardValue =  leftBusiness - rightBusiness
+
+                    }else if(rightBusiness == leftBusiness){
+                        console.log("came in second blocks")
+                        
+                        combo = Number(rightBusiness)
+                        var subtractForwardValue =  0
 
                     }
 
@@ -173,7 +185,12 @@ export default async (req, res) => {
 
 
 
+                    console.log(  "this is the number ===> "+combo)
                      var packPercantage = Number(combo) * 8 / 100
+
+
+
+
 
 
 
@@ -186,6 +203,10 @@ export default async (req, res) => {
                     const GiveMatchingBonus = await User.findById(FindAllUsers[index]._id)
     
                     const userWallet = Number(GiveMatchingBonus.MainWallet) + Number(packPercantage)
+
+
+
+                    // console.log(packPercantage)
     
     
                     const ProvideMatchingBonus = await User.findByIdAndUpdate({ _id: FindAllUsers[index]._id }, { MainWallet: userWallet })
@@ -198,6 +219,32 @@ export default async (req, res) => {
                         Rate:"8%",
                         ForwardedValue:subtractForwardValue
                     }).save()
+
+
+
+
+                    const findShortRecord = await ShortRecord.findOne({RecordOwner:FindAllUsers[index]._id})
+
+
+                    if (findShortRecord) {
+            
+                      let sum = Number(findShortRecord.MatcingBonus) + Number(packPercantage)
+            
+                      const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{MatcingBonus:sum})
+            
+                    }else{
+            
+                      const createShortRecord = await ShortRecord({
+                        RecordOwner:FindAllUsers[index]._id,
+                        MatcingBonus:packPercantage
+                      }).save()
+            
+                    }
+
+
+
+
+
 
 
 

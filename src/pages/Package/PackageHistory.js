@@ -36,10 +36,10 @@ const PackageHistory = ({ TopUpHistory,setShowHistoryScreen }) => {
                   <TableRow>
                     <TableCell>Package Name</TableCell>
                     <TableCell align='left'>Price</TableCell>
-                    <TableCell align='left'>Period</TableCell>
+                    
                     <TableCell align='left'>Maximum Limit</TableCell>
                     <TableCell align='left'>Alexa Tokens</TableCell>
-                    <TableCell align='left'>Reward Wallet</TableCell>
+                   
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -52,10 +52,10 @@ const PackageHistory = ({ TopUpHistory,setShowHistoryScreen }) => {
                   >
                     <TableCell align='left'>{TopUpHistory ? TopUpHistory[0].PackageName : ''}</TableCell>
                     <TableCell align='left'>{TopUpHistory ? TopUpHistory[0].PackagePrice : ''}</TableCell>
-                    <TableCell align='left'>{TopUpHistory ? TopUpHistory[0].PaackagePeriod : ''}</TableCell>
+                    
                     <TableCell align='left'>{TopUpHistory ? TopUpHistory[0].PackageMaximumLimit + '%' : ''}</TableCell>
                     <TableCell align='left'>{TopUpHistory ? TopUpHistory[0].LykaToken : ''}</TableCell>
-                    <TableCell align='left'>{TopUpHistory ? TopUpHistory[0].PackgeRewardWallte : ''}</TableCell>
+                   
                   </TableRow>
                 </TableBody>
               </Table>

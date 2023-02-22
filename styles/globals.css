@@ -93,3 +93,12 @@ code[class*='language-'] {
 MuiList-root MuiList-padding MuiMenu-list css-6hp17o-MuiList-root-MuiMenu-list{
   background: #062929 !important;
 }
+
+
+MuiPaper-root MuiPaper-elevation MuiPaper-elevation16 MuiDrawer-paper MuiDrawer-paperAnchorLeft css-122rimn {
+  background: #062929 !important;
+}
+
+.MuiPaper-root MuiPaper-elevation MuiPaper-elevation16 MuiDrawer-paper MuiDrawer-paperAnchorLeft css-122rimn {
+  background: #062929 !important;
+}

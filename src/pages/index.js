@@ -106,34 +106,7 @@ const Dashboard = () => {
     <ApexChartWrapper>
       <Grid container spacing={6}>
       
-        <Grid item xs={12} md={12}>
-          <div style={{borderColor:"#05A4A6",borderWidth:1,borderStyle:"solid",padding:20,borderRadius:20}}>
-
-            <h2>Hello User (12345)</h2>
-            <h4 style={{color:"red",marginTop:-20,fontWeight:"normal"}}>Inactive</h4>
-            <h4 style={{color:"white",marginTop:-20,fontWeight:"normal"}}>Contact : <a style={{color:'yellow'}}>hsdkjghskdghsdkjgasjfjajlkfjalskfjalskfjalsfjasl</a></h4>
-
-
-
-
-            <h4>Referral Link</h4>
-
-
-<Button >
-
-<svg xmlns="http://www.w3.org/2000/svg" style={{color:"white"}} width={16} height={16} fill="currentColor" className="bi bi-clipboard2-fill" viewBox="0 0 16 16">
-  <path d="M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z" />
-  <path d="M3.5 1h.585A1.498 1.498 0 0 0 4 1.5V2a1.5 1.5 0 0 0 1.5 1.5h5A1.5 1.5 0 0 0 12 2v-.5c0-.175-.03-.344-.085-.5h.585A1.5 1.5 0 0 1 14 2.5v12a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-12A1.5 1.5 0 0 1 3.5 1Z" />
-</svg>
- 
-
-
-</Button>
-            <Input style={{width:"50%"}} value="235265723658723562837562387563258723" contentEditable={false}></Input>
-<Button style={{color:"white"}} onClick={()=>side =="Right"?setSide("Left"):setSide("Right")} >{side}</Button>
-
-          </div>
-        </Grid>
+      
 
 
 
