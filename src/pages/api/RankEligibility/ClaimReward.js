@@ -19,9 +19,9 @@ export default async (req, res) => {
     const findRankEligibilityData = await RankEligibilityClaim.find({RankEligibilityClaimOwnerId:id})
 
 
-    if (findRankEligibilityData.length !== 0) {
-        return res.status(200).json({message:"Already Given Rank Eligibility"})
-    }
+    // if (findRankEligibilityData.length !== 0) {
+    //     return res.status(200).json({message:"Already Given Rank Eligibility"})
+    // }
 
 
     const MainUserData = await User.findById(id)

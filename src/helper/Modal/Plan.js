@@ -25,10 +25,28 @@ const Plan = mongoose.Schema(
     PackageReferalCommision:{
       default: '0',
       type: 'String'
-    }
+    },
+    RankEligibilityDirectTeamBusiness:{
+      default: 0,
+      type: 'Number'
+    },
+    RankEligibilityReward:{
+      default: 0,
+      type: 'Number'
+    },
+    RankEligibilityTeam:{
+      default: 0,
+      type: 'Number'
+    },
+
+
+
+
+
+
   },
   {
     timestamps: true
   }
 )
-export default mongoose.models.Plan || mongoose.model('Plan', Plan)
+export default mongoose.models.NewPlan || mongoose.model('NewPlan', Plan)

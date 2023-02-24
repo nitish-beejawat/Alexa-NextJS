@@ -5,6 +5,7 @@ import Card from '@mui/material/Card'
 import axios from 'axios'
 import WeeklyOverview from '../../views/dashboard/WeeklyOverview'
 import History from './History'
+import AvalibleRewardsCard from './AvalibleRewardsCard'
 
 
 const PackageHistory = () => {
@@ -15,6 +16,7 @@ const PackageHistory = () => {
   const [percantage, setPercantage] = useState(0)
   const [crWall, setCrWall] = useState(0)
   const [yourReward, setYourReward] = useState(0)
+  const [userCurrentWallet, setUserCurrentWallet] = useState(0)
 
 
   useEffect(() => {
@@ -120,62 +122,52 @@ const PackageHistory = () => {
 
   }
 
+
+
+
+  useEffect(() => {
+    const getData = localStorage.getItem("jwt")
+    const parseIt = JSON.parse(getData)
+    
+    try {
+      
+      axios.post("/api/RankTeamBusiness/FindMyTeamBusiness",{
+        id:parseIt._id
+      })
+      .then((acc)=>{
+        console.log(acc.data)
+
+        setUserCurrentWallet(acc.data)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+
+
+    } catch (error) {
+      console.log(error)
+    }
+
+
+
+   
+  }, [])
+  
+
+
+
+
+
+
+
   return (
     <div>
       <Grid container spacing={6}>
         <Grid item xs={12}>
-          <Typography variant='h4'>Rank Eligibility</Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Card style={{}}>
-            <WeeklyOverview />
-          </Card>
-        </Grid>
-        <Grid item xs={6}>
-          <Card style={{ padding: 10, paddingBottom: 40 }}>
-            <div style={{ textAlign: 'center', marginTop: 40 }}>
-              <img
-                src='https://cdn-icons-png.flaticon.com/512/726/726461.png'
-                style={{ width: 130, height: 130 }}
-                alt=''
-              />
-              {buttonDisable ? (
-                <p
-                  onClick={handleButtonPress}
-                  style={{
-                    backgroundColor: 'gray',
-                    padding: 5,
-                    marginLeft: 100,
-                    marginRight: 100,
-                    fontWeight: 'bolder',
-                    color: 'white',
-                    borderRadius: 10
-                  }}
-                >
-                  Claim Reward
-                </p>
-              ) : (
-                <p
-                  onClick={handleButtonPress}
-                  style={{
-                    backgroundColor: '#9357FD',
-                    padding: 5,
-                    marginLeft: 100,
-                    marginRight: 100,
-                    fontWeight: 'bolder',
-                    color: 'white',
-                    borderRadius: 10
-                  }}
-                >
-                  Claim Reward
-                </p>
-              )}
-            </div>
-          </Card>
+          <Typography style={{marginBottom:20}} variant='h4'>Rank Eligibility</Typography>
         </Grid>
       </Grid>
-
-
+      <AvalibleRewardsCard userCurrentWallet={userCurrentWallet}/>
       <History/>
     </div>
   )

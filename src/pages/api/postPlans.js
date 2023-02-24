@@ -11,7 +11,7 @@ initDB()
 export default async (req, res) => {
 
 
-    const {PackageName,PackagePrice,PaackagePeriod,PackageMaximumLimit,LykaToken,PackageReferalCommision } = req.body;
+    const {PackageName,PackagePrice,PaackagePeriod,PackageMaximumLimit,LykaToken,PackageReferalCommision,RankEligibilityDirectTeamBusiness,RankEligibilityReward ,RankEligibilityTeam} = req.body;
 
 
     const updatePlan = await Plan({
@@ -20,7 +20,10 @@ export default async (req, res) => {
         PaackagePeriod,
         PackageMaximumLimit,
         LykaToken,
-        PackageReferalCommision
+        PackageReferalCommision,
+        RankEligibilityDirectTeamBusiness,
+        RankEligibilityReward,
+        RankEligibilityTeam
     }).save()
 
 
