@@ -4,7 +4,6 @@ import User from "../../../helper/Modal/User";
 import PackageHistory from "../../../helper/Modal/History/PackageHistory";
 import RankEligibilityClaim from "src/helper/Modal/History/RankEligibilityClaim";
 
-
 initDB()
 
 export default async(req,res)=>{
@@ -46,21 +45,32 @@ export default async(req,res)=>{
 
     
     
-    const findMainUserPackage = await User.findById(id)
+    // const findMainUserPackage = await User.findById(id)
+    const FindRankClaimHis = await RankEligibilityClaim.findOne({RankEligibilityClaimOwnerId:id}).sort({_id:-1})
     
     
-    const mainUserPackagePrice = Number(findMainUserPackage.PurchasedPackagePrice)
+    const mainUserPackagePrice = Number(FindRankClaimHis.ClaimedReward)
 
     console.log("pack price is => "+mainUserPackagePrice)
     
-    const rankEligibleForThatPackage = await RankEligibilityClaim.find({PackageOwnPrice:mainUserPackagePrice})
+    const rankEligibleForThatPackage = await RankEligibilityClaim.find({ClaimedReward:mainUserPackagePrice})
     console.log(rankEligibleForThatPackage)
     console.log("it is comided here")
 
+
+
+
+
+
+
+
+
+
     
 
 
     
+    // const memberEligible = 1 // this is the count of eligible 
     const memberEligible = rankEligibleForThatPackage.length // this is the count of eligible 
 
     // here we are calculating estimated tokens 
@@ -68,34 +78,35 @@ export default async(req,res)=>{
     var percantage = 0
     var star = ""
 
-    if (mainUserPackagePrice == 500) {
+    if (mainUserPackagePrice == 250) {
         percantage = 1
         star = "1 Star Eligible"
-    }else if (mainUserPackagePrice == 1000) {
+        
+    }else if (mainUserPackagePrice == 500) {
         percantage = 1
         star = "2 Star Eligible"
 
-    }else if (mainUserPackagePrice == 2500) {
+    }else if (mainUserPackagePrice == 1000) {
         percantage = 0.5
         star = "3 Star Eligible"
 
-    }else if (mainUserPackagePrice == 5000) {
+    }else if (mainUserPackagePrice == 2500) {
         percantage = 0.3
         star = "4 Star Eligible"
 
-    }else if (mainUserPackagePrice == 10000) {
+    }else if (mainUserPackagePrice == 5000) {
         percantage = 0.2
         star = "5 Star Eligible"
 
-    }else if (mainUserPackagePrice == 25000) {
+    }else if (mainUserPackagePrice == 10000) {
         percantage = 0.1
         star = "6 Star Eligible"
 
-    }else if (mainUserPackagePrice == 50000) {
+    }else if (mainUserPackagePrice == 25000) {
         percantage = 0.1
         star = "7 Star Eligible"
 
-    }else if (mainUserPackagePrice == 100000) {
+    }else if (mainUserPackagePrice == 50000) {
         percantage = 0.1
         star = "8 Star Eligible"
 
@@ -122,7 +133,7 @@ export default async(req,res)=>{
 
     
     
-    res.json({companyBusiness:TotalBusiness,memberEligibleForRank:memberEligible,estimatedToken:est1,fromDate:`1/${esDate.getMonth()+1}/${esDate.getFullYear()}`,toDate:`1/${esDate.getMonth()+1}/${esDate.getFullYear()}`,packageStar:star})
+    res.json({companyBusiness:TotalBusiness,memberEligibleForRank:memberEligible,estimatedToken:est1,fromDate:`1/${esDate.getMonth()+1}/${esDate.getFullYear()}`,toDate:`${myDay2}/${esDate.getMonth()+1}/${esDate.getFullYear()}`,packageStar:star})
 
 
 }

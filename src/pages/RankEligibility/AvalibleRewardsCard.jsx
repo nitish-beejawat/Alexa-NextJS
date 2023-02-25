@@ -6,13 +6,17 @@ import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
 import axios from 'axios'
 
-const AvalibleRewardsCard = ({userCurrentWallet}) => {
+const AvalibleRewardsCard = ({userCurrentWallet,teamCount}) => {
 
     const [datas, setDatas] = useState("")
 
 
 
     console.log("user wallet is ==> "+userCurrentWallet)
+
+
+
+    console.log("my team count is ===> "+teamCount)
 
 
 
@@ -137,7 +141,7 @@ const AvalibleRewardsCard = ({userCurrentWallet}) => {
                                 <div style={{ textAlign: "center" }}>
                                     {index == 0 ?
 
-                                    userCurrentWallet >= Number(hit.RankEligibilityDirectTeamBusiness) ? 
+                                    userCurrentWallet >= Number(hit.RankEligibilityDirectTeamBusiness) && teamCount >= Number(hit.RankEligibilityTeam)? 
 
                                         <Button onClick={()=>handleButtonPress(hit.RankEligibilityReward,hit.RankEligibilityDirectTeamBusiness)} style={{ backgroundColor: "white", color: "black", fontWeight: "bolder" }} size='large' type='submit' sx={{ mr: 2 }} variant='contained'>
                                             Claim Now

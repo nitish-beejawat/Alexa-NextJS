@@ -19,6 +19,9 @@ const PackageHistory = () => {
   const [userCurrentWallet, setUserCurrentWallet] = useState(0)
 
 
+  const [teamCount, setTeamCount] = useState(0)
+
+
   useEffect(() => {
     const getData = async () => {
       const jwt = localStorage.getItem('jwt')
@@ -152,6 +155,40 @@ const PackageHistory = () => {
 
    
   }, [])
+
+
+
+
+
+
+
+  useEffect(() => {
+    const getData = localStorage.getItem("jwt")
+    const parseIt = JSON.parse(getData)
+    
+    try {
+      
+      axios.post("/api/RankEligibility/getUserTeamNumber",{
+        id:parseIt._id
+      })
+      .then((acc)=>{
+        console.log(acc.data)
+        setTeamCount(acc.data)
+
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+
+
+    } catch (error) {
+      console.log(error)
+    }
+
+
+
+   
+  }, [])
   
 
 
@@ -167,7 +204,7 @@ const PackageHistory = () => {
           <Typography style={{marginBottom:20}} variant='h4'>Rank Eligibility</Typography>
         </Grid>
       </Grid>
-      <AvalibleRewardsCard userCurrentWallet={userCurrentWallet}/>
+      <AvalibleRewardsCard teamCount={teamCount} userCurrentWallet={userCurrentWallet}/>
       <History/>
     </div>
   )

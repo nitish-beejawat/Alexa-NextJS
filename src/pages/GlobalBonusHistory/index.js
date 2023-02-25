@@ -104,8 +104,8 @@ const PackageHistory = () => {
         <Grid item xs={4}>
           <Card style={{backgroundColor:"white",padding:10}}>
 
-            <Typography variant='h5' style={{textAlign:"center",marginBottom:10}}>Company Business</Typography>
-            <Typography variant='h4' style={{textAlign:"center"}}>{data?data.companyBusiness:0}$</Typography>
+            <Typography variant='h5' style={{textAlign:"center",marginBottom:10,color:"black",fontWeight:"bolder"}}>Company Business</Typography>
+            <Typography variant='h4' style={{textAlign:"center",color:"black"}}>{data?data.companyBusiness:0}$</Typography>
             <Typography variant='subtitle2' style={{textAlign:"center",marginTop:10,color:"#945AFD",fontWeight:"bold"}}>{data&&data.fromDate} - {data&&data.toDate}</Typography>
 
           </Card>
@@ -113,8 +113,8 @@ const PackageHistory = () => {
         <Grid item xs={4}>
           <Card style={{backgroundColor:"white",padding:10}}>
 
-            <Typography variant='h5' style={{textAlign:"center",marginBottom:10}}>Rank Eligibility</Typography>
-            <Typography variant='h4' style={{textAlign:"center"}}>{data?data.memberEligibleForRank:0} Person</Typography>
+            <Typography variant='h5' style={{textAlign:"center",marginBottom:10,color:"black",fontWeight:"bolder"}}>Rank Eligibility</Typography>
+            <Typography variant='h4' style={{textAlign:"center",color:"black"}}>{data?data.memberEligibleForRank:0} Person</Typography>
             <Typography variant='subtitle2' style={{textAlign:"center",marginTop:10,color:"#945AFD",fontWeight:"bold"}}>{data&&data.packageStar}</Typography>
 
           </Card>
@@ -122,8 +122,8 @@ const PackageHistory = () => {
         <Grid item xs={4}>
           <Card style={{backgroundColor:"white",padding:10}}>
 
-            <Typography variant='h5' style={{textAlign:"center",marginBottom:10}}>Estimated Token</Typography>
-            <Typography variant='h4' style={{textAlign:"center"}}>{data?data.estimatedToken:0}$</Typography>
+            <Typography variant='h5' style={{textAlign:"center",marginBottom:10,color:"black",fontWeight:"bolder"}}>Estimated Token</Typography>
+            <Typography variant='h4' style={{textAlign:"center",color:"black"}}>{data?data.estimatedToken:0}$</Typography>
             <Typography variant='subtitle2' style={{textAlign:"center",marginTop:10,color:"#945AFD",fontWeight:"bold"}}>{data&&data.fromDate} - {data&&data.toDate}</Typography>
 
           </Card>

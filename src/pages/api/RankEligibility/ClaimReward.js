@@ -5,6 +5,9 @@ import PackageHistory from "../../../helper/Modal/History/PackageHistory";
 import User from "../../../helper/Modal/User";
 import Plan from "../../../helper/Modal/Plan";
 import RenewalPurchasePackage from "../../../helper/Modal/Renewal/RenewalPurchasePackage";
+import ShortRecord from "../../../helper/Modal/ShortRecord";
+
+
 
 initDB()
 
@@ -64,6 +67,34 @@ export default async (req, res) => {
         TotBusiness: TotalBusiness
 
     }).save()
+
+
+    const findShortRecord = await ShortRecord.findOne({RecordOwner:MainUserData._id})
+
+
+    if (findShortRecord) {
+
+      let sum = Number(findShortRecord.RankEligibility) + Number(ClaimedReward)
+
+      const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{RankEligibility:sum})
+
+    }else{
+
+      const createShortRecord = await ShortRecord({
+        RecordOwner:list[i].id,
+        RankEligibility:ClaimedReward
+      }).save()
+
+    }
+
+
+
+
+
+
+
+
+
 
    return res.status(200).json({ message: 'Claim Reward Done' })
 
