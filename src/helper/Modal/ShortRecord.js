@@ -41,8 +41,12 @@ const ShortRecord = mongoose.Schema({
         type:"Number",
         default:0
     },
+    DirectBusiness:{
+        type:"Number",
+        default:0
+    },
 },
 {
   timestamps: true
 })
-export default mongoose.models.ShortRecord || mongoose.model('ShortRecord', ShortRecord)
+export default mongoose.models.MyShortRecord || mongoose.model('MyShortRecord', ShortRecord)

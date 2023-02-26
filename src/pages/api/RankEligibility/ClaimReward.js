@@ -1,5 +1,6 @@
 import initDB from "../../../helper/initDB";
 import RankEligibilityClaim from "../../../helper/Modal/History/RankEligibilityClaim";
+import RankEligibilityClaimForGlobalPool from "../../../helper/Modal/History/RankEligibilityClaimForGlobalPool";
 import RankEligibilityBonusFill from "../../../helper/Modal/Bonus/RankEligibilityBonusFill";
 import PackageHistory from "../../../helper/Modal/History/PackageHistory";
 import User from "../../../helper/Modal/User";
@@ -67,6 +68,40 @@ export default async (req, res) => {
         TotBusiness: TotalBusiness
 
     }).save()
+
+
+    const checkIfAlreadyExists = await RankEligibilityClaimForGlobalPool.findOne({RankEligibilityClaimOwnerId: MainUserData._id})
+
+
+    if (checkIfAlreadyExists) {
+      
+      await RankEligibilityClaimForGlobalPool.findByIdAndDelete(checkIfAlreadyExists._id)
+
+      RankEligibilityClaimForGlobalPool({
+
+        RankEligibilityClaimOwnerId: MainUserData._id,
+        RankEligibilityClaimOwnerUserName: MainUserData.SponserCode,
+        RankEligibilityClaimOwnerEmail: MainUserData.EmailId,
+        PackageOwnName: FindPackage.PackageName,
+        PackageOwnPrice: FindPackage.PackagePrice,
+        ClaimedReward: ClaimedReward,
+        TotBusiness: TotalBusiness
+
+    }).save()
+
+    }else{   
+      RankEligibilityClaimForGlobalPool({
+
+        RankEligibilityClaimOwnerId: MainUserData._id,
+        RankEligibilityClaimOwnerUserName: MainUserData.SponserCode,
+        RankEligibilityClaimOwnerEmail: MainUserData.EmailId,
+        PackageOwnName: FindPackage.PackageName,
+        PackageOwnPrice: FindPackage.PackagePrice,
+        ClaimedReward: ClaimedReward,
+        TotBusiness: TotalBusiness
+
+    }).save()
+  }
 
 
     const findShortRecord = await ShortRecord.findOne({RecordOwner:MainUserData._id})

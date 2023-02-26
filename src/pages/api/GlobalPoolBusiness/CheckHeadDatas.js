@@ -2,7 +2,7 @@ import initDB from "../../../helper/initDB";
 import RankBonusHistory from "../../../helper/Modal/History/RankBonusHistory";
 import User from "../../../helper/Modal/User";
 import PackageHistory from "../../../helper/Modal/History/PackageHistory";
-import RankEligibilityClaim from "src/helper/Modal/History/RankEligibilityClaim";
+import RankEligibilityClaim from "src/helper/Modal/History/RankEligibilityClaimForGlobalPool";
 
 initDB()
 
@@ -24,6 +24,7 @@ export default async(req,res)=>{
 
     console.log(start)
     console.log(end)
+
 
     var TotalBusiness = 0
     
@@ -79,7 +80,7 @@ export default async(req,res)=>{
     var star = ""
 
     if (mainUserPackagePrice == 250) {
-        percantage = 1
+        percantage = 2
         star = "1 Star Eligible"
         
     }else if (mainUserPackagePrice == 500) {
@@ -113,11 +114,14 @@ export default async(req,res)=>{
     }
 
 
-    console.log(percantage)
+    console.log("TotalBusiness ===> "+percantage)
 
-
+    console.log("TotalBusiness ===> "+TotalBusiness)
+    
+    
     var est1 = Number(TotalBusiness) * percantage /100
-
+    
+    console.log("Estimated ===> "+est1)
 
 
     const esDate = new Date(start)

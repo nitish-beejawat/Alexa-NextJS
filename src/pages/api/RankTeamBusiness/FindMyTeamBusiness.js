@@ -1,6 +1,7 @@
 import initDB from "../../../helper/initDB";
 import User from "../../../helper/Modal/User";
 import PackageHistory from "../../../helper/Modal/History/PackageHistory";
+import ShortRecord from "../../../helper/Modal/ShortRecord"
 
 initDB()
 
@@ -8,25 +9,18 @@ export default async (req, res) => {
 
     const { id } = req.body;
 
-    const findMydirects = await User.find({ UpperlineUser: id })
+    const findShort = await ShortRecord.findOne({RecordOwner:id})
 
-    var num = 0
 
-    for (let index = 0; index < findMydirects.length; index++) {
 
-        const mainId = findMydirects[index]._id
-
-        const findMyPackageHis = await PackageHistory.find({ PackageOwner: mainId })
-
-        for (let index = 0; index < findMyPackageHis.length; index++) {
-
-            const Price = findMyPackageHis[index].PackagePrice;
-
-            num = num + Number(Price)
-
-        }
-
+    if (!findShort) {
+        return res.json(0)
     }
 
-    res.json(num)
+
+    console.log("the sit ===> "+findShort.DirectBusiness)
+
+   
+
+   return res.json(Number(findShort.DirectBusiness))
 }

@@ -158,6 +158,7 @@ const PackageHistory = () => {
 
 
 
+  
 
 
 
@@ -172,7 +173,7 @@ const PackageHistory = () => {
         id:parseIt._id
       })
       .then((acc)=>{
-        console.log(acc.data)
+        console.log( "My Team Count From Backend ===> "+acc.data)
         setTeamCount(acc.data)
 
       })

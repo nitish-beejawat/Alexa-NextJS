@@ -57,6 +57,7 @@ const PackageHistory = () => {
 
 
 
+  
 
   const getDat = () => {
     var data = localStorage.getItem('jwt')
@@ -146,6 +147,8 @@ const PackageHistory = () => {
                     <TableCell>S.N.</TableCell>
                     <TableCell>Coins</TableCell>
                     <TableCell align='left'>Percantage</TableCell>
+                    <TableCell align='left'>Company Business</TableCell>
+                    <TableCell align='left'>Date</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -167,6 +170,8 @@ const PackageHistory = () => {
                       <TableCell align='left'>{index+1}</TableCell>
                       <TableCell align='left'>{hit.Coins}</TableCell>
                       <TableCell align='left'>{hit.Percantage+"%"}</TableCell>                   
+                      <TableCell align='left'>{hit.CompanyBusiness}</TableCell>                   
+                      <TableCell align='left'>{hit.createdAt.slice(0,10)}</TableCell>                   
                      
                     </TableRow>
                     })

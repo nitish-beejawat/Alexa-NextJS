@@ -250,6 +250,56 @@ export default async (req, res) => {
       Type: "Basic"
     }).save()
 
+
+
+
+    if (checkUpperlineUser.UpperlineUser !== "null") {
+
+
+
+
+
+
+      const findShortRecord = await ShortRecord.findOne({RecordOwner:checkUpperlineUser.UpperlineUser})
+
+
+      if (findShortRecord) {
+  
+        let sum = Number(findShortRecord.DirectBusiness) + Number(findMyPackage.PackagePrice)
+  
+        const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{DirectBusiness:sum})
+  
+      }else{
+  
+        const createShortRecord = await ShortRecord({
+          RecordOwner:checkUpperlineUser.UpperlineUser,
+          DirectBusiness:findMyPackage.PackagePrice
+        }).save()
+  
+      }
+
+
+
+
+
+ 
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
     const createPackageInvoice = await PurchasePackageInvoice({
       PackageName: findMyPackage.PackageName,
       PackagePrice: findMyPackage.PackagePrice,
@@ -486,6 +536,49 @@ export default async (req, res) => {
       }).save()
 
     }
+
+
+
+
+    if (checkUpperlineUser.UpperlineUser !== "null") {
+
+
+
+
+
+
+      const findShortRecord = await ShortRecord.findOne({RecordOwner:checkUpperlineUser.UpperlineUser})
+
+
+      if (findShortRecord) {
+  
+        let sum = Number(findShortRecord.DirectBusiness) + Number(findMyPackage.PackagePrice)
+  
+        const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{DirectBusiness:sum})
+  
+      }else{
+  
+        const createShortRecord = await ShortRecord({
+          RecordOwner:checkUpperlineUser.UpperlineUser,
+          DirectBusiness:findMyPackage.PackagePrice
+        }).save()
+  
+      }
+
+
+
+
+
+ 
+
+
+
+
+
+
+    }
+
+
 
 
 

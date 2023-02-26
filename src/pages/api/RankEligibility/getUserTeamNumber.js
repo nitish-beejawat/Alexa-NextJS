@@ -30,7 +30,7 @@ export default async (req, res) => {
         bfsQueue.push(sub);
     });
 
-    while(bfsQueue.length > 1) {
+    while(bfsQueue.length > 0) {
         const currentUser = bfsQueue.shift();
 
         const latestPackageHistory = await PackageHistory.findOne({

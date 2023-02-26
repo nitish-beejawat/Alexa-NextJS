@@ -14,9 +14,14 @@ const GlobalBonusHistory = mongoose.Schema(
       require: true,
       type: 'String'
     },
+    CompanyBusiness: {
+      require: true,
+      type: 'String'
+    },
+
   },
   {
     timestamps: true
   }
 )
-export default mongoose.models.GlobalBonusHistory || mongoose.model('GlobalBonusHistory', GlobalBonusHistory)
+export default mongoose.models.GlobalBonusHistoryn || mongoose.model('GlobalBonusHistoryn', GlobalBonusHistory)

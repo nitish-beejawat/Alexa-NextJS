@@ -23,38 +23,6 @@ const Dashboard = () => {
   const [side, setSide] = useState("Right")
   const [dashData, setDashData] = useState("")
 
-
-
-  // useEffect(() => {
-
-  //   var ids = localStorage.getItem("jwt")
-  //   var parsedData = JSON.parse(ids)
-    
-
-  //   try {
-      
-  //     axios.post("/api/dashboardData/myDashboardData",{
-  //       id:parsedData._id
-  //     })
-  //     .then((acc)=>{
-  //       console.log(acc.data)
-  //       setDatas(acc.data)
-  //     })
-  //     .catch((err)=>{
-  //       console.log(err)
-  //     })
-
-
-
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  
-
-
-  // }, [])
-
-
   useEffect(() => {
 
 
@@ -190,14 +158,35 @@ const Dashboard = () => {
             </div>
 
           </Grid>
-        {/*  <Grid style={{marginTop:-20}} item xs={12} md={4}>
+         <Grid style={{marginTop:-20}} item xs={12} md={4}>
             <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20}}>
-              <h4>Account Status</h4>
-              <h3 style={{marginTop:-20}}>In-Active</h3>
+              <h4>Avalible Tokens</h4>
+              <h3 style={{marginTop:-20}}>${Number(dashData.AvaibleTokens).toFixed(2)}</h3>
 
             </div>
 
-          </Grid> */}
+          </Grid>
+         <Grid style={{marginTop:-20}} item xs={12} md={4}>
+            <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20}}>
+              <h4>Total Earning</h4>
+              <h3 style={{marginTop:-20}}>${Number(dashData.TotalEarnings).toFixed(2)}</h3>
+
+            </div>
+
+          </Grid>
+
+
+
+
+
+          <Grid style={{marginTop:-20}} item xs={12} md={4}>
+            <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20}}>
+              <h4>Direct Business</h4>
+              <h3 style={{marginTop:-20}}>${Number(dashData.DirectBusiness).toFixed(2)}</h3>
+
+            </div>
+
+          </Grid>
 
 
 
