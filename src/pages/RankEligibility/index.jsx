@@ -26,15 +26,14 @@ const PackageHistory = () => {
     const getData = async () => {
       const jwt = localStorage.getItem('jwt')
       const parsedData = JSON.parse(jwt)
-      // console.log("this is is => "+parsedData._id)
+     
 
       axios
         .post('/api/checkPercantage', {
           id: parsedData._id
         })
         .then(acc => {
-          // console.log("below ==> ")
-          // console.log(acc.data)
+          
           setPercantage(acc.data.goal)
           setCrWall(acc.data.crWall)
           setYourReward(acc.data.reward)

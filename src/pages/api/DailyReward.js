@@ -7,7 +7,6 @@ import LykaFastBonusHis from '../../helper/Modal/History/LykaFastBonusHis'
 import RenewalPurchasePackage from '../../helper/Modal/Renewal/RenewalPurchasePackage'
 import RebuyBonus from '../../helper/Modal/Bonus/RebuyBonus'
 import ShortRecord from 'src/helper/Modal/ShortRecord'
-// import ShortRecord from 'src/helper/Modal/Invoice/'
 import LapWallet from "../../helper/Modal/History/LapWallet"
 
 
