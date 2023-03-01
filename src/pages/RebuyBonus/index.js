@@ -80,6 +80,9 @@ const PackageHistory = () => {
 
 
                     datas.map((hit,index)=>{
+
+                      console.log(hit)
+
                       return  <TableRow key={hit._id}
                       sx={{
                         '&:last-of-type td, &:last-of-type th': {

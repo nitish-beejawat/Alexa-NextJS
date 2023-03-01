@@ -26,15 +26,15 @@ const PackageHistory = () => {
     const getData = async () => {
       const jwt = localStorage.getItem('jwt')
       const parsedData = JSON.parse(jwt)
-      console.log("this is is => "+parsedData._id)
+      // console.log("this is is => "+parsedData._id)
 
       axios
         .post('/api/checkPercantage', {
           id: parsedData._id
         })
         .then(acc => {
-          console.log("below ==> ")
-          console.log(acc.data)
+          // console.log("below ==> ")
+          // console.log(acc.data)
           setPercantage(acc.data.goal)
           setCrWall(acc.data.crWall)
           setYourReward(acc.data.reward)
@@ -68,7 +68,7 @@ const PackageHistory = () => {
     var data = localStorage.getItem('jwt')
     var parseData = JSON.parse(data)
 
-    console.log(parseData._id)
+    // console.log(parseData._id)
 
     try {
       axios
@@ -76,7 +76,7 @@ const PackageHistory = () => {
           id: parseData._id
         })
         .then(acc => {
-          console.log(acc.data)
+          // console.log(acc.data)
           setDatas(acc.data)
         })
         .catch(err => {
@@ -102,7 +102,7 @@ const PackageHistory = () => {
         TotalBusiness:crWall
       })
       .then((acc)=>{
-        console.log(acc.data)
+        // console.log(acc.data)
         window.alert(acc.data.message)
       })
       .catch((err)=>{
@@ -138,7 +138,7 @@ const PackageHistory = () => {
         id:parseIt._id
       })
       .then((acc)=>{
-        console.log(acc.data)
+        // console.log("user wallet is ====> "+acc.data)
 
         setUserCurrentWallet(acc.data)
       })
@@ -152,8 +152,6 @@ const PackageHistory = () => {
     }
 
 
-
-   
   }, [])
 
 
@@ -168,10 +166,32 @@ const PackageHistory = () => {
     const parseIt = JSON.parse(getData)
     
     try {
+
+
+      console.log("trying to post on ==> "+"http://65.108.141.59:4000/CountMyTeam")
       
-      axios.post("/api/RankEligibility/getUserTeamNumber",{
-        id:parseIt._id
-      })
+      // axios.post("http://65.108.141.59:4000/CountMyTeam",{
+      //   id:parseIt._id
+      // },
+      // {
+      //   headers: {
+      //     "Access-Control-Allow-Origin": "*"
+      //   }
+      // }
+      
+      
+      // )
+
+      axios.post("http://65.108.141.59:4000/CountMyTeam", {
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                    'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8',
+                    "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS", 
+                  }, 
+                
+                  id:parseIt._id
+                
+            })
       .then((acc)=>{
         console.log( "My Team Count From Backend ===> "+acc.data)
         setTeamCount(acc.data)

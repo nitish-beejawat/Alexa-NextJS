@@ -6,7 +6,7 @@ import PackageHistory from '../../helper/Modal/History/PackageHistory'
 import User from '../../helper/Modal/User'
 import PurchasePackageInvoice from '../../helper/Modal/Invoice/PurchasePackageInvoice'
 import RankEligibilityClaim from 'src/helper/Modal/History/RankEligibilityClaimForGlobalPool'
-
+import ShortRecord from "../../helper/Modal/ShortRecord"
 
 
 
@@ -291,6 +291,38 @@ export default async (req, res) => {
       CompanyBusiness:TotalBusiness
 
     }).save()
+
+
+
+
+    // short record
+
+    const findShortRecord = await ShortRecord.findOne({RecordOwner:id})
+
+
+    console.log(givre)
+
+
+
+
+
+    if (findShortRecord) {
+
+      let sum = (parseFloat(findShortRecord.GobalPoolBonus) + parseFloat(givre)).toFixed(2)
+     
+      console.log(sum)
+      console.log(typeof(sum))
+
+      const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{GobalPoolBonus:sum})
+
+    }else{
+
+      const createShortRecord = await ShortRecord({
+        RecordOwner:id,
+        GobalPoolBonus:Number(givre).toFixed(2)
+      }).save()
+
+    }
 
 
 
