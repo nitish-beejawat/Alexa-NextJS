@@ -139,6 +139,32 @@ export default async (req, res) => {
           }).save()
           
           await User.findByIdAndUpdate({ _id: uplineUser }, { MainWallet: Number(lastWallete) + Number(Add_Money_In_Wallet) })
+          console.log("wallet is updating from here only ===> ")
+        
+
+            // short record is below 
+
+
+            const findShortRecord = await ShortRecord.findOne({ RecordOwner: uplineUser })
+
+
+            if (findShortRecord) {
+      
+              let sum = Number(findShortRecord.DirectReward) + Number(Add_Money_In_Wallet)
+      
+              const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { DirectReward: sum })
+      
+            } else {
+      
+              const createShortRecord = await ShortRecord({
+                RecordOwner: uplineUser,
+                DirectReward: Add_Money_In_Wallet
+              }).save()
+      
+            }
+
+
+        
         }
 
 
@@ -146,36 +172,46 @@ export default async (req, res) => {
 
         var Add_Money_In_Wallet = Got_Reward + My_Wallet
 
-        const ReferalHistory = await ReferralHistory({
-          ReferralFrom: findPackagePurchaseUser.SponserCode,
-          ReferralTo: uplineUser,
-          ReferralCoins: Got_Reward,
-          ReferralPercantage: upperPercantage,
-          PackageName: findMyPackage.PackageName
-        }).save()
-        await User.findByIdAndUpdate({ _id: uplineUser }, { MainWallet: Number(lastWallete) + Number(Got_Reward) })
+
+        if (Add_Money_In_Wallet !== 0 || !Add_Money_In_Wallet < 0) {
+
+          
+          const ReferalHistory = await ReferralHistory({
+            ReferralFrom: findPackagePurchaseUser.SponserCode,
+            ReferralTo: uplineUser,
+            ReferralCoins: Got_Reward,
+            ReferralPercantage: upperPercantage,
+            PackageName: findMyPackage.PackageName
+          }).save()
+          await User.findByIdAndUpdate({ _id: uplineUser }, { MainWallet: Number(lastWallete) + Number(Got_Reward) })
+        }
+       
+        // short record is below 
+       
+        const findShortRecord = await ShortRecord.findOne({ RecordOwner: uplineUser })
+
+
+        if (findShortRecord) {
+  
+          let sum = Number(findShortRecord.DirectReward) + Number(Got_Reward)
+  
+          const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { DirectReward: sum })
+  
+        } else {
+  
+          const createShortRecord = await ShortRecord({
+            RecordOwner: uplineUser,
+            DirectReward: Got_Reward
+          }).save()
+  
+        }
+      
       }
 
 
 
 
-      const findShortRecord = await ShortRecord.findOne({ RecordOwner: uplineUser })
-
-
-      if (findShortRecord) {
-
-        let sum = Number(findShortRecord.DirectReward) + Number(PackagePercantage)
-
-        const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { DirectReward: sum })
-
-      } else {
-
-        const createShortRecord = await ShortRecord({
-          RecordOwner: uplineUser,
-          DirectReward: PackagePercantage
-        }).save()
-
-      }
+  
 
 
 
@@ -456,14 +492,42 @@ export default async (req, res) => {
           }).save()
 
         }
-        
-        const ReferalHistory = await ReferralHistory({
-          ReferralFrom: findPackagePurchaseUser.SponserCode,
-          ReferralTo: uplineUser,
-          ReferralCoins: Add_Money_In_Wallet,
-          ReferralPercantage: upperPercantage,
-          PackageName: findMyPackage.PackageName
-        }).save()
+
+        if (Add_Money_In_Wallet !== 0 || !Add_Money_In_Wallet < 0) {
+ 
+          const ReferalHistory = await ReferralHistory({
+            ReferralFrom: findPackagePurchaseUser.SponserCode,
+            ReferralTo: uplineUser,
+            ReferralCoins: Add_Money_In_Wallet,
+            ReferralPercantage: upperPercantage,
+            PackageName: findMyPackage.PackageName
+          }).save()
+
+        await User.findByIdAndUpdate({ _id: uplineUser }, { MainWallet: Number(lastWallete) + Number(Add_Money_In_Wallet) })
+
+        }
+
+        // short record is bwlow
+
+
+
+        const findShortRecord = await ShortRecord.findOne({ RecordOwner: uplineUser })
+
+
+        if (findShortRecord) {
+  
+          let sum = Number(findShortRecord.DirectReward) + Number(Add_Money_In_Wallet)
+  
+          const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { DirectReward: sum })
+  
+        } else {
+  
+          const createShortRecord = await ShortRecord({
+            RecordOwner: uplineUser,
+            DirectReward: Add_Money_In_Wallet
+          }).save()
+  
+        }
 
 
       } else {
@@ -477,31 +541,43 @@ export default async (req, res) => {
           ReferralPercantage: upperPercantage,
           PackageName: findMyPackage.PackageName
         }).save()
+
+        await User.findByIdAndUpdate({ _id: uplineUser }, { MainWallet: Number(lastWallete) + Number(Got_Reward) })
+
+        // short record is bwlow
+
+
+
+        const findShortRecord = await ShortRecord.findOne({ RecordOwner: uplineUser })
+
+
+        if (findShortRecord) {
+  
+          let sum = Number(findShortRecord.DirectReward) + Number(Got_Reward)
+  
+          const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { DirectReward: sum })
+  
+        } else {
+  
+          const createShortRecord = await ShortRecord({
+            RecordOwner: uplineUser,
+            DirectReward: Got_Reward
+          }).save()
+  
+        }
+
+
+
+
+
       }
 
 
 
-      await User.findByIdAndUpdate({ _id: uplineUser }, { MainWallet: Number(lastWallete) + Number(Add_Money_In_Wallet) })
 
 
 
-      const findShortRecord = await ShortRecord.findOne({ RecordOwner: uplineUser })
 
-
-      if (findShortRecord) {
-
-        let sum = Number(findShortRecord.DirectReward) + Number(PackagePercantage)
-
-        const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { DirectReward: sum })
-
-      } else {
-
-        const createShortRecord = await ShortRecord({
-          RecordOwner: uplineUser,
-          DirectReward: PackagePercantage
-        }).save()
-
-      }
 
 
 
@@ -568,25 +644,7 @@ export default async (req, res) => {
 
         }).save()
 
-        // const findShortRecord = await ShortRecord.findOne({RecordOwner:uplineUser})
-
-        // if (findShortRecord) {
-
-        //   let sum = Number(findShortRecord.RankEligibility) + Number(findMyPackage.PackagePrice)
-
-        //   const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{RankEligibility:sum})
-
-        // }else{
-
-        //   const createShortRecord = await ShortRecord({
-        //     RecordOwner:uplineUser,
-        //     DirectReward:findMyPackage.PackagePrice
-        //   }).save()
-
-        // }
-
-
-
+       
 
         const AddRankEligibilityHistory = await RankBonusHistory({
           UpperLineUserId: uplineUser,
@@ -608,37 +666,147 @@ export default async (req, res) => {
 
     }
 
-    const createPackage = await PackageHistory({
-      PackageName: findMyPackage.PackageName,
-      PackagePrice: findMyPackage.PackagePrice,
-      PaackagePeriod: findMyPackage.PaackagePeriod,
-      PackageMaximumLimit: '300',
-      LykaToken: Lamount,
-      PackgeRewardWallte: '0',
-      PackageOwner: id,
-      Type: "Repurchased"
-    }).save()
+   
 
 
 
 
-    // const findShortRecord = await ShortRecord.findOne({ RecordOwner: id })
 
 
-    // if (findShortRecord) {
 
-    //   let sum = Number(findShortRecord.RebuyBonus) + Number(findMyPackage.PackagePrice)
 
-    //   const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { RebuyBonus: sum })
 
-    // } else {
 
-    //   const createShortRecord = await ShortRecord({
-    //     RecordOwner: uplineUser,
-    //     RebuyBonus: findMyPackage.PackagePrice
-    //   }).save()
 
-    // }
+
+      // maximum caping start
+
+
+
+    const findOldWallet = await User.findById(uplineUser)
+
+
+
+    const FindPackage = await PackageHistory.findOne({ PackageOwner: uplineUser })
+
+    const Max_Cap = Number(FindPackage.PackagePrice) * 300 / 100
+
+    const Got_Reward = Number(findMyPackage.PackagePrice)
+
+    const My_Wallet = Number(findOldWallet.MainWallet)
+    console.log("came in Sec")
+
+
+    if (Got_Reward + My_Wallet >= Max_Cap) {
+
+      var Add_Money_In_Wallet = Max_Cap - My_Wallet
+
+      const Lap_Income = Got_Reward > Add_Money_In_Wallet ? Got_Reward - Add_Money_In_Wallet : Add_Money_In_Wallet - Got_Reward
+
+      const fetch_Last_Lap_Wallet = await LapWallet.findOne({ BonusOwner: uplineUser })
+
+      if (fetch_Last_Lap_Wallet) {
+
+        await LapWallet.findByIdAndUpdate({ _id: fetch_Last_Lap_Wallet._id }, { LapAmount: fetch_Last_Lap_Wallet.LapAmount + Lap_Income })
+
+      } else {
+
+        await LapWallet({
+          BonusOwner: uplineUser,
+          LapAmount: Lap_Income
+        }).save()
+
+      }
+
+
+      // maximum caping close
+      
+      const createPackage = await PackageHistory({
+        PackageName: findMyPackage.PackageName,
+        PackagePrice: Add_Money_In_Wallet,
+        PaackagePeriod: findMyPackage.PaackagePeriod,
+        PackageMaximumLimit: '300',
+        LykaToken: Lamount,
+        PackgeRewardWallte: '0',
+        PackageOwner: id,
+        Type: "Repurchased"
+      }).save()
+
+      // short record is bwlow
+
+
+
+      const findShortRecord = await ShortRecord.findOne({ RecordOwner: uplineUser })
+
+
+      if (findShortRecord) {
+
+        let sum = Number(findShortRecord.RebuyBonus) + Number(Add_Money_In_Wallet)
+
+        const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { RebuyBonus: sum })
+
+      } else {
+
+        const createShortRecord = await ShortRecord({
+          RecordOwner: uplineUser,
+          RebuyBonus: Add_Money_In_Wallet
+        }).save()
+
+      }
+
+
+      // short record is done
+
+
+    } else {
+
+      var Add_Money_In_Wallet = Got_Reward + My_Wallet
+
+    
+
+      const createPackage = await PackageHistory({
+        PackageName: findMyPackage.PackageName,
+        PackagePrice: Got_Reward,
+        PaackagePeriod: findMyPackage.PaackagePeriod,
+        PackageMaximumLimit: '300',
+        LykaToken: Lamount,
+        PackgeRewardWallte: '0',
+        PackageOwner: id,
+        Type: "Repurchased"
+      }).save()
+
+
+
+
+      // short record is bwlow
+
+
+
+      const findShortRecord = await ShortRecord.findOne({ RecordOwner: uplineUser })
+
+
+      if (findShortRecord) {
+
+        let sum = Number(findShortRecord.RebuyBonus) + Number(Got_Reward)
+
+        const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { RebuyBonus: sum })
+
+      } else {
+
+        const createShortRecord = await ShortRecord({
+          RecordOwner: uplineUser,
+          RebuyBonus: Got_Reward
+        }).save()
+
+      }
+
+
+
+
+
+    }
+
+
 
 
 
@@ -702,6 +870,8 @@ export default async (req, res) => {
       PackageOwner: id,
       Type: "Repurchased"
     }).save()
+
+    
 
 
     const updateDataS = await RankEligibilityClaim.findOne({ RankEligibilityClaimOwnerId: id })
