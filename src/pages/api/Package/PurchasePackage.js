@@ -15,13 +15,17 @@ import LapWallet from 'src/helper/Modal/History/LapWallet'
 
 initDB()
 
-
 export default async (req, res) => {
   const { packageId, Anount, id } = req.body
 
 
 
   var checkUpperlineUser = await User.findById(id)
+
+
+  console.log(checkUpperlineUser)
+
+
   if (checkUpperlineUser.UpperlineUser !== "null") {
     var findUpperlineUser = await User.findById(checkUpperlineUser.UpperlineUser)
     var checkUpperlineUserPackageName = findUpperlineUser.PurchasedPackageName
@@ -102,7 +106,7 @@ export default async (req, res) => {
 
       if (Got_Reward + My_Wallet >= Max_Cap) {
 
-        var Add_Money_In_Wallet = Max_Cap - My_Wallet
+        var Add_Money_In_Wallet = Max_Cap > My_Wallet ? Max_Cap - My_Wallet : My_Wallet - Max_Cap
 
         const Lap_Income = Got_Reward > Add_Money_In_Wallet ? Got_Reward - Add_Money_In_Wallet : Add_Money_In_Wallet - Got_Reward
 
@@ -121,20 +125,31 @@ export default async (req, res) => {
 
         }
 
+        if (Add_Money_In_Wallet !== 0) {
+          const ReferalHistory = await ReferralHistory({
+            ReferralFrom: findPackagePurchaseUser.SponserCode,
+            ReferralTo: uplineUser,
+            ReferralCoins: Add_Money_In_Wallet,
+            ReferralPercantage: upperPercantage,
+            PackageName: findPackage.PackageName
+          }).save()
+          
+        }
+
 
       } else {
 
         var Add_Money_In_Wallet = Got_Reward + My_Wallet
 
+        const ReferalHistory = await ReferralHistory({
+          ReferralFrom: findPackagePurchaseUser.SponserCode,
+          ReferralTo: uplineUser,
+          ReferralCoins: Got_Reward,
+          ReferralPercantage: upperPercantage,
+          PackageName: findPackage.PackageName
+        }).save()
       }
 
-      const ReferalHistory = await ReferralHistory({
-        ReferralFrom: findPackagePurchaseUser.SponserCode,
-        ReferralTo: uplineUser,
-        ReferralCoins: Add_Money_In_Wallet,
-        ReferralPercantage: upperPercantage,
-        PackageName: findPackage.PackageName
-      }).save()
 
       await User.findByIdAndUpdate({ _id: uplineUser }, { MainWallet: Number(lastWallete) + Number(Add_Money_In_Wallet) })
 
@@ -436,22 +451,29 @@ export default async (req, res) => {
           }).save()
 
         }
+        const ReferalHistory = await ReferralHistory({
+          ReferralFrom: findPackagePurchaseUser.SponserCode,
+          ReferralTo: uplineUser,
+          ReferralCoins: Add_Money_In_Wallet,
+          ReferralPercantage: upperPercantage,
+          PackageName: findPackage.PackageName
+        }).save()
 
 
       } else {
 
         var Add_Money_In_Wallet = Got_Reward + My_Wallet
 
+        const ReferalHistory = await ReferralHistory({
+          ReferralFrom: findPackagePurchaseUser.SponserCode,
+          ReferralTo: uplineUser,
+          ReferralCoins: Got_Reward,
+          ReferralPercantage: upperPercantage,
+          PackageName: findPackage.PackageName
+        }).save()
       }
 
 
-      const ReferalHistory = await ReferralHistory({
-        ReferralFrom: findPackagePurchaseUser.SponserCode,
-        ReferralTo: uplineUser,
-        ReferralCoins: Add_Money_In_Wallet,
-        ReferralPercantage: upperPercantage,
-        PackageName: findPackage.PackageName
-      }).save()
 
       await User.findByIdAndUpdate({ _id: uplineUser }, { MainWallet: Number(lastWallete) + Number(Add_Money_In_Wallet) })
 

@@ -140,7 +140,7 @@ export default async (req, res) => {
 
         const Max_Cap = Number(FindPackage.PackagePrice)*300/100
 
-        const Got_Reward = Number(finalCal)
+        const Got_Reward = Number(finalCal)*3/100
 
         const My_Wallet = Number(myOldWallet.MainWallet)
         console.log("came in Sec")
@@ -149,6 +149,8 @@ export default async (req, res) => {
         if (Got_Reward + My_Wallet >= Max_Cap) {
 
            var Add_Money_In_Wallet = Max_Cap - My_Wallet 
+
+
 
            const Lap_Income = Got_Reward > Add_Money_In_Wallet?Got_Reward-Add_Money_In_Wallet:Add_Money_In_Wallet-Got_Reward 
 
@@ -166,12 +168,31 @@ export default async (req, res) => {
               }).save()
               
             }
+            
+            const GiveReawdToUpperUpper = await RebuyBonus({
+              BonusOwner:upperlineUserData._id,
+              ReferSentFromId:myOldWallet._id,
+              ReferSentFromUserId:myOldWallet.UserName,
+              ReferGetFromId:upperlineUserData._id,
+              ReferGetFromUserId:upperlineUserData.UserName,
+              PackName:myOldWallet.PurchasedPackageName,
+              EarnedRewardCoins:Number(Add_Money_In_Wallet).toFixed(2)
+            }).save()
 
           
         }else{
 
           var Add_Money_In_Wallet = Got_Reward + My_Wallet
 
+          const GiveReawdToUpperUpper = await RebuyBonus({
+            BonusOwner:upperlineUserData._id,
+            ReferSentFromId:myOldWallet._id,
+            ReferSentFromUserId:myOldWallet.UserName,
+            ReferGetFromId:upperlineUserData._id,
+            ReferGetFromUserId:upperlineUserData.UserName,
+            PackName:myOldWallet.PurchasedPackageName,
+            EarnedRewardCoins:Number(Got_Reward).toFixed(2)
+          }).save()
         }
 
 
@@ -179,15 +200,6 @@ export default async (req, res) => {
 
 
   
-        const GiveReawdToUpperUpper = await RebuyBonus({
-          BonusOwner:upperlineUserData._id,
-          ReferSentFromId:myOldWallet._id,
-          ReferSentFromUserId:myOldWallet.UserName,
-          ReferGetFromId:upperlineUserData._id,
-          ReferGetFromUserId:upperlineUserData.UserName,
-          PackName:myOldWallet.PurchasedPackageName,
-          EarnedRewardCoins:Number(refDef).toFixed(2)
-        }).save()
 
 
 
@@ -265,21 +277,28 @@ export default async (req, res) => {
               
             }
 
+            const createRecord = await LykaFastBonusHis({
+              BonusOwner: list[i].id,
+              FormPackage: list[i].name,
+              PackagePercantage: per,
+              Amount: Add_Money_In_Wallet
+            }).save()
+
           
         }else{
 
           var Add_Money_In_Wallet = Got_Reward + My_Wallet
 
+          const createRecord = await LykaFastBonusHis({
+            BonusOwner: list[i].id,
+            FormPackage: list[i].name,
+            PackagePercantage: per,
+            Amount: Got_Reward
+          }).save()
         }
 
 
 
-        const createRecord = await LykaFastBonusHis({
-          BonusOwner: list[i].id,
-          FormPackage: list[i].name,
-          PackagePercantage: per,
-          Amount: Add_Money_In_Wallet
-        }).save()
 
 
     await User.findByIdAndUpdate({ _id: list[i].id }, { MainWallet: Number(myWallete)+Number(Add_Money_In_Wallet) })
@@ -340,6 +359,8 @@ export default async (req, res) => {
 
            var Add_Money_In_Wallet = Max_Cap - My_Wallet 
 
+           console.log("Add_Money_In_Wallet => "+Add_Money_In_Wallet)
+
            const Lap_Income = Got_Reward > Add_Money_In_Wallet?Got_Reward-Add_Money_In_Wallet:Add_Money_In_Wallet-Got_Reward 
 
             const fetch_Last_Lap_Wallet = await LapWallet.findOne({BonusOwner:list[i].id})
@@ -357,19 +378,26 @@ export default async (req, res) => {
               
             }
 
+            const createRecord = await DailyBonus({
+              BonusOwner: list[i].id,
+              FormPackage: list[i].name,
+              PackagePercantage: per,
+              Amount: Add_Money_In_Wallet
+            }).save()
+
           
         }else{
 
           var Add_Money_In_Wallet = Got_Reward + My_Wallet
 
+          const createRecord = await DailyBonus({
+            BonusOwner: list[i].id,
+            FormPackage: list[i].name,
+            PackagePercantage: per,
+            Amount: Got_Reward
+          }).save()
         }
 
-        const createRecord = await DailyBonus({
-          BonusOwner: list[i].id,
-          FormPackage: list[i].name,
-          PackagePercantage: per,
-          Amount: finalCal
-        }).save()
 
 
 
@@ -434,20 +462,29 @@ export default async (req, res) => {
               
             }
 
+
+
+            const createRecord = await LykaFastBonusHis({
+              BonusOwner: list[i].id,
+              FormPackage: list[i].name,
+              PackagePercantage: per,
+              Amount: Add_Money_In_Wallet
+            }).save()
+
           
         }else{
 
           var Add_Money_In_Wallet = Got_Reward + My_Wallet
 
+          const createRecord = await LykaFastBonusHis({
+            BonusOwner: list[i].id,
+            FormPackage: list[i].name,
+            PackagePercantage: per,
+            Amount: Got_Reward
+          }).save()
         }
 
 
-        const createRecord = await LykaFastBonusHis({
-          BonusOwner: list[i].id,
-          FormPackage: list[i].name,
-          PackagePercantage: per,
-          Amount: Got_Reward
-        }).save()
 
     await User.findByIdAndUpdate({ _id: list[i].id }, { MainWallet: Number(myWallete)+Number(Add_Money_In_Wallet) })
 
@@ -512,20 +549,26 @@ export default async (req, res) => {
               }).save()
               
             }
+            const createRecord = await DailyBonus({
+              BonusOwner: list[i].id,
+              FormPackage: list[i].name,
+              PackagePercantage: per,
+              Amount: Add_Money_In_Wallet
+            }).save()
 
           
         }else{
 
           var Add_Money_In_Wallet = Got_Reward + My_Wallet
 
+          const createRecord = await DailyBonus({
+            BonusOwner: list[i].id,
+            FormPackage: list[i].name,
+            PackagePercantage: per,
+            Amount: Got_Reward
+          }).save()
         }
 
-        const createRecord = await DailyBonus({
-          BonusOwner: list[i].id,
-          FormPackage: list[i].name,
-          PackagePercantage: per,
-          Amount: finalCal
-        }).save()
 
     await User.findByIdAndUpdate({ _id: list[i].id }, { MainWallet: Number(myWallete)+Number(Add_Money_In_Wallet) })
 

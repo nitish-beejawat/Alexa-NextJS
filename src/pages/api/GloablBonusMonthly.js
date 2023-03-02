@@ -7,6 +7,7 @@ import User from '../../helper/Modal/User'
 import PurchasePackageInvoice from '../../helper/Modal/Invoice/PurchasePackageInvoice'
 import RankEligibilityClaim from 'src/helper/Modal/History/RankEligibilityClaimForGlobalPool'
 import ShortRecord from "../../helper/Modal/ShortRecord"
+import LapWallet from 'src/helper/Modal/History/LapWallet'
 
 
 
@@ -19,124 +20,6 @@ export default async (req, res) => {
   for (let index = 0; index < users.length; index++) {
    
     var mainUser = users[index]._id
-
-  //   var myDate = new Date()
-
-  //   var myDay = 1
-  //   var myDay2 = myDate.getDate()
-  //   var myMonth = myDate.getMonth()
-  //   var myMonth2 = myDate.getMonth() + 1
-  //   var myYear = myDate.getFullYear()
-
-  //   var start = new Date(myYear, myMonth, myDay);
-  //   var end = new Date(myYear, myMonth2, myDay2);
-
-  //   var TotalBusiness = 0
-
-
-  //   var elegiblePeoples = []
-
-
-  //   const RankBonusHistoryData = await RankEligibilityClaim.find({ created_on: { $gte: start, $lt: end } })
-
-  //   RankBonusHistoryData.map((hit) => {
-  //     return TotalBusiness = TotalBusiness + Number(hit.TotBusiness)
-  //   })
-
-  //   // RankBonusHistoryData.map((hits) => {
-  //   //   return elegiblePeoples.push(hits.DownLineUserId)
-  //   // })
-
-  //   RankBonusHistoryData.map((hit)=>{
-  //     return elegiblePeoples.push(hit.RankEligibilityClaimOwnerId)
-  //   })
-
-  //   // elegiblePeoples
-
-  //   const memberEligible = RankBonusHistoryData.length // this is the count of eligible 
-
-
-
-
-  //   const findMainUserPackage = await User.findById(users[index]._id)
-
-
-  //   const mainUserPackagePrice = Number(findMainUserPackage.PurchasedPackagePrice)
-
-
-  //   // here we are calculating estimated tokens 
-
-  //   var percantage = 0
-
-  //   if (mainUserPackagePrice == 500) {
-  //     percantage = 1
-  //   } else if (mainUserPackagePrice == 1000) {
-  //     percantage = 1
-  //   } else if (mainUserPackagePrice == 2500) {
-  //     percantage = 0.5
-  //   } else if (mainUserPackagePrice == 5000) {
-  //     percantage = 0.3
-  //   } else if (mainUserPackagePrice == 10000) {
-  //     percantage = 0.2
-  //   } else if (mainUserPackagePrice == 25000) {
-  //     percantage = 0.1
-  //   } else if (mainUserPackagePrice == 50000) {
-  //     percantage = 0.1
-  //   } else if (mainUserPackagePrice == 100000) {
-  //     percantage = 0.1
-  //   }
-
-
-
-
-  //   var est1 = Number(TotalBusiness) * percantage / 100
-
-
-  //   var devideIt = memberEligible / est1
-
-
-
-
-
-  //   for (let index = 0; index < elegiblePeoples.length; index++) {
-  //     const userIt = elegiblePeoples[index];
-
-  //     const getUserOldWallet = await User.findById(userIt)
-      
-
-  //     const userWallete = Number(getUserOldWallet.MainWallet) + Number(devideIt)
-
-
-  //     const updateWallet = await User.findByIdAndUpdate({ _id: userIt }, { MainWallet: userWallete })
-
-
-
-  //     const makeSingleHistory = await GlobalBonus({
-
-  //       BonusOwner: userIt,
-  //       Percantage: percantage
-
-
-  //     }).save()
-
-
-
-  //   }
-
-
-
-  //   const makeGlobalHistory = await GlobalBonusHistory({
-
-  //     Owner: mainUser,
-  //     Coins: est1,
-  //     Percantage: percantage
-
-  //   }).save()
-
-  
-  
-  
-  
   
   var id = mainUser
 
@@ -283,14 +166,97 @@ export default async (req, res) => {
 
 
 
-    const makeGlobalHistory = await GlobalBonusHistory({
 
-      Owner: id,
-      Coins:givre,
-      Percantage: percantage,
-      CompanyBusiness:TotalBusiness
 
-    }).save()
+
+
+
+
+
+
+
+
+
+
+
+
+    const userDataid = await User.findById(id)
+    const FindPackage = await PackageHistory.findOne({ PackageOwner: id })
+
+    const Max_Cap = Number(FindPackage.PackagePrice) * 300 / 100
+
+    console.log("Max_Cap => " + Max_Cap)
+
+    const Got_Reward = Number(givre)
+
+    console.log("Got_Reward => " + Got_Reward)
+    const My_Wallet = Number(userDataid.MainWallet)
+    console.log("My_Wallet => " + My_Wallet)
+    console.log("came in first")
+
+
+    if (Got_Reward + My_Wallet >= Max_Cap) {
+
+      var Add_Money_In_Wallet = Max_Cap - My_Wallet
+
+      const Lap_Income = Got_Reward > Add_Money_In_Wallet ? Got_Reward - Add_Money_In_Wallet : Add_Money_In_Wallet - Got_Reward
+
+      const fetch_Last_Lap_Wallet = await LapWallet.findOne({ BonusOwner: id })
+
+      if (fetch_Last_Lap_Wallet) {
+
+        await LapWallet.findByIdAndUpdate({ _id: fetch_Last_Lap_Wallet._id }, { LapAmount: fetch_Last_Lap_Wallet.LapAmount + Lap_Income })
+
+      } else {
+
+        await LapWallet({
+          BonusOwner: id,
+          LapAmount: Lap_Income
+        }).save()
+
+      }
+
+      const makeGlobalHistory = await GlobalBonusHistory({
+
+        Owner: id,
+        Coins:givre,
+        Percantage: Got_Reward,
+        CompanyBusiness:TotalBusiness
+  
+      }).save()
+
+    } else {
+
+      var Add_Money_In_Wallet = Got_Reward + My_Wallet
+
+      const makeGlobalHistory = await GlobalBonusHistory({
+
+        Owner: id,
+        Coins:Add_Money_In_Wallet,
+        Percantage: percantage,
+        CompanyBusiness:TotalBusiness
+  
+      }).save()
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
