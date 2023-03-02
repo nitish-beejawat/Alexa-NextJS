@@ -549,6 +549,7 @@ export default async (req, res) => {
               }).save()
               
             }
+            
             const createRecord = await DailyBonus({
               BonusOwner: list[i].id,
               FormPackage: list[i].name,
