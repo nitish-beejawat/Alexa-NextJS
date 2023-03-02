@@ -942,14 +942,8 @@ export default async (req, res) => {
         PackageOwner: id,
         Type: "Repurchased"
       }).save()
-      // }
+      
   
-
-
-
-
-      // short record is bwlow
-
 
 
       const findShortRecord = await ShortRecord.findOne({ RecordOwner: uplineUser })
