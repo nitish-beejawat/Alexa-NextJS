@@ -22,6 +22,8 @@ export default async (req, res) => {
 
   var checkUpperlineUser = await User.findById(id)
 
+  var findPack = await PackageHistory.findOne({PackageOwner:id})
+
 
   console.log(checkUpperlineUser)
 
@@ -46,6 +48,8 @@ export default async (req, res) => {
     var Lamount = Number(Anount) * 30
 
     const findPackage = await Package.findOne({ PackageName: checkUpperlineUserPackageName })
+
+
 
 
 
@@ -125,15 +129,16 @@ export default async (req, res) => {
 
         }
 
-        if (Add_Money_In_Wallet !== 0) {
+        if (Add_Money_In_Wallet !== 0 || !Add_Money_In_Wallet < 0) {
           const ReferalHistory = await ReferralHistory({
             ReferralFrom: findPackagePurchaseUser.SponserCode,
             ReferralTo: uplineUser,
             ReferralCoins: Add_Money_In_Wallet,
             ReferralPercantage: upperPercantage,
-            PackageName: findPackage.PackageName
+            PackageName: findMyPackage.PackageName
           }).save()
           
+          await User.findByIdAndUpdate({ _id: uplineUser }, { MainWallet: Number(lastWallete) + Number(Add_Money_In_Wallet) })
         }
 
 
@@ -146,12 +151,12 @@ export default async (req, res) => {
           ReferralTo: uplineUser,
           ReferralCoins: Got_Reward,
           ReferralPercantage: upperPercantage,
-          PackageName: findPackage.PackageName
+          PackageName: findMyPackage.PackageName
         }).save()
+        await User.findByIdAndUpdate({ _id: uplineUser }, { MainWallet: Number(lastWallete) + Number(Got_Reward) })
       }
 
 
-      await User.findByIdAndUpdate({ _id: uplineUser }, { MainWallet: Number(lastWallete) + Number(Add_Money_In_Wallet) })
 
 
       const findShortRecord = await ShortRecord.findOne({ RecordOwner: uplineUser })
@@ -457,7 +462,7 @@ export default async (req, res) => {
           ReferralTo: uplineUser,
           ReferralCoins: Add_Money_In_Wallet,
           ReferralPercantage: upperPercantage,
-          PackageName: findPackage.PackageName
+          PackageName: findMyPackage.PackageName
         }).save()
 
 
@@ -470,7 +475,7 @@ export default async (req, res) => {
           ReferralTo: uplineUser,
           ReferralCoins: Got_Reward,
           ReferralPercantage: upperPercantage,
-          PackageName: findPackage.PackageName
+          PackageName: findMyPackage.PackageName
         }).save()
       }
 
