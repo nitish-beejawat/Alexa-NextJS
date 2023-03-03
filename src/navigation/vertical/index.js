@@ -53,6 +53,11 @@ const navigation = () => {
         icon: AccountCogOutline,
         path: '/Package'
       },
+    {
+        title: 'Top History',
+        icon: AccountCogOutline,
+        path: '/TopUpHistory'
+      },
    
     {
       sectionTitle: 'Team Details'

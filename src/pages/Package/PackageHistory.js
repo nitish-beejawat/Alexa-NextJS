@@ -22,7 +22,7 @@ const PackageHistory = ({ TopUpHistory,setShowHistoryScreen }) => {
     <div>
       <Grid container spacing={6}>
         <Grid item xs={6}>
-          <Typography variant='h4'>Top Up History</Typography>
+          <Typography variant='h4'>Active Package</Typography>
         </Grid>
         <Grid item xs={6}>
           <Typography onClick={()=>setShowHistoryScreen(false)} style={{textAlign:"right",fontWeight:"bold",cursor:'pointer'}} variant='subtitle2'>Repurchase Package</Typography>

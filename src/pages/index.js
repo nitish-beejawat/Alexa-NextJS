@@ -82,6 +82,60 @@ const Dashboard = () => {
         dashData ? 
 
         <Grid style={{marginTop:20,marginLeft:10}} container spacing={12}>
+
+
+<Grid item xs={12} md={4}>
+            <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20,backgroundImage:"https://png.pngtree.com/element_our/sm/20180520/sm_5b0125134eb72.jpg",backgroundSize:80,backgroundRepeat:"no-repeat"}}>
+              <h4>Active Package</h4>
+              <h3 style={{marginTop:-20}}>{dashData.ActivePackage}</h3>
+
+            </div>
+
+          </Grid>
+
+
+          <Grid item xs={12} md={4}>
+            <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20,backgroundImage:"https://png.pngtree.com/element_our/sm/20180520/sm_5b0125134eb72.jpg",backgroundSize:80,backgroundRepeat:"no-repeat"}}>
+              <h4>Dalily Bonus</h4>
+              <h3 style={{marginTop:-20}}>{dashData.DailyFastBonus}</h3>
+
+            </div>
+
+          </Grid>
+
+          <Grid item xs={12} md={4}>
+            <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20,backgroundImage:"https://png.pngtree.com/element_our/sm/20180520/sm_5b0125134eb72.jpg",backgroundSize:80,backgroundRepeat:"no-repeat"}}>
+              <h4>Future Earnings</h4>
+              <h3 style={{marginTop:-20}}>{Number(dashData.FutureIWillGet).toFixed(2)}</h3>
+
+            </div>
+
+          </Grid>
+
+          <Grid item xs={12} md={4}>
+            <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20,backgroundImage:"https://png.pngtree.com/element_our/sm/20180520/sm_5b0125134eb72.jpg",backgroundSize:80,backgroundRepeat:"no-repeat"}}>
+              <h4>Maximum Earning</h4>
+              <h3 style={{marginTop:-20}}>{Number(dashData.MaxCaping).toFixed(2)}</h3>
+
+            </div>
+
+          </Grid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <Grid item xs={12} md={4}>
             <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20,backgroundImage:"https://png.pngtree.com/element_our/sm/20180520/sm_5b0125134eb72.jpg",backgroundSize:80,backgroundRepeat:"no-repeat"}}>
               <h4>Dalily Staking</h4>
