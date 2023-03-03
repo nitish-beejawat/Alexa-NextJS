@@ -446,7 +446,7 @@ export default async (req, res) => {
 
       const calWallete = Number(lastWallete) + Number(PackagePercantage)
 
-      await User.findByIdAndUpdate({ _id: uplineUser }, { MainWallet: calWallete })
+      // await User.findByIdAndUpdate({ _id: uplineUser }, { MainWallet: calWallete })
 
 
 
@@ -718,17 +718,6 @@ export default async (req, res) => {
 
       }
 
-
-      // maximum caping close
-
-
-      // if ( Add_Money_In_Wallet > 0) {
-        console.log("this four =========================> ")
-
-
-        console.log("Add_Money_In_Wallet ==> "+Add_Money_In_Wallet)
-
-        
         
         const createPackage = await PackageHistory({
         PackageName: findMyPackage.PackageName,
@@ -745,23 +734,23 @@ export default async (req, res) => {
 
 
 
-      const findShortRecord = await ShortRecord.findOne({ RecordOwner: uplineUser })
+      // const findShortRecord = await ShortRecord.findOne({ RecordOwner: uplineUser })
 
 
-      if (findShortRecord) {
+      // if (findShortRecord) {
 
-        let sum = Number(findShortRecord.RebuyBonus) + Number(Add_Money_In_Wallet)
+      //   let sum = Number(findShortRecord.RebuyBonus) + Number(Add_Money_In_Wallet)
 
-        const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { RebuyBonus: sum })
+      //   const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { RebuyBonus: sum })
 
-      } else {
+      // } else {
 
-        const createShortRecord = await ShortRecord({
-          RecordOwner: uplineUser,
-          RebuyBonus: Add_Money_In_Wallet
-        }).save()
+      //   const createShortRecord = await ShortRecord({
+      //     RecordOwner: uplineUser,
+      //     RebuyBonus: Add_Money_In_Wallet
+      //   }).save()
 
-      }
+      // }
 
 
       // short record is done
@@ -900,23 +889,23 @@ export default async (req, res) => {
 
 
 
-      const findShortRecord = await ShortRecord.findOne({ RecordOwner: uplineUser })
+      // const findShortRecord = await ShortRecord.findOne({ RecordOwner: uplineUser })
 
 
-      if (findShortRecord) {
+      // if (findShortRecord) {
 
-        let sum = Number(findShortRecord.RebuyBonus) + Number(Add_Money_In_Wallet)
+      //   let sum = Number(findShortRecord.RebuyBonus) + Number(Add_Money_In_Wallet)
 
-        const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { RebuyBonus: sum })
+      //   const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { RebuyBonus: sum })
 
-      } else {
+      // } else {
 
-        const createShortRecord = await ShortRecord({
-          RecordOwner: uplineUser,
-          RebuyBonus: Add_Money_In_Wallet
-        }).save()
+      //   const createShortRecord = await ShortRecord({
+      //     RecordOwner: uplineUser,
+      //     RebuyBonus: Add_Money_In_Wallet
+      //   }).save()
 
-      }
+      // }
 
 
       // short record is done
