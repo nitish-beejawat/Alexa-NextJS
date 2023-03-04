@@ -54,7 +54,7 @@ const navigation = () => {
         path: '/Package'
       },
     {
-        title: 'Top History',
+        title: 'Top-Up History',
         icon: AccountCogOutline,
         path: '/TopUpHistory'
       },

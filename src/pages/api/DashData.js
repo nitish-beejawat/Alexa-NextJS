@@ -31,7 +31,7 @@ export default async (req, res) => {
         ActivePackage:findPackageHistory ? findPackageHistory.PackageName : "No Active Package",
         DailyFastBonus:"0%",
         MaxCaping:findPackageHistory ? Number(findPackageHistory.PackagePrice)*300/100 : "No Active Package",
-        FutureIWillGet:findUser ? Number(findPackageHistory.PackagePrice)*300/100 - Number(findUser.MainWallet) : "Login Again"
+        FutureIWillGet:findPackageHistory ? Number(findPackageHistory.PackagePrice)*300/100 - Number(findUser.MainWallet) : "Login Again"
 
 
     })
