@@ -105,7 +105,7 @@ const Dashboard = () => {
 
           <Grid item xs={12} md={4}>
             <div style={{borderColor:"#06A5A7",borderStyle:"solid",borderWidth:3,padding:10,borderRadius:20,backgroundColor:'rgb(3 232 235 / 10%)',paddingLeft:20,backgroundImage:"https://png.pngtree.com/element_our/sm/20180520/sm_5b0125134eb72.jpg",backgroundSize:80,backgroundRepeat:"no-repeat"}}>
-              <h4>Future Earnings</h4>
+              <h4>Left Earnings</h4>
               <h3 style={{marginTop:-20}}>{dashData.FutureIWillGet}</h3>
 
             </div>

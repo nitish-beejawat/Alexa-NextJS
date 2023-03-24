@@ -22,10 +22,30 @@ const MatchingBonusHistory = mongoose.Schema({
     ForwardedValue:{
         default: 'null',
         type: 'String'
+    },
+    LeftDirectBusiness:{
+        default: 'null',
+        type: 'String'
+    },
+    RightDirectBusiness:{
+        default: 'null',
+        type: 'String'
+    },
+    LeftBinaryBusiness:{
+        default: 'null',
+        type: 'String'
+    },
+    RightBinaryBusiness:{
+        default: 'null',
+        type: 'String'
+    },
+    FlushCalculation:{
+        default: 'null',
+        type: 'String'
     }
 },
     {
         timestamps: true
     })
 
-export default mongoose.models.MatchingBonusHistoryy || mongoose.model('MatchingBonusHistoryy', MatchingBonusHistory)
+export default mongoose.models.MatchingBonHis || mongoose.model('MatchingBonHis', MatchingBonusHistory)

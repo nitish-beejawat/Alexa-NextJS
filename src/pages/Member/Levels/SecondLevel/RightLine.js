@@ -12,7 +12,7 @@ const RightLine = ({datas,handleClikedSuperUser}) => {
 
         <>
         
-        <img src={datas.FirstLevel.RightLine.userName == "null" ?  '/empltyplace.png' : "/activated.png"} style={{ width: 80 }} alt='' />
+        <img src={datas.FirstLevel.RightLine.userName == "null" ?  '/empltyplace.png' : !datas.FirstLevel.RightLine.Package ? "/notactivated.png" : "/activated.png"} style={{ width: 80 }} alt='' />
         <Typography variant='h6'>{datas.FirstLevel.RightLine.userName == "null" ? "Vacant":datas.FirstLevel.RightLine.userName}</Typography>
         {
           datas.FirstLevel.RightLine.userName == "null" ? 

@@ -1,5 +1,6 @@
 import initDB from '../../helper/initDB'
 import User from '../../helper/Modal/User'
+import PackageHistory from '../../helper/Modal/History/PackageHistory'
 
 initDB()
 
@@ -281,82 +282,204 @@ export default async (req, res) => {
   }
 
 
+
+
+
+  // findding Active Package
+
+
+
+  if (superUserId !== "null") {
+    var findUserName1 = await User.findOne({SponserCode:superUserId})
+    var findPackageForUser1 = await PackageHistory.findOne({PackageOwner:findUserName1._id})
+  }
+
+// First Level
+
+  if (LeftSideUserId !== "null") {
+    var findUserName2 = await User.findOne({SponserCode:LeftSideUserId})
+    var findPackageForUser2 = await PackageHistory.findOne({PackageOwner:findUserName2._id})
+  }
+
+
+  if (RightSideUserId !== "null") {
+    var findUserName3 = await User.findOne({SponserCode:RightSideUserId})
+    var findPackageForUser3 = await PackageHistory.findOne({PackageOwner:findUserName3._id})
+  }
+
+// Second Level
+
+  if (leftSideName1 !== "null") {
+    var findUserName4 = await User.findOne({SponserCode:leftSideName1})
+    var findPackageForUser4 = await PackageHistory.findOne({PackageOwner:findUserName4._id})
+  }
+  if (RightSideName2 !== "null") {
+    var findUserName5 = await User.findOne({SponserCode:RightSideName2})
+    var findPackageForUser5 = await PackageHistory.findOne({PackageOwner:findUserName5._id})
+  }
+  if (AnotherLeftSideName2 !== "null") {
+    var findUserName6 = await User.findOne({SponserCode:AnotherLeftSideName2})
+    var findPackageForUser6 = await PackageHistory.findOne({PackageOwner:findUserName6._id})
+  }
+  if (AnotherRightSideName !== "null") {
+    var findUserName7 = await User.findOne({SponserCode:AnotherRightSideName})
+    var findPackageForUser7 = await PackageHistory.findOne({PackageOwner:findUserName7._id})
+  }
+
+  // Third Level
+
+
+
+
+  if (firstLeftKaLeftSponser ) {
+    console.log(firstLeftKaLeftSponser)
+    var findUserName8 = await User.findOne({SponserCode:firstLeftKaLeftSponser})
+    var findPackageForUser8 = await PackageHistory.findOne({PackageOwner:findUserName8._id})
+  }
+  if (firstLeftKaRightSponser ) {
+    var findUserName9 = await User.findOne({SponserCode:firstLeftKaRightSponser})
+    var findPackageForUser9 = await PackageHistory.findOne({PackageOwner:findUserName9._id})
+  }
+  if (SecLeftKaLeftSponser ) {
+    var findUserName10 = await User.findOne({SponserCode:SecLeftKaLeftSponser})
+    var findPackageForUser10 = await PackageHistory.findOne({PackageOwner:findUserName10._id})
+  }
+  if (SecLeftKaRightSponser ) {
+    var findUserName11 = await User.findOne({SponserCode:SecLeftKaRightSponser})
+    var findPackageForUser11 = await PackageHistory.findOne({PackageOwner:findUserName11._id})
+  }
+  if (ThirdLeftKaLeftSponser ) {
+    var findUserName12 = await User.findOne({SponserCode:ThirdLeftKaLeftSponser})
+    var findPackageForUser12 = await PackageHistory.findOne({PackageOwner:findUserName12._id})
+  }
+  if (ThirdLeftKaLeftSponser ) {
+    var findUserName12 = await User.findOne({SponserCode:ThirdLeftKaLeftSponser})
+    var findPackageForUser12 = await PackageHistory.findOne({PackageOwner:findUserName12._id})
+  }
+  if (ThirdLeftKaRightSponser ) {
+    var findUserName13 = await User.findOne({SponserCode:ThirdLeftKaRightSponser})
+    var findPackageForUser13 = await PackageHistory.findOne({PackageOwner:findUserName13._id})
+  }
+  if (FourLeftKaLeftSponser ) {
+    var findUserName14 = await User.findOne({SponserCode:FourLeftKaLeftSponser})
+    var findPackageForUser14 = await PackageHistory.findOne({PackageOwner:findUserName14._id})
+  }
+  if (FourLeftKaRightSponser ) {
+    var findUserName15 = await User.findOne({SponserCode:FourLeftKaRightSponser})
+    var findPackageForUser15 = await PackageHistory.findOne({PackageOwner:findUserName15._id})
+  }
+
+
+
+
+
+
   res.json({
     SuperUser: {
       id: superUserId,
-      userName: superUserName
+      userName: superUserName,
+      Package:findPackageForUser1? findPackageForUser1.PackagePrice : null
     },
     FirstLevel: {
       LeftLine: {
         id: LeftSideUserId,
-        userName: LeftSideUserName
+        userName: LeftSideUserName,
+        Package:findPackageForUser2? findPackageForUser2.PackagePrice : null
+
+        
       },
       RightLine: {
         id: RightSideUserId,
-        userName: RightSideUserName
+        userName: RightSideUserName,
+        Package:findPackageForUser3? findPackageForUser3.PackagePrice : null
+
       }
     },
     SecondLeve: {
       TotalLeft: {
         LeftLine: {
           id: leftSideName1,
-          userName: leftSideId1
+          userName: leftSideId1,
+          Package:findPackageForUser4? findPackageForUser4.PackagePrice : null
+
         },
         RightLine: {
           id: RightSideName2,
-          userName: RightSideId2
+          userName: RightSideId2,
+          Package:findPackageForUser5? findPackageForUser5.PackagePrice : null
+
         }
       },
       TotalRight: {
         LeftLine: {
           id: AnotherLeftSideName2,
-          userName: AnotherLeftSideId
+          userName: AnotherLeftSideId,
+          Package:findPackageForUser6? findPackageForUser6.PackagePrice : null
+
         },
         RightLine: {
           id: AnotherRightSideName,
-          userName: AnotherRightSideId
+          userName: AnotherRightSideId,
+          Package:findPackageForUser7? findPackageForUser7.PackagePrice : null
+
         }
       }
     },
     ThirdLevel: {
       One: {
         LeftLine: {
-          id: firstLeftKaLeftSponser,
-          userName: firstLeftKaLeftName
+          id: firstLeftKaLeftSponser ? firstLeftKaLeftSponser : "null",
+          userName: firstLeftKaLeftName ? firstLeftKaLeftName : "null",
+          Package:findPackageForUser8? findPackageForUser8.PackagePrice : null
+
         },
         RightLine: {
-          id: firstLeftKaRightSponser,
-          userName: firstLeftKaRightName
+          id: firstLeftKaRightSponser ? firstLeftKaRightSponser : "null",
+          userName: firstLeftKaRightName ? firstLeftKaRightName : "null",
+          Package:findPackageForUser9? findPackageForUser9.PackagePrice : null
+
         }
       },
       Two: {
         LeftLine: {
-          id: SecLeftKaLeftSponser,
-          userName: SecLeftKaLeftName
+          id: SecLeftKaLeftSponser ? SecLeftKaLeftSponser : "null",
+          userName: SecLeftKaLeftName ? SecLeftKaLeftName : "null",
+          Package:findPackageForUser10? findPackageForUser10.PackagePrice : null
+
         },
         RightLine: {
-          id: SecLeftKaRightSponser,
-          userName: SecLeftKaRightName
+          id: SecLeftKaRightSponser ? SecLeftKaRightSponser : "null",
+          userName: SecLeftKaRightName ? SecLeftKaRightName : "null",
+          Package:findPackageForUser11? findPackageForUser11.PackagePrice : null
+
         }
       },
       Three: {
         LeftLine: {
-          id: ThirdLeftKaLeftSponser,
-          userName: ThirdLeftKaLeftName
+          id: ThirdLeftKaLeftSponser ? ThirdLeftKaLeftSponser : "null",
+          userName: ThirdLeftKaLeftName ? ThirdLeftKaLeftName : "null",
+          Package:findPackageForUser12? findPackageForUser12.PackagePrice : null
+
         },
         RightLine: {
-          id: ThirdLeftKaRightSponser,
-          userName: ThirdLeftKaRightName
+          id: ThirdLeftKaRightSponser ? ThirdLeftKaRightSponser : "null",
+          userName: ThirdLeftKaRightName ? ThirdLeftKaRightName : "null",
+          Package:findPackageForUser13? findPackageForUser13.PackagePrice : null
+
         }
       },
       Four: {
         LeftLine: {
-          id: FourLeftKaLeftSponser,
-          userName: FourLeftKaLeftName
+          id: FourLeftKaLeftSponser ? FourLeftKaLeftSponser : "null",
+          userName: FourLeftKaLeftName ? FourLeftKaLeftName : "null",
+          Package:findPackageForUser14? findPackageForUser14.PackagePrice : null
+
         },
         RightLine: {
-          id: FourLeftKaRightSponser,
-          userName: FourLeftKaRightName
+          id: FourLeftKaRightSponser ? FourLeftKaRightSponser :"null",
+          userName: FourLeftKaRightName ? FourLeftKaRightName :"null",
+          Package:findPackageForUser15? findPackageForUser15.PackagePrice : null
+
         }
       }
     }

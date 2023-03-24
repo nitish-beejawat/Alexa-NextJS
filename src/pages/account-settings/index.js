@@ -46,6 +46,8 @@ const AccountSettings = () => {
   // ** State
   const [value, setValue] = useState('account')
   const [datas, setDatas] = useState("")
+  const [dashData, setDashData] = useState("")
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
@@ -55,6 +57,7 @@ const AccountSettings = () => {
     const getData = () => {
       var ids = localStorage.getItem('jwt')
       var parsedId = JSON.parse(ids)
+
 
       try {
         axios
@@ -75,6 +78,44 @@ const AccountSettings = () => {
 
     getData()
   }, [])
+
+
+
+
+  useEffect(() => {
+
+
+    const datas = localStorage.getItem("jwt")
+    const parseIt = JSON.parse(datas)
+    console.log(parseIt)
+
+     try {
+      
+      axios.post("/api/DashData",{
+        id:parseIt._id
+      })
+      .then((acc)=>{
+        console.log(acc.data)
+        setDashData(acc.data)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+
+
+     } catch (error) {
+      console.log(error)
+     }
+
+
+
+
+  
+  }, [])
+
+
+
+
 
   return (
     <Card>
@@ -98,7 +139,7 @@ const AccountSettings = () => {
             
             <TabPanel sx={{ p: 0 }} value='account'>
 
-            <TabAccount datas={datas} />
+            <TabAccount dashData={dashData} datas={datas} />
           </TabPanel>
             
           

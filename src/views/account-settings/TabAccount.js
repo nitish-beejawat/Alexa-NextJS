@@ -45,7 +45,7 @@ const ResetButtonStyled = styled(Button)(({ theme }) => ({
   }
 }))
 
-const TabAccount = ({datas}) => {
+const TabAccount = ({datas,dashData}) => {
   // ** State
   const [openAlert, setOpenAlert] = useState(true)
   const [imgSrc, setImgSrc] = useState('/images/avatars/1.png')
@@ -134,7 +134,7 @@ const TabAccount = ({datas}) => {
               type='number'
               label='Main Wallet'
               placeholder='Main Wallet'
-             value={datas.MainWallet}
+             value={Number(dashData.AvaibleTokens)}
             />
           </Grid>
           <Grid item xs={12} sm={6}>

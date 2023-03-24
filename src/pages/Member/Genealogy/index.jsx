@@ -1,14 +1,5 @@
 import Grid from '@mui/material/Grid'
-import Link from '@mui/material/Link'
-import Card from '@mui/material/Card'
 import Typography from '@mui/material/Typography'
-import CardHeader from '@mui/material/CardHeader'
-import Select from '@mui/material/Select'
-import MenuItem from '@mui/material/MenuItem'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
-import FormControl from '@mui/material/FormControl'
-import InputLabel from '@mui/material/InputLabel'
 import { useState, useEffect } from 'react'
 import SuperUserLevel from '../Levels/SuperUserLevel'
 import LeftLine from '../Levels/SecondLevel/LeftLine'
@@ -41,7 +32,6 @@ const MUITable = () => {
   const [idName, setIdName] = useState("")
   const [openModal, setOpenModal] = useState(false)
 
-  // inout vals
 
 
   const [userName, setUserName] = useState("")

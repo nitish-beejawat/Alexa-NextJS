@@ -4,7 +4,6 @@ import PackageHistory from "../../../helper/Modal/History/PackageHistory"
 import MatchingBonusHistory from "../../../helper/Modal/History/MatchingBonusHistory"
 import ShortRecord from "../../../helper/Modal/ShortRecord"
 
-
 initDB()
 
 const findTotalBussiness = async(userId, totalBussinessCache) => {
@@ -77,8 +76,8 @@ export default async (req, res) => {
 
         const FindMainUserPackage = await PackageHistory.findOne({ PackageOwner: FindAllUsers[index]._id,createdAt:{ $gte: new Date((new Date().getTime() - (7 * 24 * 60 * 60 * 1000))) } })
         
-        console.log("This is hit ===> ")
-        console.log(FindMainUserPackage)
+        
+        
        
         if (FindMainUserPackage !== null) {
 
@@ -123,12 +122,12 @@ export default async (req, res) => {
 
             if (LeftWall >= Number(PackPrice) && RightWall >= Number(PackPrice)) {
 
-                console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx =>")
-                console.log("yes he is eligible => "+FindAllUsers[index]._id)
-                console.log("in this left there is => "+LeftWall)
-                console.log("in this left there is => "+RightWall)
-                console.log("the total goal is => "+PackPrice)
-                console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx =>")
+                
+                
+                
+                
+                
+                
 
 
 
@@ -140,7 +139,7 @@ export default async (req, res) => {
 
                 const currentUserBussiness = await findTotalBussiness(FindAllUsers[index]._id, totalBussinessCache);
 
-                // console.log(currentUserBussiness)
+                // 
                 
                 
 
@@ -149,32 +148,32 @@ export default async (req, res) => {
 
 
 
-                console.log("This is sec time this user => "+FindAllUsers[index]._id)
+                
 
-                console.log("second time this user Left =>"+leftBusiness)
-                console.log("second time this user Righ =>"+rightBusiness)
+                
+                
                 
                 if (leftBusiness >= Number(PackPrice) && rightBusiness >= Number(PackPrice)) {
                     
-                    console.log("user purchased pack => "+Number(PackPrice))
+                    
                     var combo = 0
 
                     if (leftBusiness < rightBusiness) {
 
 
-                        console.log("came in first blocks")
+                        
                         
                         combo = Number(leftBusiness) + Number(subLastValue)
                         var subtractForwardValue =  rightBusiness - leftBusiness
                         
                     }else if(rightBusiness < leftBusiness){
-                        console.log("came in second blocks")
+                        
                         
                         combo = Number(rightBusiness) + Number(subLastValue)
                         var subtractForwardValue =  leftBusiness - rightBusiness
 
                     }else if(rightBusiness == leftBusiness){
-                        console.log("came in second blocks")
+                        
                         
                         combo = Number(rightBusiness)
                         var subtractForwardValue =  0
@@ -185,7 +184,7 @@ export default async (req, res) => {
 
 
 
-                    console.log(  "this is the number ===> "+combo)
+                    
                      var packPercantage = Number(combo) * 8 / 100
 
 
@@ -195,10 +194,10 @@ export default async (req, res) => {
 
 
 
-                    console.log("leftBusiness => "+leftBusiness)
-                    console.log("rightBusiness => "+rightBusiness)
+                    
+                    
 
-                    console.log("Yes he is eligible for matching bonus")
+                    
 
                     const GiveMatchingBonus = await User.findById(FindAllUsers[index]._id)
     
@@ -206,7 +205,7 @@ export default async (req, res) => {
 
 
 
-                    // console.log(packPercantage)
+                    // 
     
     
                     const ProvideMatchingBonus = await User.findByIdAndUpdate({ _id: FindAllUsers[index]._id }, { MainWallet: userWallet })
@@ -217,10 +216,16 @@ export default async (req, res) => {
                         Amount:packPercantage,
                         Matching:combo,
                         Rate:"8%",
-                        ForwardedValue:subtractForwardValue
+                        ForwardedValue:subtractForwardValue,
+                        LeftDirectBusiness:LeftWall,
+                        RightDirectBusiness:RightWall,
+                        LeftBinaryBusiness:leftBusiness,
+                        RightBinaryBusiness:rightBusiness,
+                        FlushCalculation:"0"
                     }).save()
 
-
+                    
+                    
 
 
                     const findShortRecord = await ShortRecord.findOne({RecordOwner:FindAllUsers[index]._id})
@@ -267,7 +272,7 @@ export default async (req, res) => {
 
             } else {
 
-                console.log("No he is not eligible for matching bonus")
+                
             }
         }
     }

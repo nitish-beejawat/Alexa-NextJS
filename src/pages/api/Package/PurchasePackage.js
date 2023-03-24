@@ -673,6 +673,8 @@ export default async (req, res) => {
           Type: "Repurchased"
         }).save()
 
+        const RemoveLastWallet = await User.findByIdAndUpdate({_id:id},{MainWallet:0})
+
 
 
      
@@ -739,6 +741,9 @@ export default async (req, res) => {
           PackageOwner: id,
           Type: "Repurchased"
         }).save()
+
+        const RemoveLastWallet = await User.findByIdAndUpdate({_id:id},{MainWallet:0})
+
 
 
 
@@ -939,6 +944,8 @@ export default async (req, res) => {
         PackageOwner: id,
         Type: "Repurchased"
       }).save()
+      const RemoveLastWallet = await User.findByIdAndUpdate({_id:id},{MainWallet:0})
+
 
 
     }
