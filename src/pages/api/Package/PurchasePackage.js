@@ -763,7 +763,7 @@ export default async (req, res) => {
 
           let sum = Number(findShortRecord.RebuyBonus) + Number(Got_Reward)
 
-          const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { RebuyBonus: sum })
+          // const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { RebuyBonus: sum })
 
         } else {
 
@@ -895,7 +895,7 @@ export default async (req, res) => {
 
           let sum = Number(findShortRecord.RebuyBonus) + Number(Got_Reward)
 
-          const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { RebuyBonus: sum })
+          // const updateValue = await ShortRecord.findByIdAndUpdate({ _id: findShortRecord._id }, { RebuyBonus: sum })
 
         } else {
 
