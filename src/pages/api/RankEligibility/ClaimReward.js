@@ -13,124 +13,122 @@ import ShortRecord from "../../../helper/Modal/ShortRecord";
 initDB()
 
 export default async (req, res) => {
+  let {
+    id,
+    ClaimedReward,
+    TotalBusiness
+  } = req.body;
+  let message = 'Claim Reward Done';
 
-    const { id, ClaimedReward, TotalBusiness } = req.body;
+  if (!id || !ClaimedReward || !TotalBusiness) {
+    return res.status(500).json({
+      message: 'Please Provide All Data'
+    })
+  }
 
-    if (!id || !ClaimedReward || !TotalBusiness) {
-        return res.status(500).json({ message: 'Please Provide All Data' })
-    }
+  const findRankEligibilityData = await RankEligibilityClaim.find({
+    RankEligibilityClaimOwnerId: id
+  })
 
-    const findRankEligibilityData = await RankEligibilityClaim.find({RankEligibilityClaimOwnerId:id})
+  const MainUserData = await User.findById(id)
 
+  const FindPackage = await Plan.findOne({
+    PackagePrice: MainUserData.PurchasedPackagePrice
+  })
 
-    // if (findRankEligibilityData.length !== 0) {
-    //     return res.status(200).json({message:"Already Given Rank Eligibility"})
-    // }
+  console.log("FindPackage ============== ", FindPackage)
 
+  let NewWallet = Number(MainUserData.MainWallet) + Number(ClaimedReward)
+  console.log("NewWallet ============== ", NewWallet, MainUserData.MainWallet, ClaimedReward)
 
-    const MainUserData = await User.findById(id)
+  if(NewWallet > ((Number(FindPackage.PackagePrice) * Number(FindPackage.PackageMaximumLimit))/100)){
+    ClaimedReward = ClaimedReward - (NewWallet - ((Number(FindPackage.PackagePrice) * Number(FindPackage.PackageMaximumLimit))/100))
+    NewWallet = ((Number(FindPackage.PackagePrice) * Number(FindPackage.PackageMaximumLimit))/100);
+  }
 
-    const FindPackage = await Plan.findOne({ PackagePrice: MainUserData.PurchasedPackagePrice })
+  console.log("ClaimedReward ============= ", ClaimedReward)
+  if(ClaimedReward == 0){
+    message = '300% capping reached';
+    return res.status(200).json({
+      message: message
+    })
+  }
+  
+  await User.findByIdAndUpdate({
+    _id: id
+  }, {
+    MainWallet: NewWallet
+  }) // giving reward
 
+  // // finding renwal
+  const findOldReneal = await RenewalPurchasePackage.find({
+    PackageOwner: id
+  })
 
-    const NewWallet = Number(MainUserData.MainWallet) + Number(ClaimedReward)
+  if (findOldReneal.length !== 0) {
+    await RenewalPurchasePackage.findByIdAndUpdate({
+      _id: findOldReneal[0]._id
+    }, {
+      RankEligibility: "false"
+    })
+  }
 
+  RankEligibilityClaim({
+    RankEligibilityClaimOwnerId: MainUserData._id,
+    RankEligibilityClaimOwnerUserName: MainUserData.SponserCode,
+    RankEligibilityClaimOwnerEmail: MainUserData.EmailId,
+    PackageOwnName: FindPackage.PackageName,
+    PackageOwnPrice: FindPackage.PackagePrice,
+    ClaimedReward: ClaimedReward,
+    TotBusiness: TotalBusiness
+  }).save()
 
-    await User.findByIdAndUpdate({ _id: id }, { MainWallet: NewWallet }) // giving reward
+  const checkIfAlreadyExists = await RankEligibilityClaimForGlobalPool.findOne({
+    RankEligibilityClaimOwnerId: MainUserData._id
+  })
 
-
-    // finding renwal
-    const findOldReneal = await RenewalPurchasePackage.find({PackageOwner:id})
-
-    if (findOldReneal.length !== 0) {
-
-        await RenewalPurchasePackage.findByIdAndUpdate({_id:findOldReneal[0]._id},{RankEligibility:"false"})
-        
-    }
-
-
-
-
-
-
-
-
-
-
-    RankEligibilityClaim({
-
-        RankEligibilityClaimOwnerId: MainUserData._id,
-        RankEligibilityClaimOwnerUserName: MainUserData.SponserCode,
-        RankEligibilityClaimOwnerEmail: MainUserData.EmailId,
-        PackageOwnName: FindPackage.PackageName,
-        PackageOwnPrice: FindPackage.PackagePrice,
-        ClaimedReward: ClaimedReward,
-        TotBusiness: TotalBusiness
-
+  if (checkIfAlreadyExists) {
+    await RankEligibilityClaimForGlobalPool.findByIdAndDelete(checkIfAlreadyExists._id)
+    RankEligibilityClaimForGlobalPool({
+      RankEligibilityClaimOwnerId: MainUserData._id,
+      RankEligibilityClaimOwnerUserName: MainUserData.SponserCode,
+      RankEligibilityClaimOwnerEmail: MainUserData.EmailId,
+      PackageOwnName: FindPackage.PackageName,
+      PackageOwnPrice: FindPackage.PackagePrice,
+      ClaimedReward: ClaimedReward,
+      TotBusiness: TotalBusiness
     }).save()
-
-
-    const checkIfAlreadyExists = await RankEligibilityClaimForGlobalPool.findOne({RankEligibilityClaimOwnerId: MainUserData._id})
-
-
-    if (checkIfAlreadyExists) {
-      
-      await RankEligibilityClaimForGlobalPool.findByIdAndDelete(checkIfAlreadyExists._id)
-
-      RankEligibilityClaimForGlobalPool({
-
-        RankEligibilityClaimOwnerId: MainUserData._id,
-        RankEligibilityClaimOwnerUserName: MainUserData.SponserCode,
-        RankEligibilityClaimOwnerEmail: MainUserData.EmailId,
-        PackageOwnName: FindPackage.PackageName,
-        PackageOwnPrice: FindPackage.PackagePrice,
-        ClaimedReward: ClaimedReward,
-        TotBusiness: TotalBusiness
-
-    }).save()
-
-    }else{   
-      RankEligibilityClaimForGlobalPool({
-
-        RankEligibilityClaimOwnerId: MainUserData._id,
-        RankEligibilityClaimOwnerUserName: MainUserData.SponserCode,
-        RankEligibilityClaimOwnerEmail: MainUserData.EmailId,
-        PackageOwnName: FindPackage.PackageName,
-        PackageOwnPrice: FindPackage.PackagePrice,
-        ClaimedReward: ClaimedReward,
-        TotBusiness: TotalBusiness
-
+  } else {
+    RankEligibilityClaimForGlobalPool({
+      RankEligibilityClaimOwnerId: MainUserData._id,
+      RankEligibilityClaimOwnerUserName: MainUserData.SponserCode,
+      RankEligibilityClaimOwnerEmail: MainUserData.EmailId,
+      PackageOwnName: FindPackage.PackageName,
+      PackageOwnPrice: FindPackage.PackagePrice,
+      ClaimedReward: ClaimedReward,
+      TotBusiness: TotalBusiness
     }).save()
   }
 
+  const findShortRecord = await ShortRecord.findOne({
+    RecordOwner: MainUserData._id
+  })
 
-    const findShortRecord = await ShortRecord.findOne({RecordOwner:MainUserData._id})
+  if (findShortRecord) {
+    let sum = Number(findShortRecord.RankEligibility) + Number(ClaimedReward)
+    const updateValue = await ShortRecord.findByIdAndUpdate({
+      _id: findShortRecord._id
+    }, {
+      RankEligibility: sum
+    })
+  } else {
+    const createShortRecord = await ShortRecord({
+      RecordOwner: list[i].id,
+      RankEligibility: ClaimedReward
+    }).save()
+  }
 
-
-    if (findShortRecord) {
-
-      let sum = Number(findShortRecord.RankEligibility) + Number(ClaimedReward)
-
-      const updateValue = await ShortRecord.findByIdAndUpdate({_id:findShortRecord._id},{RankEligibility:sum})
-
-    }else{
-
-      const createShortRecord = await ShortRecord({
-        RecordOwner:list[i].id,
-        RankEligibility:ClaimedReward
-      }).save()
-
-    }
-
-
-
-
-
-
-
-
-
-
-   return res.status(200).json({ message: 'Claim Reward Done' })
-
+  return res.status(200).json({
+    message: message
+  })
 }
