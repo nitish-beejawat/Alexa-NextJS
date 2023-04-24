@@ -46,7 +46,7 @@ export default async (req, res) => {
     NewWallet = ((Number(FindPackage.PackagePrice) * Number(FindPackage.PackageMaximumLimit))/100);
   }
 
-  console.log("ClaimedReward ============= ", ClaimedReward)
+
   if(ClaimedReward == 0){
     message = '300% capping reached';
     return res.status(200).json({
@@ -115,13 +115,17 @@ export default async (req, res) => {
   })
 
   if (findShortRecord) {
+
     let sum = Number(findShortRecord.RankEligibility) + Number(ClaimedReward)
+
     const updateValue = await ShortRecord.findByIdAndUpdate({
+
       _id: findShortRecord._id
     }, {
       RankEligibility: sum
     })
   } else {
+    
     const createShortRecord = await ShortRecord({
       RecordOwner: list[i].id,
       RankEligibility: ClaimedReward
