@@ -1,0 +1,86 @@
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+option {
+  color: black;
+}
+.claim-sec ul li img {
+  width: 25px !important;
+  margin-right: 5px !important;
+  padding: 3px !important;
+}
+.stacking-sec li .stake-content img {
+  width: 40px !important;
+  height: 40px !important;
+}
+.css-1sztzqu .chakra-button.css-1xmiqul {
+  background: #f2bc2e;
+  color: #000;
+}
+.css-xkcpoh {
+  margin-top: 70px !important;
+}
+.memekong-sec.staking-sec .col-md-6.col-12 {
+  width: 70%;
+  margin: 0 auto;
+}
+.chakra-tabs {
+  width: 50%;
+  margin: 100px auto;
+  background: #000;
+  padding: 20px;
+  border-radius: 10px;
+}
+.chakra-tabs button.css-119h0cq[aria-selected="true"] {
+  background: #f2bc2e;
+  color: #000;
+  font-weight: bold;
+}
+.chakra-tabs button {
+  font-size: 18px;
+}
+.chakra-tabs__tablist.css-2zljzd {
+  border-bottom: 1px solid #ffffff40;
+}
+.chakra-tabs input {
+  background: #191b1f;
+  color: #fff;
+  height: 45px;
+  margin: 0;
+}
+.chakra-tabs button.chakra-action-btn {
+  background: #f2bc2e;
+  display: block;
+  margin: 0px auto 0px;
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 7px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.chakra-tabs ul li img {
+  width: 30px !important;
+  margin-right: 0px !important;
+  padding: 0 10px 0 0 !important;
+}
+.chakra-tabs ul li {
+  display: flex;
+  align-items: center;
+  margin: 10px 0 0px;
+}
+.input-action-sec {
+  display: flex;
+  align-items: center;
+  margin: 20px 0 20px;
+  flex-wrap: wrap;
+}
+
+.input-action-sec button.chakra-action-btn {
+  width: 100%;
+  margin: 10px 0 0;
+}
+
+.input-action-sec input {
+  width: 100%;
+}

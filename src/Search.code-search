@@ -1,0 +1,25 @@
+# Query: 
+# ContextLines: 1
+
+.chakra-tabs {
+    width: 70%;
+    margin: 100px auto;
+    background: #000;
+    padding: 20px;
+    border-radius: 10px;
+}
+.chakra-tabs button.css-119h0cq[aria-selected=true] {
+    background: #f2bc2e;
+    color: #fff;
+    font-weight: bold;
+}
+.chakra-tabs button {font-size: 18px;}
+.chakra-tabs__tablist.css-2zljzd {
+    border-bottom: 1px solid #ffffff40;
+}
+.chakra-tabs input {
+    background: #191b1f;
+    color: #fff;
+    height: 55px;
+    margin: 0 0 20px;
+}
