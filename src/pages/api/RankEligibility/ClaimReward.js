@@ -48,9 +48,13 @@ export default async (req, res) => {
 
 
   if(ClaimedReward == 0){
+
     message = '300% capping reached';
+
     return res.status(200).json({
+
       message: message
+      
     })
   }
   
