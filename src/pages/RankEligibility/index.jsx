@@ -137,7 +137,7 @@ const PackageHistory = () => {
         id:parseIt._id
       })
       .then((acc)=>{
-        // console.log("user wallet is ====> "+acc.data)
+        console.log("user wallet is 2344324 ====> "+acc.data)
 
         setUserCurrentWallet(acc.data)
       })
@@ -167,9 +167,9 @@ const PackageHistory = () => {
     try {
 
 
-      console.log("trying to post on ==> "+"http://65.108.141.59:4000/CountMyTeam")
+      console.log("trying to post on ==> "+"http://localhost:4000/api/CountMyTeam"+parseIt._id)
       
-      // axios.post("http://65.108.141.59:4000/CountMyTeam",{
+      // axios.post("http://localhost:4000/api/CountMyTeam",{
       //   id:parseIt._id
       // },
       // {
@@ -181,7 +181,7 @@ const PackageHistory = () => {
       
       // )
 
-      axios.post("http://65.108.141.59:4000/CountMyTeam", {
+      axios.post("http://localhost:4000/api/CountMyTeam", {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8',

@@ -981,13 +981,13 @@ export default async (req, res) => {
 
 
 
-    const updateDataS = await RankEligibilityClaim.findOne({ RankEligibilityClaimOwnerId: id })
+    // const updateDataS = await RankEligibilityClaim.findOne({ RankEligibilityClaimOwnerId: id })
 
 
     // const updatesdatas = await RankEligibilityClaim.findByIdAndUpdate({_id:updateDataS._id},{})
-    if (updateDataS !== null) {
-      const deleteOldData = await RankEligibilityClaim.findByIdAndDelete(updateDataS._id)
-    }
+    // if (updateDataS !== null) {
+    //   const deleteOldData = await RankEligibilityClaim.findByIdAndDelete(updateDataS._id)
+    // }
 
 
 

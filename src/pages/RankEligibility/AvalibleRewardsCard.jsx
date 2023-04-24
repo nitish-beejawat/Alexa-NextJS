@@ -41,7 +41,9 @@ const AvalibleRewardsCard = ({userCurrentWallet,teamCount}) => {
             id: parseIt._id
         })
             .then((acc) => {
-                console.log(acc.data)
+                console.log("wqeeeeeeeee ----- ", acc.data)
+                const details = acc.data;
+                details.PendingLock = details.PendingLock.sort((a,b) => Number(a.PackagePrice) - Number(b.PackagePrice));
                 setDatas(acc.data)
             })
             .catch((err) => {
