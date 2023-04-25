@@ -204,6 +204,7 @@ export default function NftMarketplace() {
             <Tab>Stacking</Tab>
             <Tab>Unstaking</Tab>
             <Tab>Claim</Tab>
+            <Tab>Burn</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -353,6 +354,53 @@ export default function NftMarketplace() {
                 <li>
                   <Image src={Images.Logo} alt="logo" />
                   Pending Interest to Claim: {calcInterest} MKong
+                </li>
+              </ul>
+            </TabPanel>
+
+            <TabPanel>
+              <p>BURN MKONG TO ACQUIRE A MAXIMUM OF 10X STAKING APY @ 42.0%</p>
+              <div className="input-action-sec">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="text"
+                  placeholder="Stake Amount"
+                  value={amount}
+                  onChange={(e) => {
+                    setAmount(e.target.value);
+                  }}
+                />
+                <button
+                  className="chakra-action-btn"
+                  onClick={() => {
+                   // stake();
+                  }}
+                >
+                  Burn MKong
+                </button>
+              </div>
+              <ul>
+                <li>
+                  <Image src={Images.Wallet} alt="wallet" />
+                 Balance: 0 MKong
+                </li>
+                <li>
+                  <Image src={Images.Logo} alt="logo" />
+                  Staking Balance:{" "}
+                  {/* {userStakes?.stakedBalance
+                    ? (parseFloat(userStakes.stakedBalance) / 10 ** 9).toFixed(
+                        4
+                      )
+                    : 0}{" "} */}
+                    0
+                  MKong
+                </li>
+                
+               
+                <li>
+                  <Image src={Images.Wallet} alt="wallet" />
+                  Burnt: 0 MKong
                 </li>
               </ul>
             </TabPanel>

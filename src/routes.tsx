@@ -41,21 +41,21 @@ const routes: IRoute[] = [
     component: NFTMarketplace,
     secondary: true,
   },
-  {
-    name: "Burn Mkong",
-    layout: "/admin",
-    path: "/burn-mkong",
-    icon: (
-      <Icon
-        as={MdOutlineShoppingCart}
-        width="20px"
-        height="20px"
-        color="inherit"
-      />
-    ),
-    component: NFTMarketplace,
-    secondary: true,
-  },
+  // {
+  //   name: "Burn Mkong",
+  //   layout: "/admin",
+  //   path: "/burn-mkong",
+  //   icon: (
+  //     <Icon
+  //       as={MdOutlineShoppingCart}
+  //       width="20px"
+  //       height="20px"
+  //       color="inherit"
+  //     />
+  //   ),
+  //   component: NFTMarketplace,
+  //   secondary: true,
+  // },
 ];
 
 export default routes;
