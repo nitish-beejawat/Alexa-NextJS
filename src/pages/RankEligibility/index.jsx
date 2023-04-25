@@ -167,9 +167,9 @@ const PackageHistory = () => {
     try {
 
 
-      console.log("trying to post on ==> "+"http://139.59.0.196:4000/api/CountMyTeam"+parseIt._id)
+      console.log("trying to post on ==> "+"http://64.227.156.27:4000/api/CountMyTeam"+parseIt._id)
       
-      // axios.post("http://139.59.0.196:4000/api/CountMyTeam",{
+      // axios.post("http://64.227.156.27:4000/api/CountMyTeam",{
       //   id:parseIt._id
       // },
       // {
@@ -181,7 +181,7 @@ const PackageHistory = () => {
       
       // )
 
-      axios.post("http://139.59.0.196:4000/api/CountMyTeam", {
+      axios.post("http://64.227.156.27:4000/api/CountMyTeam", {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8',
