@@ -24,6 +24,10 @@ export default function ConnectButton({ handleOpenModal }: Props) {
   console.log(useEtherBalance(account));
 
   useEffect(async () => {
+    if (!window.ethereum) {
+      // MetaMask is not installed, show a message or button to prompt the user to install it
+      return;
+    }
     await window.ethereum.enable();
     const accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
@@ -42,6 +46,30 @@ export default function ConnectButton({ handleOpenModal }: Props) {
         clearInterval(interval);
       }
     }, 200);
+  }
+
+  if (!window.ethereum) {
+    return (
+      <Button
+        onClick={() => window.open("https://metamask.io/download.html")}
+        bg="blue.800"
+        color="blue.300"
+        fontSize="lg"
+        fontWeight="medium"
+        borderRadius="xl"
+        border="1px solid transparent"
+        _hover={{
+          borderColor: "blue.700",
+          color: "blue.400",
+        }}
+        _active={{
+          backgroundColor: "blue.800",
+          borderColor: "blue.700",
+        }}
+      >
+        Install MetaMask
+      </Button>
+    );
   }
   return account ? (
     <Box

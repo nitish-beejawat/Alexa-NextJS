@@ -192,6 +192,16 @@ a {
   .css-xnh8of {
     width: 100% !important;
   }
+  .stake-content .claim-sec {
+    width: 100%;
+  }
+  .stake-content .claim-sec .calcu.action-sec {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .stake-content {
+    padding: 150px 0 0;
+  }
 }
 
 @media (max-width: 320px) {

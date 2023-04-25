@@ -84,3 +84,19 @@ option {
 .input-action-sec input {
   width: 100%;
 }
+.stake-content {
+  padding: 100px 0 0;
+  width: 100%;
+  margin: 0 auto;
+}
+.stake-content .claim-sec {
+  width: 60%;
+  margin: 50px auto 0;
+}
+.stake-content .claim-sec li {
+  margin: 0;
+}
+.stake-content .claim-sec .calcu.action-sec {
+  flex-wrap: wrap;
+  justify-content: center;
+}
