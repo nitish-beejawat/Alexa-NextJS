@@ -100,3 +100,9 @@ option {
   flex-wrap: wrap;
   justify-content: center;
 }
+.stacking-sec ul li .stake-content {
+    padding: 0;
+}
+.stake-content p {
+    font-size: 13px;
+}

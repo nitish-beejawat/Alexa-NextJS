@@ -49,6 +49,7 @@ import { ScrollAlphaContract } from "web3/ContractAddress";
 export default function NftMarketplace() {
   // Chakra Color Mode
 
+  const [burnAmount, setBurnAmount] = useState(0);
   const [amount, setAmount] = useState(0);
   const [calcInterest, setCalcInterest] = useState(0);
   const [account, setAccount] = useState("");
@@ -147,7 +148,27 @@ export default function NftMarketplace() {
       console.log("error ==== ", JSON.stringify(error));
     }
   };
-  console.log("mmmm", mKongBalance);
+
+  const burnMkong = async () => {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const memeKongContract = new ethers.Contract(
+        ScrollAlphaContract,
+        MemeKongABI,
+        signer
+      );
+      const totalAmount = parseFloat(burnAmount) * 10 ** 9;
+      const tx = await memeKongContract.BurnMkong(totalAmount);
+      await tx.wait();
+      window.alert("Burned Successfully.");
+      window.location.reload();
+    } catch (error) {
+      console.log("error ==== ", JSON.stringify(error));
+    }
+  };
+
+  // console.log("mmmm", mKongBalance);
   return (
     <AdminLayout>
       <div className="memekong-sec">
@@ -171,21 +192,32 @@ export default function NftMarketplace() {
                   </li>
                   <li>
                     <div className="stake-content">
-                      <Image src={Images.Meme} />
+                      <Image src={Images.Unstack} />
                       <h4>Unstack</h4>
                       <p>
-                        Burn MKONG to pump the price relative to amount burnt,
-                        increase your individual MKONG staking APY.
+                      Unstake in MKONG Unstack all  Staked MKONG, accessible only by
+                      owning a Genesis MKONG.
                       </p>
                     </div>
                   </li>
                   <li>
                     <div className="stake-content">
-                      <Image src={Images.NFTS} alt="NFTS" />
+                      <Image src={Images.Claim} alt="NFTS" />
                       <h4>Claim</h4>
                       <p>
                         Stake in MKONG claim Staking pool, accessible only by
                         owning a Genesis MKONG.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div className="stake-content">
+                      <Image src={Images.Burn} alt="NFTS" />
+                      <h4>Burn</h4>
+                      <p>
+                        Burn MKONG to pump the price relative to amount burnt,
+                        increase your individual MKONG staking APY
                       </p>
                     </div>
                   </li>
@@ -365,44 +397,87 @@ export default function NftMarketplace() {
                   type="text"
                   className="form-control"
                   id="text"
-                  placeholder="Stake Amount"
-                  value={amount}
+                  placeholder="Burn Amount"
+                  value={burnAmount}
                   onChange={(e) => {
-                    setAmount(e.target.value);
+                    setBurnAmount(e.target.value);
                   }}
                 />
                 <button
                   className="chakra-action-btn"
                   onClick={() => {
-                   // stake();
+                    burnMkong();
                   }}
                 >
                   Burn MKong
                 </button>
               </div>
+              <div className="input-action-sec">
+                <p>CLAIMABLE INTEREST $0</p>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="text"
+                  placeholder="0 MKONG"
+                  //value={burnAmount}
+                  onChange={(e) => {
+                    setBurnAmount(e.target.value);
+                  }}
+                />
+                <button
+                  className="chakra-action-btn"
+                  onClick={() => {
+                    //burnMkong();
+                  }}
+                >
+                  ROLL MKONG
+                </button>
+                <p> ROLL ADDS INTEREST TO STAKED BALANCE</p>
+              </div>
               <ul>
                 <li>
                   <Image src={Images.Wallet} alt="wallet" />
-                 Balance: 0 MKong
+                 Balance: {mKongBalance} MKong
                 </li>
                 <li>
                   <Image src={Images.Logo} alt="logo" />
                   Staking Balance:{" "}
-                  {/* {userStakes?.stakedBalance
+                  {userStakes?.stakedBalance
                     ? (parseFloat(userStakes.stakedBalance) / 10 ** 9).toFixed(
                         4
                       )
-                    : 0}{" "} */}
-                    0
+                    : 0}{" "}
                   MKong
                 </li>
                 
                
                 <li>
                   <Image src={Images.Wallet} alt="wallet" />
-                  Burnt: 0 MKong
+                  Burnt: {userStakes?.totalBurnt
+                    ? (
+                        parseFloat(userStakes.totalBurnt) /
+                        10 ** 9
+                      ).toFixed(4)
+                    : 0}{" "}
+                  MKong
+                </li>
+                <li>
+                  <Image src={Images.Wallet} alt="wallet" />
+                  Available to burn: {mKongBalance <= 0 ? 0 : ((userStakes?.totalStakingInterest
+                    ? (
+                        parseFloat(userStakes.totalStakingInterest) /
+                        10 ** 9
+                      ).toFixed(4)
+                    : 0)*10) - (userStakes?.totalBurnt
+                    ? (
+                        parseFloat(userStakes.totalBurnt) /
+                        10 ** 9
+                      ).toFixed(4)
+                    : 0)}{" "}
+                  MKong
                 </li>
               </ul>
+              
             </TabPanel>
           </TabPanels>
         </Tabs>

@@ -62,9 +62,9 @@ a {
   flex-wrap: wrap;
 }
 .stacking-sec ul li {
-  width: 32%;
+  width: 24%;
   background: #000;
-  padding: 25px;
+  padding: 15px;
   border-radius: 15px;
 }
 .stake-content img {
@@ -75,7 +75,8 @@ a {
 }
 .stake-content h4 {
   margin: 10px 0;
-  font-size: 21px;
+  font-size: 18px;
+  font-weight: 600;
 }
 .action-sec a {
   background: #f2bc2e;
@@ -113,6 +114,11 @@ a {
   margin: 10px 0;
   display: flex;
   align-items: center;
+}
+button:focus:not(:focus-visible) {
+  outline: 0;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 .calculation-sec input {
   height: 55px;
@@ -171,6 +177,10 @@ a {
   .stacking-sec ul li {
     margin: 0 0 15px;
     width: 100%;
+  }
+  .chakra-tabs__tablist.css-2zljzd {
+    overflow-x: scroll;
+    overflow-y: hidden;
   }
   .action-sec a {
     width: 100%;
