@@ -49,6 +49,7 @@ import { ScrollAlphaContract } from "web3/ContractAddress";
 export default function NftMarketplace() {
   // Chakra Color Mode
 
+  const [rollAmount, setRollAmount] = useState(0);
   const [burnAmount, setBurnAmount] = useState(0);
   const [amount, setAmount] = useState(0);
   const [calcInterest, setCalcInterest] = useState(0);
@@ -143,6 +144,24 @@ export default function NftMarketplace() {
       const tx = await memeKongContract.ClaimStakeInterest();
       await tx.wait();
       window.alert("Claimed Successfully.");
+      window.location.reload();
+    } catch (error) {
+      console.log("error ==== ", JSON.stringify(error));
+    }
+  };
+
+  const roll = async () => {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const memeKongContract = new ethers.Contract(
+        ScrollAlphaContract,
+        MemeKongABI,
+        signer
+      );
+      const tx = await memeKongContract.RollStakeInterest();
+      await tx.wait();
+      window.alert("Rolled Successfully.");
       window.location.reload();
     } catch (error) {
       console.log("error ==== ", JSON.stringify(error));
@@ -413,8 +432,8 @@ export default function NftMarketplace() {
                 </button>
               </div>
               <div className="input-action-sec">
-                <p>CLAIMABLE INTEREST $0</p>
-                <input
+                <p>CLAIMABLE INTEREST {calcInterest + " Mkong"}</p>
+                {/* <input
                   type="text"
                   className="form-control"
                   id="text"
@@ -423,11 +442,11 @@ export default function NftMarketplace() {
                   onChange={(e) => {
                     setBurnAmount(e.target.value);
                   }}
-                />
+                /> */}
                 <button
                   className="chakra-action-btn"
                   onClick={() => {
-                    //burnMkong();
+                    roll();
                   }}
                 >
                   ROLL MKONG
