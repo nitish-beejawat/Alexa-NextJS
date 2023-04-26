@@ -192,21 +192,32 @@ export default function NftMarketplace() {
                   </li>
                   <li>
                     <div className="stake-content">
-                      <Image src={Images.Meme} />
+                      <Image src={Images.Unstack} />
                       <h4>Unstack</h4>
                       <p>
-                        Burn MKONG to pump the price relative to amount burnt,
-                        increase your individual MKONG staking APY.
+                      Unstake in MKONG Unstack all  Staked MKONG, accessible only by
+                      owning a Genesis MKONG.
                       </p>
                     </div>
                   </li>
                   <li>
                     <div className="stake-content">
-                      <Image src={Images.NFTS} alt="NFTS" />
+                      <Image src={Images.Claim} alt="NFTS" />
                       <h4>Claim</h4>
                       <p>
                         Stake in MKONG claim Staking pool, accessible only by
                         owning a Genesis MKONG.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div className="stake-content">
+                      <Image src={Images.Burn} alt="NFTS" />
+                      <h4>Burn</h4>
+                      <p>
+                        Burn MKONG to pump the price relative to amount burnt,
+                        increase your individual MKONG staking APY
                       </p>
                     </div>
                   </li>
@@ -401,6 +412,28 @@ export default function NftMarketplace() {
                   Burn MKong
                 </button>
               </div>
+              <div className="input-action-sec">
+                <p>CLAIMABLE INTEREST $0</p>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="text"
+                  placeholder="0 MKONG"
+                  //value={burnAmount}
+                  onChange={(e) => {
+                    setBurnAmount(e.target.value);
+                  }}
+                />
+                <button
+                  className="chakra-action-btn"
+                  onClick={() => {
+                    //burnMkong();
+                  }}
+                >
+                  ROLL MKONG
+                </button>
+                <p> ROLL ADDS INTEREST TO STAKED BALANCE</p>
+              </div>
               <ul>
                 <li>
                   <Image src={Images.Wallet} alt="wallet" />
@@ -444,6 +477,7 @@ export default function NftMarketplace() {
                   MKong
                 </li>
               </ul>
+              
             </TabPanel>
           </TabPanels>
         </Tabs>

@@ -5,7 +5,7 @@ import { Flex, useColorModeValue } from '@chakra-ui/react';
 import { HorizonLogo } from 'components/icons/Icons';
 import { HSeparator } from 'components/separator/Separator';
 import Image from 'next/image';
-import MemeCoin from "../../../img/allImg/logo.png";
+import MemeCoin from "../../../img/allImg/MainLog.png";
 
 export function SidebarBrand() {
 	//   Chakra color mode
