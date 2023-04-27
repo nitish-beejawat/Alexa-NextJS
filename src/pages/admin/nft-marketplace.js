@@ -49,6 +49,7 @@ import { ScrollAlphaContract } from "web3/ContractAddress";
 export default function NftMarketplace() {
   // Chakra Color Mode
 
+  const [rollAmount, setRollAmount] = useState(0);
   const [burnAmount, setBurnAmount] = useState(0);
   const [amount, setAmount] = useState(0);
   const [calcInterest, setCalcInterest] = useState(0);
@@ -149,6 +150,24 @@ export default function NftMarketplace() {
     }
   };
 
+  const roll = async () => {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const memeKongContract = new ethers.Contract(
+        ScrollAlphaContract,
+        MemeKongABI,
+        signer
+      );
+      const tx = await memeKongContract.RollStakeInterest();
+      await tx.wait();
+      window.alert("Rolled Successfully.");
+      window.location.reload();
+    } catch (error) {
+      console.log("error ==== ", JSON.stringify(error));
+    }
+  };
+
   const burnMkong = async () => {
     try {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -176,16 +195,16 @@ export default function NftMarketplace() {
           <div className="row">
             <div className="col-md-12 col-12">
               <div className="myheader-sec">
-                <h2>MKONG Staking</h2>
+                <h2>$MKONG Staking</h2>
               </div>
               <div className="stacking-sec">
                 <ul>
                   <li>
                     <div className="stake-content">
                       <Image src={Images.Staking} alt="staking" />
-                      <h4>Staking</h4>
+                      <h4>Stake</h4>
                       <p>
-                        Staking MKONG earns interest at 4.20% APY and up to
+                        Staking $MKONG earns interest at 4.20% APY and up to
                         42.0% APY with 90% of staked amount burnt.
                       </p>
                     </div>
@@ -193,10 +212,10 @@ export default function NftMarketplace() {
                   <li>
                     <div className="stake-content">
                       <Image src={Images.Unstack} />
-                      <h4>Unstack</h4>
+                      <h4>Unstake</h4>
                       <p>
-                      Unstake in MKONG Unstack all  Staked MKONG, accessible only by
-                      owning a Genesis MKONG.
+                        Unstake in $MKONG Unstack all Staked $MKONG, accessible
+                        only by owning a Genesis $MKONG.
                       </p>
                     </div>
                   </li>
@@ -205,8 +224,8 @@ export default function NftMarketplace() {
                       <Image src={Images.Claim} alt="NFTS" />
                       <h4>Claim</h4>
                       <p>
-                        Stake in MKONG claim Staking pool, accessible only by
-                        owning a Genesis MKONG.
+                        Claim Your Spot in the Exclusive $MKONG Staking Pool for
+                        Genesis $MKONG Owners
                       </p>
                     </div>
                   </li>
@@ -216,8 +235,8 @@ export default function NftMarketplace() {
                       <Image src={Images.Burn} alt="NFTS" />
                       <h4>Burn</h4>
                       <p>
-                        Burn MKONG to pump the price relative to amount burnt,
-                        increase your individual MKONG staking APY
+                        Boost Your $MKONG Staking Rewards with the Power of
+                        Burning
                       </p>
                     </div>
                   </li>
@@ -233,14 +252,14 @@ export default function NftMarketplace() {
       {isOpen && (
         <Tabs isFitted variant="enclosed">
           <TabList mb="1em">
-            <Tab>Stacking</Tab>
-            <Tab>Unstaking</Tab>
+            <Tab>Stake</Tab>
+            <Tab>Unstake</Tab>
             <Tab>Claim</Tab>
             <Tab>Burn</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
-              <p>STAKE MKONG TO EARN A MINIMUM 4.20% APY</p>
+              <p>STAKE $MKONG TO EARN A MINIMUM 4.20% APY</p>
               <div className="input-action-sec">
                 <input
                   type="text"
@@ -258,16 +277,17 @@ export default function NftMarketplace() {
                     stake();
                   }}
                 >
-                  Stake MKong
+                  Stake $MKONG
                 </button>
               </div>
               <p>
-                STAKING MKONG CLAIMS ANY ACCRUED INTEREST STAKE MKONG UNSTAKE MKONG
+                STAKING $MKONG CLAIMS ANY ACCRUED INTEREST STAKE $MKONG UNSTAKE
+                $MKONG
               </p>
               <ul>
                 <li>
                   <Image src={Images.Wallet} alt="wallet" />
-                  MKong Balance: {mKongBalance} MKong
+                  $MKONG Balance: {mKongBalance} $MKONG
                 </li>
                 <li>
                   <Image src={Images.Logo} alt="logo" />
@@ -277,7 +297,7 @@ export default function NftMarketplace() {
                         4
                       )
                     : 0}{" "}
-                  MKong
+                  $MKONG
                 </li>
                 <li>
                   <Image src={Images.Logo} alt="logo" />
@@ -288,11 +308,11 @@ export default function NftMarketplace() {
                         10 ** 9
                       ).toFixed(4)
                     : 0}{" "}
-                  MKong
+                  $MKONG
                 </li>
                 <li>
                   <Image src={Images.Logo} alt="logo" />
-                  Pending Interest to Claim: {calcInterest} MKong
+                  Pending Interest to Claim: {calcInterest} $MKONG
                 </li>
               </ul>
             </TabPanel>
@@ -305,17 +325,17 @@ export default function NftMarketplace() {
                     unStake();
                   }}
                 >
-                  {!isFinished && "Emergency"} Unstake MKong
+                  {!isFinished && "Emergency"} Unstake $MKONG
                 </button>
               </div>
               <p>
-                UNSTAKING MKONG CLAIMS ANY ACCRUED INTEREST STAKE MKONG UNSTAKE
-                MKONG
+                UNSTAKING $MKONG CLAIMS ANY ACCRUED INTEREST STAKE $MKONG
+                UNSTAKE $MKONG
               </p>
               <ul>
                 <li>
                   <Image src={Images.Wallet} alt="wallet" />
-                  MKong Balance: {mKongBalance} MKong
+                  $MKONG Balance: {mKongBalance} $MKONG
                 </li>
                 <li>
                   <Image src={Images.Logo} alt="logo" />
@@ -325,7 +345,7 @@ export default function NftMarketplace() {
                         4
                       )
                     : 0}{" "}
-                  MKong
+                  $MKONG
                 </li>
                 <li>
                   <Image src={Images.Logo} alt="logo" />
@@ -336,11 +356,11 @@ export default function NftMarketplace() {
                         10 ** 9
                       ).toFixed(4)
                     : 0}{" "}
-                  MKong
+                  $MKONG
                 </li>
                 <li>
                   <Image src={Images.Logo} alt="logo" />
-                  Pending Interest to Claim: {calcInterest} MKong
+                  Pending Interest to Claim: {calcInterest} $MKONG
                 </li>
               </ul>
             </TabPanel>
@@ -353,14 +373,14 @@ export default function NftMarketplace() {
                   }}
                   disabled={parseFloat(mKongBalance) <= 0}
                 >
-                  Claim MKong
+                  Claim $MKONG
                 </button>
               </div>
               <p>CLAIM SENDS INTEREST DIRECT TO WALLET</p>
               <ul>
                 <li>
                   <Image src={Images.Wallet} alt="wallet" />
-                  MKong Balance: {mKongBalance} MKong
+                  $MKONG Balance: {mKongBalance} $MKONG
                 </li>
                 <li>
                   <Image src={Images.Logo} alt="logo" />
@@ -370,7 +390,7 @@ export default function NftMarketplace() {
                         4
                       )
                     : 0}{" "}
-                  MKong
+                  $MKONG
                 </li>
                 <li>
                   <Image src={Images.Logo} alt="logo" />
@@ -381,17 +401,17 @@ export default function NftMarketplace() {
                         10 ** 9
                       ).toFixed(4)
                     : 0}{" "}
-                  MKong
+                  $MKONG
                 </li>
                 <li>
                   <Image src={Images.Logo} alt="logo" />
-                  Pending Interest to Claim: {calcInterest} MKong
+                  Pending Interest to Claim: {calcInterest} $MKONG
                 </li>
               </ul>
             </TabPanel>
 
             <TabPanel>
-              <p>BURN MKONG TO ACQUIRE A MAXIMUM OF 10X STAKING APY @ 42.0%</p>
+              <p>BURN $MKONG TO ACQUIRE A MAXIMUM OF 10X STAKING APY @ 42.0%</p>
               <div className="input-action-sec">
                 <input
                   type="text"
@@ -409,12 +429,12 @@ export default function NftMarketplace() {
                     burnMkong();
                   }}
                 >
-                  Burn MKong
+                  Burn $MKONG
                 </button>
               </div>
               <div className="input-action-sec">
-                <p>CLAIMABLE INTEREST $0</p>
-                <input
+                <p>CLAIMABLE INTEREST {calcInterest + " Mkong"}</p>
+                {/* <input
                   type="text"
                   className="form-control"
                   id="text"
@@ -423,21 +443,21 @@ export default function NftMarketplace() {
                   onChange={(e) => {
                     setBurnAmount(e.target.value);
                   }}
-                />
+                /> */}
                 <button
                   className="chakra-action-btn"
                   onClick={() => {
-                    //burnMkong();
+                    roll();
                   }}
                 >
-                  ROLL MKONG
+                  ROLL $MKONG
                 </button>
-                <p> ROLL ADDS INTEREST TO STAKED BALANCE</p>
+                <p> Roll adds $MKONG rewards to your staked balance.</p>
               </div>
               <ul>
                 <li>
                   <Image src={Images.Wallet} alt="wallet" />
-                 Balance: {mKongBalance} MKong
+                  Balance: {mKongBalance} $MKONG
                 </li>
                 <li>
                   <Image src={Images.Logo} alt="logo" />
@@ -447,37 +467,37 @@ export default function NftMarketplace() {
                         4
                       )
                     : 0}{" "}
-                  MKong
+                  $MKONG
                 </li>
-                
-               
+
                 <li>
                   <Image src={Images.Wallet} alt="wallet" />
-                  Burnt: {userStakes?.totalBurnt
-                    ? (
-                        parseFloat(userStakes.totalBurnt) /
-                        10 ** 9
-                      ).toFixed(4)
+                  Burnt:{" "}
+                  {userStakes?.totalBurnt
+                    ? (parseFloat(userStakes.totalBurnt) / 10 ** 9).toFixed(4)
                     : 0}{" "}
-                  MKong
+                  $MKONG
                 </li>
                 <li>
                   <Image src={Images.Wallet} alt="wallet" />
-                  Available to burn: {mKongBalance <= 0 ? 0 : ((userStakes?.totalStakingInterest
-                    ? (
-                        parseFloat(userStakes.totalStakingInterest) /
-                        10 ** 9
-                      ).toFixed(4)
-                    : 0)*10) - (userStakes?.totalBurnt
-                    ? (
-                        parseFloat(userStakes.totalBurnt) /
-                        10 ** 9
-                      ).toFixed(4)
-                    : 0)}{" "}
-                  MKong
+                  Available to burn:{" "}
+                  {mKongBalance <= 0
+                    ? 0
+                    : (userStakes?.totalStakingInterest
+                        ? (
+                            parseFloat(userStakes.totalStakingInterest) /
+                            10 ** 9
+                          ).toFixed(4)
+                        : 0) *
+                        10 -
+                      (userStakes?.totalBurnt
+                        ? (parseFloat(userStakes.totalBurnt) / 10 ** 9).toFixed(
+                            4
+                          )
+                        : 0)}{" "}
+                  $MKONG
                 </li>
               </ul>
-              
             </TabPanel>
           </TabPanels>
         </Tabs>
