@@ -55,8 +55,6 @@ export default async (req, res) => {
      
             const claimedAmount = GetRankEligibityHis[index].ClaimedReward;
      
-     
-     
            for (let index = 0; index < AllPlans.length; index++) {
      
                const element = AllPlans[index].RankEligibilityReward;

@@ -28,6 +28,7 @@ const PackageHistory = () => {
       const parsedData = JSON.parse(jwt)
      
 
+      
       axios
         .post('/api/checkPercantage', {
           id: parsedData._id
@@ -137,7 +138,7 @@ const PackageHistory = () => {
         id:parseIt._id
       })
       .then((acc)=>{
-        console.log("user wallet is 2344324 ====> "+acc.data)
+        // console.log("user wallet is ====> "+acc.data)
 
         setUserCurrentWallet(acc.data)
       })
@@ -167,9 +168,9 @@ const PackageHistory = () => {
     try {
 
 
-      console.log("trying to post on ==> "+"http://64.227.156.27:4000/api/CountMyTeam"+parseIt._id)
+      console.log("trying to post on ==> "+"http://65.108.141.59:4000/CountMyTeam")
       
-      // axios.post("http://64.227.156.27:4000/api/CountMyTeam",{
+      // axios.post("http://65.108.141.59:4000/CountMyTeam",{
       //   id:parseIt._id
       // },
       // {
@@ -181,7 +182,7 @@ const PackageHistory = () => {
       
       // )
 
-      axios.post("http://64.227.156.27:4000/api/CountMyTeam", {
+      axios.post("http://65.108.141.59:4000/CountMyTeam", {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8',
