@@ -86,13 +86,13 @@ export default function NftMarketplace() {
     console.log(
       "qwertyui ------ ===== ",
       isfinished,
-      (parseFloat(mkonngBalance) / 10 ** 9).toFixed(4),
+      (parseFloat(mkonngBalance) / 10 ** 9).toFixed(9),
       staker
     );
     setUserStakes(staker);
-    setMKongBalance((parseFloat(mkonngBalance) / 10 ** 9).toFixed(4));
+    setMKongBalance((parseFloat(mkonngBalance) / 10 ** 9).toFixed(9));
     setIsFinished(isfinished);
-    setCalcInterest((parseFloat(calculatedInterest) / 10 ** 9).toFixed(4));
+    setCalcInterest((parseFloat(calculatedInterest) / 10 ** 9).toFixed(9));
   }, []);
 
   const stake = async () => {
@@ -293,7 +293,7 @@ export default function NftMarketplace() {
                   Staking Balance:{" "}
                   {userStakes?.stakedBalance
                     ? (parseFloat(userStakes.stakedBalance) / 10 ** 9).toFixed(
-                        4
+                        9
                       )
                     : 0}{" "}
                   MKong
@@ -305,7 +305,7 @@ export default function NftMarketplace() {
                     ? (
                         parseFloat(userStakes.totalStakingInterest) /
                         10 ** 9
-                      ).toFixed(4)
+                      ).toFixed(9)
                     : 0}{" "}
                   MKong
                 </li>
@@ -341,7 +341,7 @@ export default function NftMarketplace() {
                   Staking Balance:{" "}
                   {userStakes?.stakedBalance
                     ? (parseFloat(userStakes.stakedBalance) / 10 ** 9).toFixed(
-                        4
+                        9
                       )
                     : 0}{" "}
                   MKong
@@ -353,7 +353,7 @@ export default function NftMarketplace() {
                     ? (
                         parseFloat(userStakes.totalStakingInterest) /
                         10 ** 9
-                      ).toFixed(4)
+                      ).toFixed(9)
                     : 0}{" "}
                   MKong
                 </li>
@@ -386,7 +386,7 @@ export default function NftMarketplace() {
                   Staking Balance:{" "}
                   {userStakes?.stakedBalance
                     ? (parseFloat(userStakes.stakedBalance) / 10 ** 9).toFixed(
-                        4
+                        9
                       )
                     : 0}{" "}
                   MKong
@@ -398,7 +398,7 @@ export default function NftMarketplace() {
                     ? (
                         parseFloat(userStakes.totalStakingInterest) /
                         10 ** 9
-                      ).toFixed(4)
+                      ).toFixed(9)
                     : 0}{" "}
                   MKong
                 </li>
@@ -463,7 +463,7 @@ export default function NftMarketplace() {
                   Staking Balance:{" "}
                   {userStakes?.stakedBalance
                     ? (parseFloat(userStakes.stakedBalance) / 10 ** 9).toFixed(
-                        4
+                        9
                       )
                     : 0}{" "}
                   MKong
@@ -476,7 +476,7 @@ export default function NftMarketplace() {
                     ? (
                         parseFloat(userStakes.totalBurnt) /
                         10 ** 9
-                      ).toFixed(4)
+                      ).toFixed(9)
                     : 0}{" "}
                   MKong
                 </li>
@@ -486,12 +486,12 @@ export default function NftMarketplace() {
                     ? (
                         parseFloat(userStakes.totalStakingInterest) /
                         10 ** 9
-                      ).toFixed(4)
+                      ).toFixed(9)
                     : 0)*10) - (userStakes?.totalBurnt
                     ? (
                         parseFloat(userStakes.totalBurnt) /
                         10 ** 9
-                      ).toFixed(4)
+                      ).toFixed(9)
                     : 0)}{" "}
                   MKong
                 </li>
