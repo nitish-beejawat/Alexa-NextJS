@@ -12,7 +12,6 @@ import RankEligibilityClaim from 'src/helper/Modal/History/RankEligibilityClaim'
 import PurchasePackageInvoice from 'src/helper/Modal/Invoice/PurchasePackageInvoice'
 import ShortRecord from 'src/helper/Modal/ShortRecord'
 import LapWallet from 'src/helper/Modal/History/LapWallet'
-import ValidDownlines from 'src/helper/Modal/History/ValidDownlines'
 
 initDB()
 
@@ -248,15 +247,7 @@ export default async (req, res) => {
 
       if (findMyPackage.PackagePrice >= upperlineWallet) {
 
-        const ValidDownline = await ValidDownlines({
 
-          UpperLineUserId: uplineUser,
-          DownLineUserId: id,
-          UpperLinePackagePrice: upperlineWallet,
-          PurchasedPackageName: findMyPackage.PackageName,
-          PurchasedPackagePrice: findMyPackage.PackagePrice
-
-        }).save()
 
         const AddRankEligibility = await RankEligibilityBonusFill({
 
@@ -586,15 +577,7 @@ export default async (req, res) => {
 
       if (findMyPackage.PackagePrice >= upperlineWallet) {
 
-        const ValidDownline = await ValidDownlines({
 
-          UpperLineUserId: uplineUser,
-          DownLineUserId: id,
-          UpperLinePackagePrice: upperlineWallet,
-          PurchasedPackageName: findMyPackage.PackageName,
-          PurchasedPackagePrice: findMyPackage.PackagePrice
-
-        }).save()
 
         const AddRankEligibility = await RankEligibilityBonusFill({
 
@@ -998,13 +981,13 @@ export default async (req, res) => {
 
 
 
-    // const updateDataS = await RankEligibilityClaim.findOne({ RankEligibilityClaimOwnerId: id })
+    const updateDataS = await RankEligibilityClaim.findOne({ RankEligibilityClaimOwnerId: id })
 
 
     // const updatesdatas = await RankEligibilityClaim.findByIdAndUpdate({_id:updateDataS._id},{})
-    // if (updateDataS !== null) {
-    //   const deleteOldData = await RankEligibilityClaim.findByIdAndDelete(updateDataS._id)
-    // }
+    if (updateDataS !== null) {
+      const deleteOldData = await RankEligibilityClaim.findByIdAndDelete(updateDataS._id)
+    }
 
 
 
