@@ -18,30 +18,19 @@ initDB()
 export default async (req, res) => {
   const { packageId, Anount, id } = req.body
 
-
-
   var checkUpperlineUser = await User.findById(id)
-
   var findPack = await PackageHistory.findOne({ PackageOwner: id })
-
-
-
-
 
   if (checkUpperlineUser.UpperlineUser !== "null") {
     var findUpperlineUser = await User.findById(checkUpperlineUser.UpperlineUser)
     var checkUpperlineUserPackageName = findUpperlineUser.PurchasedPackageName
   }
 
-
-
   const checkPackageHis = await PackageHistory.find({ PackageOwner: id })
+  const checkPackageHisNew = await PackageHistory.findOne({ PackageOwner: id })
 
   var checkRenewalPackage = ""
   var findMyPackage = await Package.findById(packageId)
-
-
-
 
   if (checkPackageHis == 0) {
 
@@ -334,24 +323,15 @@ export default async (req, res) => {
 
 
   } else {
-
-
     await PackageHistory.findByIdAndDelete(checkPackageHis[0]._id)
     if (checkRenewalPackage.length !== 0) {
       await RenewalPurchasePackage.findByIdAndDelete(checkRenewalPackage[0]._id)
     }
 
-
     var Lamount = Number(Anount) * 30
-
     const findPackage = await Package.findOne({ PackageName: checkUpperlineUserPackageName })
-
-    // 
-
     const findPackagePurchaseUser = await User.findById(id)
-
     const uplineUser = findPackagePurchaseUser.UpperlineUser
-
 
     if (uplineUser !== 'null') {
       console.log("came is first boxes ========================================> ")
@@ -577,8 +557,6 @@ export default async (req, res) => {
 
       if (findMyPackage.PackagePrice >= upperlineWallet) {
 
-
-
         const AddRankEligibility = await RankEligibilityBonusFill({
 
           UpperLineUserId: uplineUser,
@@ -610,9 +588,7 @@ export default async (req, res) => {
 
 
     }
-
-    // maximum caping start
-
+    
     if (uplineUser !== 'null') {
 
       const findOldWallet = await User.findById(uplineUser)
@@ -950,64 +926,54 @@ export default async (req, res) => {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // const updateDataS = await RankEligibilityClaim.findOne({ RankEligibilityClaimOwnerId: id })
-
-
-    // const updatesdatas = await RankEligibilityClaim.findByIdAndUpdate({_id:updateDataS._id},{})
-    // if (updateDataS !== null) {
-    //   const deleteOldData = await RankEligibilityClaim.findByIdAndDelete(updateDataS._id)
-    // }
-
-
-
-
     await RenewalPurchasePackage({
       PackageOwner: id
     }).save()
 
+    const FindMainUserReferals = await User.find({
+      UpperlineUser: id,
+      PurchasedPackagePrice: {
+        $gte: Number(checkPackageHisNew.PackagePrice)
+      },
+      createdAt: {
+        $gte: checkPackageHisNew.createdAt
+      }
+    })
 
+    let userLength = checkPackageHisNew.Type == "Basic" ? FindMainUserReferals.length : (FindMainUserReferals.length >0 ? FindMainUserReferals.length - 1: 0);
+    var per = 0;
 
+    if (userLength == 2 || userLength == 3) {
+      per = 1
+
+    }else if(userLength == 4 || userLength == 5){
+      per = 2
+
+    }else if(userLength == 6 || userLength == 7){
+      per = 3
+
+    }else if(userLength == 8 || userLength == 9){
+      per = 4
+
+    }else if(userLength >= 10){
+      per = 5
+
+    }
+    console.log("per ============= ", per)
+
+    if(FindMainUserReferals?.PreviousPercentage > 0) {
+      if(per<1){
+        per = Number(FindMainUserReferals?.PreviousPercentage);
+      } else {
+        per = per + Number(FindMainUserReferals?.PreviousPercentage);
+      }
+    }
+
+    console.log("userLength per ============= ", per)
 
     await User.findByIdAndUpdate({ _id: id }, { UserEarnPercantage: "0%" })
-
-
-    const createAnotherEntry = await User.findOneAndUpdate({ _id: id }, { PurchasedPackageName: findMyPackage.PackageName, PurchasedPackagePrice: Number(findMyPackage.PackagePrice), PurchasedPackageDate: "today" })
+    const createAnotherEntry = await User.findOneAndUpdate({ _id: id }, { PurchasedPackageName: findMyPackage.PackageName, PurchasedPackagePrice: Number(findMyPackage.PackagePrice), PurchasedPackageDate: "today", PreviousPercentage: per })
 
     return res.json('Package Created Successfully')
-
-
-
   }
-
 }
