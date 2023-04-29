@@ -36,14 +36,13 @@ const AvalibleRewardsCard = ({userCurrentWallet,teamCount}) => {
     let parseIt = JSON.parse(getData)
 
     try {
+        
 
         axios.post("/api/RankEligibility/SeachForActivePackage", {
             id: parseIt._id
         })
             .then((acc) => {
-                console.log("wqeeeeeeeee ----- ", acc.data)
-                const details = acc.data;
-                details.PendingLock = details.PendingLock.sort((a,b) => Number(a.PackagePrice) - Number(b.PackagePrice));
+                console.log(acc.data)
                 setDatas(acc.data)
             })
             .catch((err) => {
@@ -73,8 +72,8 @@ const AvalibleRewardsCard = ({userCurrentWallet,teamCount}) => {
           })
           .then((acc)=>{
             console.log(acc.data)
+            window.alert(acc.data.message)
         getData() 
-        window.alert(acc.data.message)
 
           })
           .catch((err)=>{
@@ -132,6 +131,7 @@ const AvalibleRewardsCard = ({userCurrentWallet,teamCount}) => {
                     })
                 }
                 {
+                    
                     datas && datas.PendingLock.map((hit, index) => {
                         return <Grid key={index} item xs={4}>
                             <Card style={{ backgroundColor: "#05A4A6", paddingBottom: 20 }} >
