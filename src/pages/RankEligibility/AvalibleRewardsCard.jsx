@@ -73,8 +73,8 @@ const AvalibleRewardsCard = ({userCurrentWallet,teamCount}) => {
           })
           .then((acc)=>{
             console.log(acc.data)
-            window.alert(acc.data.message)
         getData() 
+        window.alert(acc.data.message)
 
           })
           .catch((err)=>{

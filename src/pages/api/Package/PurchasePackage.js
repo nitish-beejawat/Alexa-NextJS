@@ -63,7 +63,7 @@ export default async (req, res) => {
 
 
 
-      checkRenewalPackage = await RenewalPurchasePackage.find({ PackageOwner: uplineUser })
+      checkRenewalPackage = await RenewalPurchasePackage.find({ PackageOwner: uplineUser }).sort({ createdAt: -1 })
 
       const lastWallete = findUplineUserDetails.MainWallet
 

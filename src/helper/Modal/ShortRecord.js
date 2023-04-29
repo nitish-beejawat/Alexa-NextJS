@@ -45,6 +45,14 @@ const ShortRecord = mongoose.Schema({
         type:"Number",
         default:0
     },
+    Repurchased:{
+        type:"Boolean",
+        default:false
+    },
+    DirectsAfterRepurchase:{
+        type:"Number",
+        default:0
+    },
 },
 {
   timestamps: true

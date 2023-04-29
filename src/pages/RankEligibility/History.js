@@ -79,11 +79,12 @@ const History = () => {
                     <TableCell>S.N.</TableCell>
                     <TableCell>My Sponser Code</TableCell>
                     <TableCell align='left'>My Email</TableCell>
-                    <TableCell align='left'>Earned From Sponser</TableCell>
-                    <TableCell align='left'>Earned From Email</TableCell>
+                    {/* <TableCell align='left'>Earned From Sponser</TableCell>
+                    <TableCell align='left'>Earned From Email</TableCell> */}
                     <TableCell align='left'>Business Amount</TableCell>
                     <TableCell align='left'>Purchased Package</TableCell>
                     <TableCell align='left'>Package Price</TableCell>
+                    <TableCell align='left'>Reward Amount</TableCell>
                     <TableCell align='left'>Date</TableCell>
                   </TableRow>
                 </TableHead>
@@ -104,13 +105,14 @@ const History = () => {
                   
   
                       <TableCell align='left'>{index+1}</TableCell>
-                      <TableCell align='left'>{hit.UpperLineUserSponser}</TableCell>
-                      <TableCell align='left'>{hit.UpperLineUserEmail}</TableCell>
-                      <TableCell align='left'>{hit.DownLineUserSponser}</TableCell>
-                      <TableCell align='left'>{hit.DownLineUserEmail}</TableCell>
-                      <TableCell align='left'>{hit.BusinessAmount}$</TableCell>
-                      <TableCell align='left'>{hit.PurchasedPackageName}</TableCell>
-                      <TableCell align='left'>{hit.PurchasedPackagePrice}</TableCell>
+                      <TableCell align='left'>{hit.RankEligibilityClaimOwnerUserName}</TableCell>
+                      <TableCell align='left'>{hit.RankEligibilityClaimOwnerEmail}</TableCell>
+                      {/* <TableCell align='left'>{hit.DownLineUserSponser}</TableCell>
+                      <TableCell align='left'>{hit.DownLineUserEmail}</TableCell> */}
+                      <TableCell align='left'>{hit.TotBusiness}$</TableCell>
+                      <TableCell align='left'>{hit.PackageOwnName}</TableCell>
+                      <TableCell align='left'>{hit.PackageOwnPrice}</TableCell>
+                      <TableCell align='left'>{hit.ClaimedReward}</TableCell>
                       <TableCell align='left'>{hit.createdAt.slice(0,10)}</TableCell>
   
                      
