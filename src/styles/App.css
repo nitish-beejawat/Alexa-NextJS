@@ -1,7 +1,27 @@
 body {
   font-family: "DM Sans", sans-serif;
+ 
+}
+body {
+  background: transparent linear-gradient(180deg, #07071D 0%, #07071D00 100%) 0% 0% no-repeat padding-box !important;
+  opacity: 1 !important;
+}
+.contain-sec ul {
+  margin: 0 0 20px;
+  list-style: circle;
+  padding: 0 0 0 20px;
 }
 
+.contain-sec ul li {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+.black-back-sec {
+  background: #00000080;
+  padding: 30px;
+  border-radius: 10px;
+  margin: 0 0 30px;
+}
 option {
   color: black;
 }
