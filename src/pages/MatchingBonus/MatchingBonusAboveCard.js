@@ -94,7 +94,7 @@ const MatchingBonusAboveCard = () => {
                 </Grid>
                 <Grid item xs={12} md={4}>
 
-                    <div style={{ borderColor: "#06A5A7", borderStyle: "solid", borderWidth: 3, padding: 10, borderRadius: 20, backgroundColor: 'rgb(3 232 235 / 10%)', paddingLeft: 20, backgroundImage: "https://png.pngtree.com/element_our/sm/20180520/sm_5b0125134eb72.jpg", backgroundSize: 80, backgroundRepeat: "no-repeat" }}>
+                    {/* <div style={{ borderColor: "#06A5A7", borderStyle: "solid", borderWidth: 3, padding: 10, borderRadius: 20, backgroundColor: 'rgb(3 232 235 / 10%)', paddingLeft: 20, backgroundImage: "https://png.pngtree.com/element_our/sm/20180520/sm_5b0125134eb72.jpg", backgroundSize: 80, backgroundRepeat: "no-repeat" }}>
 
                         <div style={{ textAlign: "center" }}>
                             <svg xmlns="http://www.w3.org/2000/svg" style={{ color: "#07AAAC", marginBottom: -18 }} width={26} height={26} fill="currentColor" className="bi bi-box2-fill" viewBox="0 0 16 16">
@@ -105,7 +105,7 @@ const MatchingBonusAboveCard = () => {
                         <h4 style={{ textAlign: "center" }}>Qualified (YES / NO)</h4>
                         <h3 style={{ marginTop: -20, textAlign: "center" }}>0.00</h3>
 
-                    </div>
+                    </div> */}
 
                 </Grid>
             </Grid>

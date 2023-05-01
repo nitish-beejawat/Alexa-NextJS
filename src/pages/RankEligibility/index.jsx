@@ -168,9 +168,9 @@ const PackageHistory = () => {
     try {
 
 
-      console.log("trying to post on ==> "+"http://65.108.141.59:4000/CountMyTeam")
+      console.log("trying to post on ==> "+"http://192.168.1.8:4000/CountMyTeam")
       
-      // axios.post("http://65.108.141.59:4000/CountMyTeam",{
+      // axios.post("http://192.168.1.8:4000/CountMyTeam",{
       //   id:parseIt._id
       // },
       // {
@@ -182,7 +182,7 @@ const PackageHistory = () => {
       
       // )
 
-      axios.post("http://65.108.141.59:4000/CountMyTeam", {
+      axios.post("http://192.168.1.8:4000/CountMyTeam", {
                 headers: {
                     "Access-Control-Allow-Origin": "*",
                     'Content-Type' : 'application/x-www-form-urlencoded; charset=UTF-8',

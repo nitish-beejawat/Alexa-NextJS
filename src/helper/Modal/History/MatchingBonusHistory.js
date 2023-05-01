@@ -48,4 +48,4 @@ const MatchingBonusHistory = mongoose.Schema({
         timestamps: true
     })
 
-export default mongoose.models.MatchingBonHis || mongoose.model('MatchingBonHis', MatchingBonusHistory)
+export default mongoose.models.MatchingBonusHistoryy || mongoose.model('MatchingBonusHistoryy', MatchingBonusHistory)
