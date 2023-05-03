@@ -6,7 +6,6 @@ const MatchingBonusAboveCard = () => {
 
     const [Datas, setDatas] = useState("")
 
-
     useEffect(() => {
       getData()
     }, [])
@@ -17,11 +16,9 @@ const MatchingBonusAboveCard = () => {
         const getData = localStorage.getItem("jwt")
         const parseData = JSON.parse(getData)
 
-        
-
         try {
             
-            axios.post("http://192.168.1.8:4000/api/CountMyLeftRightDirects",{
+            axios.post("http://64.227.156.27:4000/api/CountMyLeftRightDirects",{
                 id:parseData._id
             })
             .then((acc)=>{
@@ -32,28 +29,12 @@ const MatchingBonusAboveCard = () => {
                 console.log(err)
             })
 
-
         } catch (error) {
             console.log(error)
         }
 
-
-
-
-
-
     }
     
-
-
-
-
-
-
-
-
-
-
 
     return (
 
@@ -93,7 +74,7 @@ const MatchingBonusAboveCard = () => {
 
                 </Grid>
                 <Grid item xs={12} md={4}>
-
+{/* 
                     <div style={{ borderColor: "#06A5A7", borderStyle: "solid", borderWidth: 3, padding: 10, borderRadius: 20, backgroundColor: 'rgb(3 232 235 / 10%)', paddingLeft: 20, backgroundImage: "https://png.pngtree.com/element_our/sm/20180520/sm_5b0125134eb72.jpg", backgroundSize: 80, backgroundRepeat: "no-repeat" }}>
 
                         <div style={{ textAlign: "center" }}>
@@ -105,7 +86,7 @@ const MatchingBonusAboveCard = () => {
                         <h4 style={{ textAlign: "center" }}>Qualified (YES / NO)</h4>
                         <h3 style={{ marginTop: -20, textAlign: "center" }}>0.00</h3>
 
-                    </div>
+                    </div> */}
 
                 </Grid>
             </Grid>
