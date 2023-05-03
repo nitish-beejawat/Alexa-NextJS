@@ -12,6 +12,7 @@ import RankEligibilityClaim from 'src/helper/Modal/History/RankEligibilityClaim'
 import PurchasePackageInvoice from 'src/helper/Modal/Invoice/PurchasePackageInvoice'
 import ShortRecord from 'src/helper/Modal/ShortRecord'
 import LapWallet from 'src/helper/Modal/History/LapWallet'
+import ValidDownlines from 'src/helper/Modal/History/ValidDownlines'
 
 initDB()
 
@@ -36,7 +37,6 @@ export default async (req, res) => {
 
 
   const checkPackageHis = await PackageHistory.find({ PackageOwner: id })
-  const checkPackageHisNew = await PackageHistory.findOne({ PackageOwner: id })
 
   var checkRenewalPackage = ""
   var findMyPackage = await Package.findById(packageId)
@@ -248,7 +248,15 @@ export default async (req, res) => {
 
       if (findMyPackage.PackagePrice >= upperlineWallet) {
 
+        const ValidDownline = await ValidDownlines({
 
+          UpperLineUserId: uplineUser,
+          DownLineUserId: id,
+          UpperLinePackagePrice: upperlineWallet,
+          PurchasedPackageName: findMyPackage.PackageName,
+          PurchasedPackagePrice: findMyPackage.PackagePrice
+
+        }).save()
 
         const AddRankEligibility = await RankEligibilityBonusFill({
 
@@ -289,7 +297,9 @@ export default async (req, res) => {
       LykaToken: Lamount,
       PackgeRewardWallte: '0',
       PackageOwner: id,
-      Type: "Basic"
+      Type: "Basic",
+      Type2: "Basic"
+
     }).save()
 
 
@@ -578,6 +588,16 @@ export default async (req, res) => {
 
       if (findMyPackage.PackagePrice >= upperlineWallet) {
 
+        const ValidDownline = await ValidDownlines({
+
+          UpperLineUserId: uplineUser,
+          DownLineUserId: id,
+          UpperLinePackagePrice: upperlineWallet,
+          PurchasedPackageName: findMyPackage.PackageName,
+          PurchasedPackagePrice: findMyPackage.PackagePrice
+
+        }).save()
+
         const AddRankEligibility = await RankEligibilityBonusFill({
 
           UpperLineUserId: uplineUser,
@@ -658,7 +678,8 @@ export default async (req, res) => {
           LykaToken: Lamount,
           PackgeRewardWallte: '0',
           PackageOwner: id,
-          Type: "Repurchased"
+          Type: "Repurchased",
+          Type2: "Repurchased"
         }).save()
 
         const createPackageInvoice = await PurchasePackageInvoice({
@@ -726,7 +747,8 @@ export default async (req, res) => {
           LykaToken: Lamount,
           PackgeRewardWallte: '0',
           PackageOwner: id,
-          Type: "Repurchased"
+          Type: "Repurchased",
+          Type2: "Repurchased"
         }).save()
 
 
@@ -930,7 +952,8 @@ export default async (req, res) => {
         LykaToken: Lamount,
         PackgeRewardWallte: '0',
         PackageOwner: id,
-        Type: "Repurchased"
+        Type: "Repurchased",
+        Type2: "Repurchased"
       }).save()
 
       const createPackageInvoice = await PurchasePackageInvoice({
@@ -995,56 +1018,13 @@ export default async (req, res) => {
       PackageOwner: id
     }).save()
 
-    const FindMainUserReferals = await User.find({
-      UpperlineUser: id,
-      PurchasedPackagePrice: {
-        $gte: Number(checkPackageHisNew.PackagePrice)
-      },
-      createdAt: {
-        $gte: checkPackageHisNew.createdAt
-      }
-    })
 
-    let userLength = checkPackageHisNew.Type == "Basic" ? FindMainUserReferals.length : (FindMainUserReferals.length >0 ? FindMainUserReferals.length - 1: 0);
-
-    var per = 0;
-
-    if (userLength == 2 || userLength == 3) {
-      per = 1
-
-    }else if(userLength == 4 || userLength == 5){
-      per = 2
-
-    }else if(userLength == 6 || userLength == 7){
-      per = 3
-
-    }else if(userLength == 8 || userLength == 9){
-      per = 4
-
-    }else if(userLength >= 10){
-      per = 5
-
-    }
-    console.log("per ============= ", per)
-
-    // if(FindMainUserReferals?.PreviousPercentage > 0) {
-    //   per += FindMainUserReferals?.PreviousPercentage;
-    // }
-    if(FindMainUserReferals?.PreviousPercentage > 0) {
-      if(per<1){
-        per = Number(FindMainUserReferals?.PreviousPercentage);
-      } else {
-        per = per + Number(FindMainUserReferals?.PreviousPercentage);
-      }
-    }
-
-    console.log("userLength per ============= ", per)
 
 
     await User.findByIdAndUpdate({ _id: id }, { UserEarnPercantage: "0%" })
 
 
-    const createAnotherEntry = await User.findOneAndUpdate({ _id: id }, { PurchasedPackageName: findMyPackage.PackageName, PurchasedPackagePrice: Number(findMyPackage.PackagePrice), PurchasedPackageDate: "today", PreviousPercentage: per })
+    const createAnotherEntry = await User.findOneAndUpdate({ _id: id }, { PurchasedPackageName: findMyPackage.PackageName, PurchasedPackagePrice: Number(findMyPackage.PackagePrice), PurchasedPackageDate: "today" })
 
     return res.json('Package Created Successfully')
 
