@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
 
-
-
-
 const ShortRecord = mongoose.Schema({
 
     RecordOwner:{
@@ -45,16 +42,12 @@ const ShortRecord = mongoose.Schema({
         type:"Number",
         default:0
     },
-    Repurchased:{
-        type:"Boolean",
-        default:false
-    },
-    DirectsAfterRepurchase:{
-        type:"Number",
-        default:0
+    isEligibalForMatching:{
+        type:"Bool",
+        default:true
     },
 },
 {
   timestamps: true
 })
-export default mongoose.models.MyShortRecord || mongoose.model('MyShortRecord', ShortRecord)
+export default mongoose.models.MyShortRecordsds || mongoose.model('MyShortRecordsds', ShortRecord)

@@ -21,12 +21,7 @@ const ValidDownlines = mongoose.Schema({
     PurchasedPackagePrice:{
         type:"string",
         require:true
-    },
-    OldOddCount:{
-        type:"Number",
-        require:false,
-        default:0
-    },
+    }
 },
 {
     timestamps: true

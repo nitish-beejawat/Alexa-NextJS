@@ -55,9 +55,6 @@ export default async (req, res) => {
      
             const claimedAmount = GetRankEligibityHis[index].ClaimedReward;
      
-     
-            console.log("claimedAmount ======== -------------- ", GetRankEligibityHis[index])
-     
            for (let index = 0; index < AllPlans.length; index++) {
      
                const element = AllPlans[index].RankEligibilityReward;
@@ -68,7 +65,7 @@ export default async (req, res) => {
            }    
         }
 
-        console.log("ClaimedCard ======== -------------- ", ClaimedCard)
+
 
 
         // AllPlans
@@ -76,13 +73,13 @@ export default async (req, res) => {
         AllPlans.map((hit)=>{
 
             
-            // console.log(hit.PackagePrice)
+            // console.log(hit.RankEligibilityReward)
 
 
-            var searchValue = hit.PackagePrice;
+            var searchValue = hit.RankEligibilityReward;
 
             var hasPropertyWithValue = ClaimedCard.some(function(item) {
-            return item.PackagePrice === searchValue;
+            return item.RankEligibilityReward === searchValue;
             });
 
             if (hasPropertyWithValue) {

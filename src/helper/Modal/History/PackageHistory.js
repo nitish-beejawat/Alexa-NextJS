@@ -33,10 +33,14 @@ const PackageHistory =  mongoose.Schema(
     Type:{
       required:true,
       type: 'String'
-    }
+    },
+    Type2:{
+      required:true,
+      type: 'String'
+    },
   },
   {
     timestamps: true
   }
 )
-export default mongoose.models.PackageHis || mongoose.model('PackageHis', PackageHistory)
+export default mongoose.models.PackageHistries || mongoose.model('PackageHistries', PackageHistory)

@@ -1,4 +1,3 @@
-// /api/History/GlobalBonusHis
 import Grid from '@mui/material/Grid'
 import React, { useState, useEffect } from 'react'
 import Typography from '@mui/material/Typography'
@@ -16,61 +15,60 @@ import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import axios from 'axios'
-import MatchingBonusAboveCard from './MatchingBonusAboveCard'
 
-const PackageHistory = () => {
+const History = () => {
 
   const [datas, setDatas] = useState("")
 
 
 
   useEffect(() => {
-    getDatas()
-  }, [])
 
 
+    const getDatass = () =>{
+
+      const ids = localStorage.getItem("jwt")
+      const parsedData = JSON.parse(ids)
+      console.log(parsedData)
 
 
-  const getDatas = () => {
-    var data = localStorage.getItem('jwt')
-    var parseData = JSON.parse(data)
+      try {
+        
 
-    console.log(parseData._id)
-
-    try {
-      axios
-        .post('/api/MatchingBonus/GetMatchingBonusRecord', {
-          id: parseData._id
+        axios.post("/api/History/RankEligibility",{
+          id:parsedData._id
         })
-        .then(acc => {
+        .then((acc)=>{
           console.log(acc.data)
           setDatas(acc.data)
         })
-        .catch(err => {
+        .catch((err)=>{
           console.log(err)
         })
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
+
+      } catch (error) {
+        console.log(error)
+      }
+
+
+
+
+    }
+
+    getDatass()
+    
+  
+  
+  }, [])
+  
   return (
-    <div>
+
+    <div style={{marginTop:50}}>
       <Grid container spacing={6}>
         <Grid item xs={12}>
-          <Typography variant='h4'>Matching Bonus</Typography>
+          <Typography variant='h4'>Rank Eligibity History</Typography>
         </Grid>
-
-
-
-        <div>
-          <MatchingBonusAboveCard/>
-        </div>
-
-
-
-
-
 
         <Grid item xs={12}>
           <Card>
@@ -79,9 +77,13 @@ const PackageHistory = () => {
                 <TableHead>
                   <TableRow>
                     <TableCell>S.N.</TableCell>
-                    <TableCell>Amount</TableCell>
-                    <TableCell>Matching</TableCell>
-                    <TableCell align='left'>Rate</TableCell>
+                    <TableCell>My Sponser Code</TableCell>
+                    <TableCell align='left'>My Email</TableCell>
+                    <TableCell align='left'>Earned From Sponser</TableCell>
+                    <TableCell align='left'>Earned From Email</TableCell>
+                    <TableCell align='left'>Business Amount</TableCell>
+                    <TableCell align='left'>Purchased Package</TableCell>
+                    <TableCell align='left'>Package Price</TableCell>
                     <TableCell align='left'>Date</TableCell>
                   </TableRow>
                 </TableHead>
@@ -102,10 +104,16 @@ const PackageHistory = () => {
                   
   
                       <TableCell align='left'>{index+1}</TableCell>
-                      <TableCell align='left'>{hit.Amount}</TableCell>
-                      <TableCell align='left'>{hit.Matching}</TableCell>
-                      <TableCell align='left'>{hit.Rate}</TableCell>                   
-                      <TableCell align='left'>{hit.createdAt.slice(0,10)}</TableCell>                   
+                      <TableCell align='left'>{hit.UpperLineUserSponser}</TableCell>
+                      <TableCell align='left'>{hit.UpperLineUserEmail}</TableCell>
+                      <TableCell align='left'>{hit.DownLineUserSponser}</TableCell>
+                      <TableCell align='left'>{hit.DownLineUserEmail}</TableCell>
+                      <TableCell align='left'>{hit.BusinessAmount}$</TableCell>
+                      <TableCell align='left'>{hit.PurchasedPackageName}</TableCell>
+                      <TableCell align='left'>{hit.PurchasedPackagePrice}</TableCell>
+                      <TableCell align='left'>{hit.createdAt.slice(0,10)}</TableCell>
+  
+                     
                      
                     </TableRow>
                     })
@@ -121,4 +129,4 @@ const PackageHistory = () => {
   )
 }
 
-export default PackageHistory
+export default History

@@ -1,4 +1,4 @@
-import initDB from "../../../helper/initDB";
+    import initDB from "../../../helper/initDB";
 import RankBonusHistory from "../../../helper/Modal/History/RankBonusHistory";
 import User from "../../../helper/Modal/User";
 import PackageHistory from "../../../helper/Modal/History/PackageHistory";
@@ -50,7 +50,7 @@ export default async(req,res)=>{
     const FindRankClaimHis = await RankEligibilityClaim.findOne({RankEligibilityClaimOwnerId:id}).sort({_id:-1})
     
     
-    const mainUserPackagePrice = Number(FindRankClaimHis.ClaimedReward)
+    const mainUserPackagePrice = Number(FindRankClaimHis?.ClaimedReward ? FindRankClaimHis?.ClaimedReward : 0)
 
     console.log("pack price is => "+mainUserPackagePrice)
     

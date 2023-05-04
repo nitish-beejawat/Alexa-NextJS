@@ -148,6 +148,12 @@ const AccountSettings = () => {
           
           
           <></>}
+
+
+              <div style={{textAlign:"center"}}>
+                
+          <h6 className='text-center text-dark'>V.1 03/05/2023 : 06:41 PM</h6>
+              </div>
        
       
       </TabContext>
